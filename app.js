@@ -26,6 +26,32 @@ io.on('connection', function(socket) {
     socket.emit('welcome', { message: 'Welcome!', id: socket.id });
 
     socket.on('i am client', console.log);
+
+socket.on('move', function(data)
+                     {
+                         var w = data["dir"];
+                         var x = data["x"];
+                         var y = data["y"];
+
+                                if(w == "down")
+                                    y += 5;
+
+                                if(w == "up")
+                                    y -= 5;
+
+                                if(w == "left")
+                                    x -= 5;
+
+                                if(w == "right")
+                                    x += 5;
+
+                                console.log(y);
+
+                                io.sockets.emit("_movement",{ "X" : x, "Y" : y});
+
+
+                     });
 });
+
 
 app.listen(3000);
