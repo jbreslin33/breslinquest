@@ -20,6 +20,15 @@ function sendTime() {
 // Send current time every 10 secs
 setInterval(sendTime, 10000);
 
+
+var handleClient = function (socket) {
+    // we've got a client connection
+	console.log('client connecction:' + socket.id);
+    //socket.emit("tweet", {user: "nodesource", text: "Hello, world!"});
+};
+
+io.on("connection", handleClient);
+
 // Emit welcome message on connection
 io.on('connection', function(socket) {
 	// Use socket to communicate with this particular client only, sending it it's own id
@@ -53,6 +62,29 @@ io.on('connection', function(socket) {
     		socket.emit    ('my_move'  ,{ "m": m, id: socket.id });
 	});
 });
+
+function Party (type) {
+	this.id = 0;
+	this.name = 0;
+	this.x = 0;
+	this.y = 0;
+	this.z = 0;
+	this.d = 0;
+	this.user_id = 0;
+    this.getx = function() {
+        return this.x;
+    };
+    this.gety = function() {
+        return this.x;
+    };
+}
+/*
+var apple = new Apple('macintosh');
+apple.color = "reddish";
+console.log('apple color:' + apple.color);
+*/
+//alert(apple.getInfo());
+
 
 
 app.listen(3000);
