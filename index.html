@@ -11,6 +11,21 @@
                 // Respond with a message including this clients' id sent from the server
                 socket.emit('i am client', {data: 'foo!', id: data.id});
             });
+
+
+
+
+		//just my movement
+            socket.on('my_move', function(data) {
+                //addMessage(data.message);
+		console.log('m from individual move:' + data["m"]);
+
+                // Respond with a message including this clients' id sent from the server
+                //socket.emit('i am client', {data: 'foo!', id: data.id});
+            });
+
+
+
             socket.on('time', function(data) {
                 addMessage(data.time);
             });
@@ -38,9 +53,7 @@ function movement(evt)
 
  socket.on("_movement", function(data)
  {
-	console.log('m:' + data["m"]);
-     //socketPlayer1.x = data["X"];
-     //socketPlayer1.y = data["Y"];
+	//console.log('m:' + data["m"]);
  });
 
         </script>

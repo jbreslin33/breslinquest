@@ -49,7 +49,8 @@ io.on('connection', function(socket) {
 
                 console.log(m);
 
-                io.sockets.emit("_movement",{ "m" : m});
+                //io.sockets.emit("_movement",{ "m" : m});
+    		socket.emit    ('my_move'  ,{ "m": m, id: socket.id });
 	});
 });
 
