@@ -22,35 +22,35 @@ setInterval(sendTime, 10000);
 
 // Emit welcome message on connection
 io.on('connection', function(socket) {
-    // Use socket to communicate with this particular client only, sending it it's own id
-    socket.emit('welcome', { message: 'Welcome!', id: socket.id });
+	// Use socket to communicate with this particular client only, sending it it's own id
+    	socket.emit('welcome', { message: 'Welcome!', id: socket.id });
 
-    socket.on('i am client', console.log);
+    	socket.on('i am client', console.log);
 
-socket.on('move', function(data)
-                     {
-                         var w = data["dir"];
-                         var x = data["x"];
-                         var y = data["y"];
+	socket.on('move', function(data)
+        {
+        	var m = data["m"];
+                if(m == 37)
+		{
+			//turn left 
+		}
+                if(m == 38)
+		{	
+			//go forward 
+		}
+                if(m == 39)
+		{
+			//turn right 
+		}
+                if(m == 40) 
+		{
+			//back up 
+		}
 
-                                if(w == "down")
-                                    y += 5;
+                console.log(m);
 
-                                if(w == "up")
-                                    y -= 5;
-
-                                if(w == "left")
-                                    x -= 5;
-
-                                if(w == "right")
-                                    x += 5;
-
-                                console.log(y);
-
-                                io.sockets.emit("_movement",{ "X" : x, "Y" : y});
-
-
-                     });
+                io.sockets.emit("_movement",{ "m" : m});
+	});
 });
 
 
