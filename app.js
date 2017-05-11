@@ -76,7 +76,7 @@ function World ()
 
     	this.addParty = function(party)
 	{
-        	this.mParty.push(party);
+        	this.mPartyArray.push(party);
     	};
 }
 
