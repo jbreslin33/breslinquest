@@ -12,6 +12,8 @@ var app = http.createServer(function(req, res) {
 // Socket.io server listens to our app
 var io = require('socket.io').listen(app);
 
+var world = new World();
+
 // Send current time to all connected clients
 function sendTime() {
     io.emit('time', { time: new Date().toJSON() });
@@ -24,6 +26,10 @@ setInterval(sendTime, 10000);
 var handleClient = function (socket) {
     // we've got a client connection
 	console.log('client connecction:' + socket.id);
+	party = new Party(socket.id);
+	world.addParty(party);
+
+	
     //socket.emit("tweet", {user: "nodesource", text: "Hello, world!"});
 };
 
@@ -63,7 +69,21 @@ io.on('connection', function(socket) {
 	});
 });
 
-function Party (type) {
+
+function World ()
+{
+	this.mPartyArray = new Array(); //from db
+
+    	this.addParty = function(party)
+	{
+        	this.mParty.push(party);
+    	};
+}
+
+function Party (socketid)
+	{
+
+	this.socketid = socketid;
 	this.id = 0;
 	this.name = 0;
 	this.x = 0;
@@ -71,13 +91,17 @@ function Party (type) {
 	this.z = 0;
 	this.d = 0;
 	this.user_id = 0;
-    this.getx = function() {
-        return this.x;
-    };
-    this.gety = function() {
-        return this.x;
-    };
+
+    	this.getx = function()
+	{
+        	return this.x;
+	};
+    	this.gety = function()
+	{
+        	return this.x;
+   	};
 }
+
 /*
 var apple = new Apple('macintosh');
 apple.color = "reddish";
