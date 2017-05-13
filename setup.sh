@@ -9,5 +9,6 @@ sudo npm i pg
 sudo npm install express --save
 sudo npm install express-form --save
 sudo npm install body-parser --save
+sudo npm install formidable@latest --save
 
 
