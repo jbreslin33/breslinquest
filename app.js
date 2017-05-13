@@ -30,9 +30,6 @@ query.on("end", function (result) {
 });
 
 
-
-
-
 var world = new World();
 
 // Send current time to all connected clients
@@ -122,14 +119,5 @@ function Party (socketid)
         	return this.x;
    	};
 }
-
-/*
-var apple = new Apple('macintosh');
-apple.color = "reddish";
-console.log('apple color:' + apple.color);
-*/
-//alert(apple.getInfo());
-
-
 
 app.listen(3000);
