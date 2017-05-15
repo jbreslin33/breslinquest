@@ -5,13 +5,13 @@ var util = require('util');
 
 var mUsername = 0;
 var mPassword = 0;
+console.log('running:');
 
 var server = http.createServer(function (req, res) {
     if (req.method.toLowerCase() == 'get') {
         displayForm(res);
     } else if (req.method.toLowerCase() == 'post') {
         processAllFieldsOfTheForm(req, res);
-dbcall();
     }
 });
 
@@ -30,13 +30,22 @@ function processAllFieldsOfTheForm(req, res) {
     var form = new formidable.IncomingForm();
 
 form.on('field', function(field, value) {
- console.log('field:' + field);
- console.log('value:' + value);
+	if (field == 'username')
+	{
+		mUsername = value;
+		console.log('mUsername:' + mUsername);
+		dbcall();
+	}
+	if (field == 'password')
+	{
+		mPassword = value;
+		console.log('mPassword:' + mPassword);
+	}
 });
 
     form.parse(req, function (err, fields, files) {
 
-	mUsername = fields.username; 
+	//mUsername = fields.username; 
         //Store the data from the fields in your data store.
         //The data store could be a file or database or any other store based
         //on your application.
