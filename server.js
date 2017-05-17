@@ -17,6 +17,26 @@ app.post('/login', function (req, res) {
         processAllFieldsOfTheForm(req, res);
 })
 
+
+class Rectangle 
+{
+	constructor(height, width) 
+	{
+    		this.height = height;
+    		this.width = width;
+	}
+	getArea() 
+	{
+		this.area = this.height * this.width;
+		console.log('area:' + this.area); 
+	}
+}
+
+let rect = new Rectangle(5, 4);
+
+// Manipulating data only through a fixed set of functions ensures we maintain valid state
+rect.getArea();
+
 function displayLogin(res) {
     fs.readFile('form.html', function (err, data) {
         res.writeHead(200, {
