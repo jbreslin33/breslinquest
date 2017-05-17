@@ -7,6 +7,29 @@ var mUsername = 0;
 var mPassword = 0;
 console.log('running:');
 
+
+//begin express
+var express = require('express')
+var app = express()
+
+app.get('/', function (req, res) {
+  //res.send('Hello World!')
+        displayForm(res);
+
+})
+
+app.post('/', function (req, res) {
+  //res.send('Hello World!')
+        //displayForm(res);
+        processAllFieldsOfTheForm(req, res);
+
+})
+
+
+//end express
+
+
+/*
 var server = http.createServer(function (req, res) {
     if (req.method.toLowerCase() == 'get') {
         displayForm(res);
@@ -14,6 +37,7 @@ var server = http.createServer(function (req, res) {
         processAllFieldsOfTheForm(req, res);
     }
 });
+*/
 
 function displayForm(res) {
     fs.readFile('form.html', function (err, data) {
@@ -86,6 +110,9 @@ query.on("end", function (result) {
 
 }
 
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
 
-server.listen(3000);
-console.log("server listening on 3000");
+//server.listen(3000);
+//console.log("server listening on 3000");
