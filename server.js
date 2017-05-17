@@ -6,26 +6,16 @@ var util = require('util');
 var mUsername = 0;
 var mPassword = 0;
 
-//begin express
 var express = require('express')
 var app = express()
 
 app.get('/login', function (req, res) {
-  //res.send('Hello World!')
         displayForm(res);
-
 })
 
-app.post('/', function (req, res) {
-  //res.send('Hello World!')
-        //displayForm(res);
+app.post('/login', function (req, res) {
         processAllFieldsOfTheForm(req, res);
-
 })
-
-
-//end express
-
 
 function displayForm(res) {
     fs.readFile('form.html', function (err, data) {
@@ -56,11 +46,6 @@ form.on('field', function(field, value) {
 });
 
     form.parse(req, function (err, fields, files) {
-
-	//mUsername = fields.username; 
-        //Store the data from the fields in your data store.
-        //The data store could be a file or database or any other store based
-        //on your application.
         res.writeHead(200, {
             'content-type': 'text/plain'
         });
@@ -72,7 +57,6 @@ form.on('field', function(field, value) {
     });
 }
 
-
 //db
 function dbcall() {
 var pg = require("pg");
@@ -82,10 +66,8 @@ var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 var client = new pg.Client(conString);
 client.connect();
 
-//var query_string = "SELECT id, name FROM class ORDER BY name";
 var query_string = "SELECT username, password FROM users where username = '" + mUsername + "';"; 
 console.log('query_string:' + query_string);
-
 
 var query = client.query(query_string);
 query.on("row", function (row, result) {
@@ -102,5 +84,3 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 
-//server.listen(3000);
-//console.log("server listening on 3000");
