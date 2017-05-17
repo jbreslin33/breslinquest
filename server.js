@@ -1,9 +1,8 @@
 var http = require('http');
-var formidable = require("formidable");
 var util = require('util');
 
 var dl = require('./displaylogin');
-
+var pl = require('./processlogin');
 
 var mUsername = 0;
 var mPassword = 0;
@@ -16,51 +15,8 @@ app.get('/login', function (req, res) {
 })
 
 app.post('/login', function (req, res) {
-        processAllFieldsOfTheForm(req, res);
+        pl(req,res);
 })
-
-
-/*
-function displayLogin(res) {
-    fs.readFile('form.html', function (err, data) {
-        res.writeHead(200, {
-            'Content-Type': 'text/html',
-                'Content-Length': data.length
-        });
-        res.write(data);
-        res.end();
-    });
-}
-*/
-
-function processAllFieldsOfTheForm(req, res) {
-    var form = new formidable.IncomingForm();
-
-form.on('field', function(field, value) {
-	if (field == 'username')
-	{
-		mUsername = value;
-		console.log('mUsername:' + mUsername);
-		dbcall();
-	}
-	if (field == 'password')
-	{
-		mPassword = value;
-		console.log('mPassword:' + mPassword);
-	}
-});
-
-    form.parse(req, function (err, fields, files) {
-        res.writeHead(200, {
-            'content-type': 'text/plain'
-        });
-        res.write('received the data:\n\n');
-        res.end(util.inspect({
-            fields: fields,
-            files: files
-        }));
-    });
-}
 
 //db
 function dbcall() {
