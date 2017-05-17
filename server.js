@@ -1,7 +1,9 @@
 var http = require('http');
-var fs = require('fs');
 var formidable = require("formidable");
 var util = require('util');
+
+var dl = require('./displaylogin');
+
 
 var mUsername = 0;
 var mPassword = 0;
@@ -10,7 +12,7 @@ var express = require('express')
 var app = express()
 
 app.get('/login', function (req, res) {
-        displayLogin(res);
+        dl(res);
 })
 
 app.post('/login', function (req, res) {
@@ -18,25 +20,7 @@ app.post('/login', function (req, res) {
 })
 
 
-class Rectangle 
-{
-	constructor(height, width) 
-	{
-    		this.height = height;
-    		this.width = width;
-	}
-	getArea() 
-	{
-		this.area = this.height * this.width;
-		console.log('area:' + this.area); 
-	}
-}
-
-let rect = new Rectangle(5, 4);
-
-// Manipulating data only through a fixed set of functions ensures we maintain valid state
-rect.getArea();
-
+/*
 function displayLogin(res) {
     fs.readFile('form.html', function (err, data) {
         res.writeHead(200, {
@@ -47,6 +31,7 @@ function displayLogin(res) {
         res.end();
     });
 }
+*/
 
 function processAllFieldsOfTheForm(req, res) {
     var form = new formidable.IncomingForm();
