@@ -5,14 +5,12 @@ var util = require('util');
 
 var mUsername = 0;
 var mPassword = 0;
-console.log('running:');
-
 
 //begin express
 var express = require('express')
 var app = express()
 
-app.get('/', function (req, res) {
+app.get('/login', function (req, res) {
   //res.send('Hello World!')
         displayForm(res);
 
@@ -28,16 +26,6 @@ app.post('/', function (req, res) {
 
 //end express
 
-
-/*
-var server = http.createServer(function (req, res) {
-    if (req.method.toLowerCase() == 'get') {
-        displayForm(res);
-    } else if (req.method.toLowerCase() == 'post') {
-        processAllFieldsOfTheForm(req, res);
-    }
-});
-*/
 
 function displayForm(res) {
     fs.readFile('form.html', function (err, data) {
