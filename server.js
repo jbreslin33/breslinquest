@@ -10,14 +10,14 @@ var express = require('express')
 var app = express()
 
 app.get('/login', function (req, res) {
-        displayForm(res);
+        displayLogin(res);
 })
 
 app.post('/login', function (req, res) {
         processAllFieldsOfTheForm(req, res);
 })
 
-function displayForm(res) {
+function displayLogin(res) {
     fs.readFile('form.html', function (err, data) {
         res.writeHead(200, {
             'Content-Type': 'text/html',
