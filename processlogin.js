@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var formidable = require("formidable");
 var util = require('util');
 var gc = require('./gameclient');
@@ -39,19 +41,18 @@ var processLogin = function(req,res,application)
 			application.mGameClientsArray.push(gc(u,p)); 
         	}
 	});
-
     	form.parse(req, function (err, fields, files) 
 	{
-        	res.writeHead(200, 
+ 		fs.readFile('index.html', function (err, data) 
 		{
-           		'content-type': 'text/plain'
-        	});
-        	res.write('received the data:\n\n');
-        	res.end(util.inspect(
-		{
-            		fields: fields,
-            		files: files
-        	}));
+        		res.writeHead(200, 
+			{
+            			'Content-Type': 'text/html',
+                		'Content-Length': data.length
+        		});
+        		res.write(data);
+        		res.end();
+    		});
     	});
 };
 
