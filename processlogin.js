@@ -4,12 +4,12 @@ var gc = require('./gameclient');
 
 var processLogin = function(req,res,application)
 {
+	var u = 0;
+	var p = 0;
 	var form = new formidable.IncomingForm();
 
 	form.on('field', function(field, value) 
 	{
-		u = 0;
-		p = 0;
         	if (field == 'username')
         	{
                 	u = value;
