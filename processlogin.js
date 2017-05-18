@@ -36,7 +36,7 @@ var processLogin = function(req,res,application)
         	if (field == 'password')
         	{
                 	p = value;
-			application.mClient = gc(u,p); 
+			application.mGameClientsArray.push(gc(u,p)); 
         	}
 	});
 

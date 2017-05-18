@@ -1,7 +1,4 @@
-var application = function()
-{
-	this.mClient = 0;
-};
+var mGameClientsArray = [];
 
-module.exports = application;
+module.exports.mGameClientsArray = mGameClientsArray;
 
