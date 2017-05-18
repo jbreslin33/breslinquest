@@ -1,14 +1,14 @@
 
-var gameClient = function(clientUsername,clientPassword,serverUsername,serverPassword)
+var gameClient = function(socketid)
 {
-	this.mSocketID = 0;
+	this.mSocketID = socketid;
 	this.mUserID = 0;
-	this.mClientUsername = clientUsername;
-	this.mClientPassword = clientPassword;
-	this.mServerUsername = serverUsername;
-	this.mServerPassword = serverPassword;
+	this.mClientUsername = 0;
+	this.mClientPassword = 0;
+	this.mServerUsername = 0;
+	this.mServerPassword = 0;
 	
-	this.mLoggedIn = true;
+	this.mLoggedIn = false;
 };
 
 module.exports = gameClient;

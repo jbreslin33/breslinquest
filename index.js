@@ -29,7 +29,8 @@ app.post('/login', function (req, res) {
 
 io.on('connection', function(socket)
 {
-	//console.log('id connected:' + socket.id );
+	console.log('id connected:' + socket.id );
+	application.mGameClientsArray.push(gc(socket.id));
   
 	socket.on('chat message', function(msg)
 	{

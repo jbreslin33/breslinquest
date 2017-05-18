@@ -26,8 +26,6 @@ var processLogin = function(req,res,application)
         	{
                 	clientPassword = value;
         	}
-
-		//application.mGameClientsArray.push(gc(clientUsername,clientPassword)); 
 	});
     	form.parse(req, function (err, fields, files) 
 	{
@@ -50,7 +48,7 @@ var processLogin = function(req,res,application)
 			if (clientUsername == serverUsername && clientPassword == serverPassword)
 			{
 				//we are authenticated
-				application.mGameClientsArray.push(gc(serverUsername,serverPassword,clientUsername,clientPassword)); 
+				//application.mGameClientsArray.push(gc(serverUsername,serverPassword,clientUsername,clientPassword)); 
 				
 	
 			}

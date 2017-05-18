@@ -1,5 +1,23 @@
 <html>
    <body>
+
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+        $(function ()
+        {
+                var socket = io();
+                socket.on('chat message', function(msg)
+                {
+                        $('#messages').append($('<li>').text(msg));
+                        window.scrollTo(0, document.body.scrollHeight);
+                });
+ 	});
+</script>
+
+
+
       <form action="/login" method="post" enctype="multipart/form-data">
          <fieldset>
             
