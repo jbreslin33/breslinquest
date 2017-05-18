@@ -3,9 +3,29 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+var pl = require('./processlogin');
+var application = require('./application');
+
+
+var loggedIn = false;
+//	return res.redirect('/index.html');
+
+app.get('/', function(req, res)
+{
+	if (loggedIn)
+	{
+  		res.sendFile(__dirname + '/index.html');
+	}
+	else
+	{
+  		res.sendFile(__dirname + '/form.html');
+	}
 });
+
+app.post('/login', function (req, res) {
+        var loggedIn = pl(req,res,application);
+})
+
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
