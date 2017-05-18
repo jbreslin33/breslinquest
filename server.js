@@ -2,9 +2,7 @@ var http = require('http');
 
 var dl = require('./displaylogin');
 var pl = require('./processlogin');
-
-var mUsername = 0;
-var mPassword = 0;
+var application = require('./application');
 
 var express = require('express')
 var app = express()
@@ -14,7 +12,7 @@ app.get('/login', function (req, res) {
 })
 
 app.post('/login', function (req, res) {
-        pl(req,res);
+        var loggedIn = pl(req,res,application);
 })
 
 app.listen(3000, function () {
