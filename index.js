@@ -6,9 +6,7 @@ var port = process.env.PORT || 3000;
 var pl = require('./processlogin');
 var application = require('./application');
 
-
 var loggedIn = false;
-//	return res.redirect('/index.html');
 
 app.get('/', function(req, res)
 {
@@ -29,12 +27,13 @@ app.post('/login', function (req, res) {
 
 io.on('connection', function(socket)
 {
-	console.log('id connected:' + socket.id );
-	application.mGameClientsArray.push(gc(socket.id));
+	//console.log('id connected:' + socket.id );
+	//application.mGameClientsArray.push(gc(socket.id));
   
-	socket.on('chat message', function(msg)
+	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-    		io.emit('chat message', msg);
+		console.log('loginAttempt clientUsername:' + clientUsername + ' clientPassword:' + clientPassword);
+    		//io.emit('chat message', msg);
   	});
 });
 
