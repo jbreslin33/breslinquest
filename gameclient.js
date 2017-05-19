@@ -15,8 +15,6 @@ var gameClient = function(socketid,clientUsername,clientPassword)
 
 var checkLogin = function(client_username,client_password)
 {
-	console.log('checkinglogin');
-
         //db
         var pg = require("pg");
 

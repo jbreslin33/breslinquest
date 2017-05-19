@@ -36,6 +36,7 @@ io.on('connection', function(socket)
 	{
 		console.log('loginAttempt clientUsername:' + clientUsername + ' clientPassword:' + clientPassword);
 		application.mGameClientsArray.push(gc(socket.id,clientUsername,clientPassword));
+		application.printLog('helllll');
   	});
 });
 
