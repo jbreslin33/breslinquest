@@ -10,12 +10,40 @@ var gameClient = function(socketid,clientUsername,clientPassword)
 	
 	this.mLoggedIn = false;
 
-	checkLogin();
+	checkLogin(this.mClientUsername,this.mClientPassword);
 };
 
-var checkLogin = function()
+var checkLogin = function(client_username,client_password)
 {
 	console.log('checkinglogin');
+
+        //db
+        var pg = require("pg");
+
+        var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+
+        var client = new pg.Client(conString);
+        client.connect();
+
+        var query_string = "SELECT username, password FROM users where username = '" + this.mClientUsername + "';";
+
+        var query = client.query(query_string);
+        query.on("row", function (row)
+        {
+        	serverUsername = row.username;
+                serverPassword = row.password;
+                console.log('clientUsername:' + client_username + ' clientPassword:' + client_password + ' serverUsername:' + serverUsername + ' serverPassword:' + serverPassword);
+                if (client_username == serverUsername && client_password == serverPassword)
+                {
+			console.log('login successful');	
+                	//we are authenticated
+                        //application.mGameClientsArray.push(gc(serverUsername,serverPassword,clientUsername,clientPassword));
+                }
+		else
+		{
+			console.log('login failed');	
+		}
+	});
 }
 
 module.exports = gameClient;
