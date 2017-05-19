@@ -20,8 +20,6 @@ app.post('/login', function (req, res) {
 
 io.on('connection', function(socket)
 {
-	//console.log('id connected:' + socket.id );
-  
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		console.log('loginAttempt clientUsername:' + clientUsername + ' clientPassword:' + clientPassword);
