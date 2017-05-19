@@ -1,3 +1,5 @@
+var application = require('./application');
+
 
 var gameClient = function(socketid,clientUsername,clientPassword)
 {
@@ -41,6 +43,7 @@ var checkLogin = function(client_username,client_password)
 		{
 			console.log('login failed');	
 		}
+		application.printLog('from gameclient');
 	});
 }
 
