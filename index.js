@@ -8,19 +8,9 @@ var pl          = require('./processlogin');
 var application = require('./application');
 var gc          = require('./gameclient');
 
-
-var loggedIn = false;
-
 app.get('/', function(req, res)
 {
-	if (loggedIn)
-	{
-  		res.sendFile(__dirname + '/index.html');
-	}
-	else
-	{
-  		res.sendFile(__dirname + '/form.html');
-	}
+  	res.sendFile(__dirname + '/form.html');
 });
 
 app.post('/login', function (req, res) {
