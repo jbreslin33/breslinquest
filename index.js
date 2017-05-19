@@ -3,8 +3,11 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-var pl = require('./processlogin');
+//my exports
+var pl          = require('./processlogin');
 var application = require('./application');
+var gc          = require('./gameclient');
+
 
 var loggedIn = false;
 
@@ -28,12 +31,11 @@ app.post('/login', function (req, res) {
 io.on('connection', function(socket)
 {
 	//console.log('id connected:' + socket.id );
-	//application.mGameClientsArray.push(gc(socket.id));
   
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		console.log('loginAttempt clientUsername:' + clientUsername + ' clientPassword:' + clientPassword);
-    		//io.emit('chat message', msg);
+		application.mGameClientsArray.push(gc(socket.id,clientUsername,clientPassword));
   	});
 });
 
