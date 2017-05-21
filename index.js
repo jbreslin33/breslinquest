@@ -10,7 +10,7 @@ var gc          = require('./gameclient');
 
 app.get('/', function(req, res)
 {
-  	res.sendFile(__dirname + '/form.html');
+  	res.sendFile(__dirname + '/login_form.html');
 });
 
 app.post('/login', function (req, res) {
