@@ -24,13 +24,28 @@ io.on('connection', function(socket)
 	{
 		gcInstance = new gc(socket.id,clientUsername,clientPassword); 
 		breslinApplicationInstance.mGameClientsArray.push(gcInstance);
-		console.log('socketID:' + breslinApplicationInstance.mGameClientsArray[0].mSocketID);
-		console.log('length:' + breslinApplicationInstance.mGameClientsArray.length);
+		
+		if (gcInstance.mLoggedIn == true)
+		{
+			//io.emit('load game', 'load game');
+			console.log('gc logged in true');
+		}
+		else
+		{
+			console.log('gc logged in false');
+		}
+
+		
+
+		//console.log('socketID:' + breslinApplicationInstance.mGameClientsArray[0].mSocketID);
+		//console.log('length:' + breslinApplicationInstance.mGameClientsArray.length);
+/*
 		for (i=0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
 		{
 			console.log('arr:' + breslinApplicationInstance.mGameClientsArray[i].mClientUsername);
 
 		}
+*/
 		//console.log('arr:' + application.mGameClientsArray[0].mClientUsername);
 		//if (gC.mLoggedIn == true)
 		//{
