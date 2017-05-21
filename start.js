@@ -24,9 +24,9 @@ io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		gcInstance = new gc(socket.id,clientUsername,clientPassword); 
-		mGameClientsArray.push(gcInstance);
-		console.log('socketID:' + mGameClientsArray[0].mSocketID);
+		//var gC = new gc(socket.id,clientUsername,clientPassword); 
+		mGameClientsArray.push(gc(socket.id,clientUsername,clientPassword));
+		//console.log('socketID:' + mGameClientsArray[0].mSocketID);
 		console.log('length:' + mGameClientsArray.length);
 		for (i=0; i < mGameClientsArray.length; i++)
 		{
