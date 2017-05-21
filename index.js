@@ -4,12 +4,10 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 //my exports
-//var application = require('./application');
-var gc          = require('./gameclient');
-
-var mGameClientsArray = [];
-
-
+var ba    = require('./application');
+var gc    = require('./gameclient');
+		
+var breslinApplicationInstance = new ba();
 
 app.get('/', function(req, res)
 {
@@ -25,12 +23,12 @@ io.on('connection', function(socket)
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		gcInstance = new gc(socket.id,clientUsername,clientPassword); 
-		mGameClientsArray.push(gcInstance);
-		console.log('socketID:' + mGameClientsArray[0].mSocketID);
-		console.log('length:' + mGameClientsArray.length);
-		for (i=0; i < mGameClientsArray.length; i++)
+		breslinApplicationInstance.mGameClientsArray.push(gcInstance);
+		console.log('socketID:' + breslinApplicationInstance.mGameClientsArray[0].mSocketID);
+		console.log('length:' + breslinApplicationInstance.mGameClientsArray.length);
+		for (i=0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
 		{
-			console.log('arr:' + mGameClientsArray[i].mClientUsername);
+			console.log('arr:' + breslinApplicationInstance.mGameClientsArray[i].mClientUsername);
 
 		}
 		//console.log('arr:' + application.mGameClientsArray[0].mClientUsername);
