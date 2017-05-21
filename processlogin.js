@@ -45,12 +45,21 @@ var processLogin = function(req,res,application)
 			serverUsername = row.username; 
 			serverPassword = row.password; 
 			console.log('clientUsername:' + clientUsername + ' clientPassword:' + clientPassword + ' serverUsername:' + serverUsername + ' serverPassword:' + serverPassword); 
-			if (clientUsername == serverUsername && clientPassword == serverPassword)
+			if (String("clientUsername").valueOf() == String("serverUsername").valueOf() && String("clientPassword").valueOf() && String("serverPassword").valueOf())
 			{
+				console.log('we should be calling readfile');
 				//we are authenticated
 				//application.mGameClientsArray.push(gc(serverUsername,serverPassword,clientUsername,clientPassword)); 
-				
-	
+ 				fs.readFile('simple.html', function (err, data) 
+				{
+        				res.writeHead(200, 
+					{
+            					'Content-Type': 'text/html',
+                				'Content-Length': data.length
+        				});
+        				res.write(data);
+        				res.end();
+    				});
 			}
 		});
 		query.on("row", function (row, result) 
@@ -64,16 +73,6 @@ var processLogin = function(req,res,application)
 		});
 
 
- 		fs.readFile('index.html', function (err, data) 
-		{
-        		res.writeHead(200, 
-			{
-            			'Content-Type': 'text/html',
-                		'Content-Length': data.length
-        		});
-        		res.write(data);
-        		res.end();
-    		});
     	});
 };
 

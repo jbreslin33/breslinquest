@@ -1,5 +1,7 @@
-var application = require('./application');
+var fs = require('fs');
 
+//my exports
+var application = require('./application');
 
 var gameClient = function(socketid,clientUsername,clientPassword)
 {
@@ -35,9 +37,20 @@ var checkLogin = function(client_username,client_password)
                 console.log('clientUsername:' + client_username + ' clientPassword:' + client_password + ' serverUsername:' + serverUsername + ' serverPassword:' + serverPassword);
                 if (client_username == serverUsername && client_password == serverPassword)
                 {
-			console.log('login successful');	
                 	//we are authenticated
-                        //application.mGameClientsArray.push(gc(serverUsername,serverPassword,clientUsername,clientPassword));
+			console.log('login successful');	
+
+                        fs.readFile('simple.html', function (err, data)
+                       	{
+                        	res.writeHead(200,
+                                {
+                                        'Content-Type': 'text/html',
+                                       	'Content-Length': data.length
+                                });
+                                res.write(data);
+                                res.end();
+                        });
+
                 }
 		else
 		{

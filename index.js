@@ -12,20 +12,18 @@ app.get('/', function(req, res)
 {
   	res.sendFile(__dirname + '/login_form.html');
 });
-/*
+
 app.post('/login', function (req, res) {
-        var loggedIn = pl(req,res,application);
+  	res.sendFile(__dirname + '/simple.html');
+        //var loggedIn = pl(req,res,application);
 })
-*/
 
 
 io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		console.log('loginAttempt clientUsername:' + clientUsername + ' clientPassword:' + clientPassword);
 		application.mGameClientsArray.push(gc(socket.id,clientUsername,clientPassword));
-		application.printLog('helllll');
   	});
 });
 

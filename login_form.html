@@ -23,10 +23,11 @@
                         	$('#p').val('');
                         	return false;
                 	});
-                	socket.on('chat message', function(msg)
+                	socket.on('load game', function(msg)
                 	{
-                        	$('#messages').append($('<li>').text(msg));
-                        	window.scrollTo(0, document.body.scrollHeight);
+                        	//$('#messages').append($('<li>').text(msg));
+                        	//window.scrollTo(0, document.body.scrollHeight);
+                        	$('#u').val('loading game');
                 	});
       		});
     	</script>
