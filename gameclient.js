@@ -4,6 +4,7 @@
 
 var gameClient = function(socketid,clientUsername,clientPassword)
 {
+	console.log('cons:' + clientUsername);
 	this.mSocketID = socketid;
 	this.mUserID = 0;
 	this.mClientUsername = clientUsername;
@@ -13,13 +14,18 @@ var gameClient = function(socketid,clientUsername,clientPassword)
 	
 	this.mLoggedIn = false;
 
-	checkLogin(this.mClientUsername,this.mClientPassword);
-};
 
-var checkLogin = function(client_username,client_password)
-{
+	var getClientUsername = function()
+	{
+		return this.mClientUsername;
+	}
+
+
+	var checkLogin = function(client_username,client_password)
+	{
 	
 	console.log('A:' + client_username);
+	console.log('ret:' + client_username);
         //db
         var pg = require("pg");
 
@@ -30,7 +36,8 @@ var checkLogin = function(client_username,client_password)
 
         var query_string = "SELECT username, password FROM users where username = '" + client_username + "';";
 
-	console.log('q:' + query_string);
+	console.log('un:' + client_username);
+	console.log('un this:' + this.mClientUsername);
         var query = client.query(query_string);
 	console.log('B');
         query.on("row", function (row)
@@ -51,6 +58,8 @@ var checkLogin = function(client_username,client_password)
 		}
 	});
 }
+	checkLogin(this.mClientUsername,this.mClientPassword);
+};
 
 module.exports = gameClient;
 
