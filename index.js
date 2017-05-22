@@ -39,6 +39,7 @@ io.on('connection', function(socket)
                         {
                                 //return true;
 				console.log('send load');
+				socket.emit('load game');
                         }
                         else
                         {
