@@ -11,4 +11,5 @@ sudo npm install express-form --save
 sudo npm install body-parser --save
 sudo npm install formidable@latest --save
 
+sudo npm install mootools
 

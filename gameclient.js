@@ -1,7 +1,3 @@
-
-//my exports
-//var application = require('./application');
-
 var gameClient = function(socketid,clientUsername,clientPassword)
 {
 	console.log('cons:' + clientUsername);
@@ -14,51 +10,41 @@ var gameClient = function(socketid,clientUsername,clientPassword)
 	
 	this.mLoggedIn = false;
 
-
 	var getClientUsername = function()
 	{
 		return this.mClientUsername;
 	}
 
-
 	var checkLogin = function(client_username,client_password)
 	{
-	
-	console.log('A:' + client_username);
-	console.log('ret:' + client_username);
-        //db
-        var pg = require("pg");
+		console.log('cu:' + client_username);
+		console.log('cp:' + client_password);
+        	//db
+        	var pg = require("pg");
 
-        var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+        	var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 
-        var client = new pg.Client(conString);
-        client.connect();
+        	var client = new pg.Client(conString);
+        	client.connect();
 
-        var query_string = "SELECT username, password FROM users where username = '" + client_username + "';";
+        	var query_string = "SELECT username, password FROM users where username = '" + client_username + "';";
 
-	console.log('un:' + client_username);
-	console.log('un this:' + this.mClientUsername);
-        var query = client.query(query_string);
-	console.log('B');
-        query.on("row", function (row)
-        {
-		console.log('C');
-        	serverUsername = row.username;
-                serverPassword = row.password;
-                console.log('clientUsername:' + client_username + ' clientPassword:' + client_password + ' serverUsername:' + serverUsername + ' serverPassword:' + serverPassword);
-                if (client_username == serverUsername && client_password == serverPassword)
-                {
-			console.log('login successful');	
-			this.mLoggedIn = true;
-                }
-		else
-		{
-			console.log('login failed');	
-			this.mLoggedIn = false;
-		}
-	});
-}
-	checkLogin(this.mClientUsername,this.mClientPassword);
+        	var query = client.query(query_string);
+        	query.on("row", function (row)
+        	{
+        		serverUsername = row.username;
+                	serverPassword = row.password;
+                	if (client_username == serverUsername && client_password == serverPassword)
+                	{
+				mLoggedIn = true;
+                	}
+			else
+			{
+				mLoggedIn = false;
+			}
+		});
+	}
+	checkLogin(clientUsername,clientPassword);
 };
 
 module.exports = gameClient;

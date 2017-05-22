@@ -3,9 +3,17 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
+require ('mootools');
+
+
 //my exports
 var ba    = require('./application');
 var gc    = require('./gameclient');
+var p2D    = require('./Point2D');
+
+var point2DInstance = new p2D(3,7); 
+
+console.log('x:' + point2DInstance.mX);
 		
 var breslinApplicationInstance = new ba();
 
