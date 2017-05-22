@@ -9,6 +9,8 @@ var Application = new Class(
         {
 		this.mGameClientsArray.push(gc);
         }
+	
+
 });
 
 module.exports = Application;

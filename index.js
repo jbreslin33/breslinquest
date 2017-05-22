@@ -31,7 +31,12 @@ db.executeQuery(function(resp)
 {
 	console.log(resp);
 	console.log(resp[0].username);
+	//breslinApplicationInstance.set
+	point2DInstance.set(4,5);
+	console.log('when returned x:' + point2DInstance.mX + ' y:' + point2DInstance.mY);
 });
+
+console.log('SOMETIME x:' + point2DInstance.mX + ' y:' + point2DInstance.mY);
 
 io.on('connection', function(socket)
 {
