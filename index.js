@@ -27,57 +27,27 @@ app.post('/login', function (req, res) {
   	//res.sendFile(__dirname + '/simple.html');
 })
 
-db.executeQuery(function(resp)
-{
-	console.log(resp);
-	console.log(resp[0].username);
-	//breslinApplicationInstance.set
-	point2DInstance.set(4,5);
-	console.log('when returned x:' + point2DInstance.mX + ' y:' + point2DInstance.mY);
-});
-
-console.log('SOMETIME x:' + point2DInstance.mX + ' y:' + point2DInstance.mY);
-
 io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		gcInstance = new gc(socket.id,clientUsername,clientPassword); 
-		breslinApplicationInstance.addGameClient(gcInstance);
-		var loggedIn = false;
-		loggedIn = gcInstance.checkLogin('jbreslin','Iggles_13');
-		
-		if (loggedIn == true)
-		{
-			//io.emit('load game', 'load game');
-			console.log('gc logged in true');
-		}
-		else
-		{
-			console.log('gc logged in false');
-		}
+ 		db.executeQuery(function(resp)
+                {
+                        console.log(resp);
+                        console.log(resp[0].username);
+                        if (resp[0].username == 'jbreslin')
+                        {
+                                //return true;
+				console.log('send load');
+                        }
+                        else
+                        {
+                                //return false;
+				console.log('we have a problem');
+                        }
 
-		//console.log('socketID:' + breslinApplicationInstance.mGameClientsArray[0].mSocketID);
-		//console.log('length:' + breslinApplicationInstance.mGameClientsArray.length);
-/*
-		for (i=0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
-		{
-			console.log('arr:' + breslinApplicationInstance.mGameClientsArray[i].mClientUsername);
-
-		}
-*/
-		//console.log('arr:' + application.mGameClientsArray[0].mClientUsername);
-		//if (gC.mLoggedIn == true)
-		//{
-			//io.emit('load game', 'load game');
-		//}
-  	});
-
-	//io.emit('load game', 'load game');
-  
-	//this.mIO.sockets.emit('load game', "load game");
-	//io.sockets.emit('load game', "load game");
-
+                });
+	});
 });
 
 http.listen(port, function(){
