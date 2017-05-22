@@ -10,6 +10,7 @@ require ('mootools');
 var ba    = require('./application');
 var gc    = require('./gameclient');
 var p2D    = require('./Point2D');
+var db    = require('./db');
 
 var point2DInstance = new p2D(3,7); 
 
@@ -26,14 +27,22 @@ app.post('/login', function (req, res) {
   	//res.sendFile(__dirname + '/simple.html');
 })
 
+db.executeQuery(function(resp)
+{
+	console.log(resp);
+	console.log(resp[0].username);
+});
+
 io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		gcInstance = new gc(socket.id,clientUsername,clientPassword); 
-		breslinApplicationInstance.mGameClientsArray.push(gcInstance);
+		breslinApplicationInstance.addGameClient(gcInstance);
+		var loggedIn = false;
+		loggedIn = gcInstance.checkLogin('jbreslin','Iggles_13');
 		
-		if (gcInstance.mLoggedIn == true)
+		if (loggedIn == true)
 		{
 			//io.emit('load game', 'load game');
 			console.log('gc logged in true');
@@ -42,8 +51,6 @@ io.on('connection', function(socket)
 		{
 			console.log('gc logged in false');
 		}
-
-		
 
 		//console.log('socketID:' + breslinApplicationInstance.mGameClientsArray[0].mSocketID);
 		//console.log('length:' + breslinApplicationInstance.mGameClientsArray.length);

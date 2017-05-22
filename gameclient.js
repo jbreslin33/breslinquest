@@ -1,51 +1,80 @@
-var gameClient = function(socketid,clientUsername,clientPassword)
+
+var GameClient = new Class(
 {
-	console.log('cons:' + clientUsername);
-	this.mSocketID = socketid;
-	this.mUserID = 0;
-	this.mClientUsername = clientUsername;
-	this.mClientPassword = clientPassword;
-	this.mServerUsername = 0;
-	this.mServerPassword = 0;
+        initialize: function(socketid,clientUsername,clientPassword)
+        {
+        	this.mSocketID = socketid;
+        	this.mUserID = 0;
+        	this.mClientUsername = clientUsername;
+        	this.mClientPassword = clientPassword;
+        	this.mServerUsername = 0;
+        	this.mServerPassword = 0;
+
+        	this.mLoggedIn = false;
+        },
 	
-	this.mLoggedIn = false;
-
-	var getClientUsername = function()
+	jesus: function(cb,p)
 	{
-		return this.mClientUsername;
-	}
+		//console.log('cb:' + cb);	
+	},
 
-	var checkLogin = function(client_username,client_password)
-	{
-		console.log('cu:' + client_username);
-		console.log('cp:' + client_password);
-        	//db
-        	var pg = require("pg");
+        checkLogin: function(clientUsername,clientPassword)
+        {
+		//db
+                var pg = require("pg");
 
-        	var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 
-        	var client = new pg.Client(conString);
-        	client.connect();
+                var client = new pg.Client(conString);
+                client.connect();
 
-        	var query_string = "SELECT username, password FROM users where username = '" + client_username + "';";
+                var query_string = "SELECT username, password FROM users where username = '" + this.mClientUsername + "';";
 
-        	var query = client.query(query_string);
-        	query.on("row", function (row)
-        	{
-        		serverUsername = row.username;
-                	serverPassword = row.password;
-                	if (client_username == serverUsername && client_password == serverPassword)
-                	{
-				mLoggedIn = true;
-                	}
-			else
-			{
-				mLoggedIn = false;
-			}
+                const query = client.query(query_string);
+		
+	//	this.jesus('hey','now'); 
+		//this.jesus(
+		const results = [];		
+                query.on('row', function(row)
+                {
+			results.push(row);
+/*
+                        serverUsername = row.username;
+                        serverPassword = row.password;
+                        if (clientUsername == serverUsername && clientPassword == serverPassword)
+                        {
+				loggedIn = true;
+                        }
+                        else
+                        {
+				loggedIn = false;
+                        }
+*/
+                });
+/*
+		if (loggedIn == true)
+		{
+			console.log('got true');
+			this.mLoggedIn = true;
+			//return true;
+		}
+		else
+		{
+			console.log('got false');
+			this.mLoggedIn = false;
+			//return false;
+		}
+*/
+
+		query.on('end', function(result) 
+		{
+			//done();			
+			//console.log('r:' + JSON.stringify(results));
 		});
-	}
-	checkLogin(clientUsername,clientPassword);
-};
+		console.log('r:' + JSON.stringify(results));
 
-module.exports = gameClient;
 
+        },
+});
+
+module.exports = GameClient;

@@ -1,15 +1,14 @@
-
-var breslinApplication = function()
+var Application = new Class(
 {
-	this.mGameClientsArray = [];
-};
-/*
-var printlog = function(printthis)
-{
-	console.log('' + printthis);
-};
-*/
+        initialize: function()
+        {
+      		this.mGameClientsArray = new Array(); 
+	},
 
-module.exports = breslinApplication;
-//module.exports.printLog    = printlog;
+        addGameClient: function(gc)
+        {
+		this.mGameClientsArray.push(gc);
+        }
+});
 
+module.exports = Application;
