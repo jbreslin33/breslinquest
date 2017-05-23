@@ -11,6 +11,7 @@ var gc    = require('./gameclient');
 var db    = require('./db');
 
 var breslinApplicationInstance = new ba();
+var databaseConnectionInstance = new db();
 
 app.get('/', function(req, res)
 {
@@ -26,8 +27,7 @@ io.on('connection', function(socket)
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
- 		//db.executeQuery(function(resp,query_string)
- 		db.executeQuery(function(resp)
+ 		databaseConnectionInstance.executeQuery(function(resp)
                 {
                         //console.log(resp);
                         //console.log(resp[0].username);
