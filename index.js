@@ -54,12 +54,7 @@ app.post('/login', function (req, res) {
 var io_login = io.of('/login'); 
  
 io_login.on('connection', function(socket)
-{  
-});
-
-io_login.on('connection', function(socket)
 {
-	console.log('callin io_login connection');
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		var gameClientInstance = new gc(breslinApplicationInstance,socket.id,clientUsername,clientPassword);
