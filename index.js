@@ -12,57 +12,42 @@ var db    = require('./db');
 
 var breslinApplicationInstance = new ba();
 
-
+/******************
+	ROOT NAMESPACE
+*****************/
 app.get('/', function(req, res)
 {
   	res.sendFile(__dirname + '/login_form.html');
 });
 
-var io_login = io.of('/login');  
-io_login.on('connection', function(socket){  
-    console.log('Connected to login namespace');
-});
+app.post('/', function (req, res) {
+  	//res.sendFile(__dirname + '/simple.html');
+})
+
+/******************
+	LOGIN NAMESPACE
 //iosa.emit('stats', { data: 'some data' });  
+*****************/
+//root namespace above will will return page to client which will take us into login namespace
+
+app.post('/login', function (req, res) {
+  	//res.sendFile(__dirname + '/simple.html');
+})
+
+var io_login = io.of('/login'); 
+ 
+io_login.on('connection', function(socket)
+{  
+});
 
 io_login.on('connection', function(socket)
 {
 	console.log('callin io_login connection');
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		console.log('callin login attempt in io_login connection on server');
-	});
-});
-
-app.post('/', function (req, res) {
-  	//res.sendFile(__dirname + '/simple.html');
-	console.log('callin login  on server');
-})
-
-io.on('connection', function(socket)
-{
-	socket.on('login attempt', function(clientUsername,clientPassword)
-	{
-		console.log('callin login attempt on server');
-		/*
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
-		var databaseConnectionInstance = new db(query_string);
- 		databaseConnectionInstance.executeQuery(function(resp)
-                {
-                        //console.log(resp);
-                        //console.log(resp[0].username);
-                        if (resp[0].username == 'jbreslin')
-                        {
-                                //return true;
-				console.log('send load');
-				socket.emit('load game');
-                        }
-                        else
-                        {
-                                //return false;
-				console.log('we have a problem');
-                        }
-                });
-		*/
+                var databaseConnectionInstance = new db(query_string);
+		databaseConnectionInstance.executeQuery();
 	});
 });
 

@@ -8,38 +8,33 @@ var DatabaseConnection = new Class(
         {
 		this.mConString = "postgres://postgres:mibesfat@localhost/openrpg";
 		this.mQueryString = query_string;
-		console.log('this.mQueryString:' + this.mQueryString);
 	},
 
-        executeQuery: function(callback)
+        executeQuery: function()
         {
 		var qs = this.mQueryString;
-		console.log('qs:' + qs);
-               	pg.connect
-		(
-			this.mConString, 
+		console.log('this.mQueryString:' + this.mQueryString);
 
-			function(err, client, done,qs)
-        		{
-				console.log('qs:' + qs);
-                		if(err)
-                		{
-                        		return console.error('error fetching client', err);
-                		}
-                		//var clientUsername = 'jbreslin';
-                		//var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
-                		client.query(qs, function(err, result)
-                		{
-                        		done();
-                        		if(err)
-                        		{
-                                		return console.error('error running query', err);
-                        		}
-                        		resp.push(result.rows[0]);
-                        		callback(resp);
-                		});
-        		}
-		);
+		var client = new pg.Client(this.mConString);
+		client.connect();
+
+		var login_query = client.query(this.mQueryString, function (err,result)
+		{
+			if (err)
+			{
+				throw err;
+			}
+			//console.log(result.rows[0]);
+		});
+		login_query.on("row", function (row,result) 
+		{
+			result.addRow(row);
+		});	
+		login_query.on("end", function (result) 
+		{
+    			console.log(JSON.stringify(result.rows, null, "    "));
+    			client.end();
+		});
 	}
 });
 
