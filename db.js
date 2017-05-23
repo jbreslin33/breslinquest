@@ -3,8 +3,9 @@ var pg = require('pg');
 
 var DatabaseConnection = new Class(
 {
-        initialize: function(query_string)
+        initialize: function(ba,query_string)
         {
+		this.mBreslinApplicationInstance = ba;
 		this.mConString = "postgres://postgres:mibesfat@localhost/openrpg";
 		this.mQueryString = query_string;
 	},
@@ -29,12 +30,17 @@ var DatabaseConnection = new Class(
 		{
 			result.addRow(row);
 		});	
-		login_query.on("end", function (result) 
+		login_query.on("end", function (result)  
 		{
     			console.log(JSON.stringify(result.rows, null, "    "));
     			//console.log('username:' + result.rows.username);
     			client.end();
-		});
+			console.log('l:' + this.mBreslinApplicationInstance.mGameClientsArray[0].mClientUsername);
+			for (i = 0; i < this.mBreslinApplicationInstance.mGameClientsArray.length; i++)
+			{
+				this.mBreslinApplicationInstance.mGameClientsArray[i].mLoggedIn = true;
+			}
+		}.bind(this));
 	}
 });
 

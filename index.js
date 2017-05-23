@@ -17,9 +17,7 @@ setInterval(onTimerTick, 33);
 function onTimerTick()
 {
                 //console.log('tick');
-                console.log('size:' + breslinApplicationInstance.mGameClientsArray.length);
-                if (this.mGameClientsArray)
-                {
+                //console.log('size:' + breslinApplicationInstance.mGameClientsArray.length);
                         for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
                         {
                                 if (breslinApplicationInstance.mGameClientsArray[i].mLoggedIn == false)
@@ -31,7 +29,6 @@ function onTimerTick()
                                         console.log('client: ' + i + ' is logged in');
                                 }
                         }
-                }
 }
 
 
@@ -71,7 +68,7 @@ io_login.on('connection', function(socket)
 		var gameClientInstance = new gc(breslinApplicationInstance,socket.id,clientUsername,clientPassword);
 		breslinApplicationInstance.addGameClient(gameClientInstance);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
-                var databaseConnectionInstance = new db(query_string);
+                var databaseConnectionInstance = new db(breslinApplicationInstance,query_string);
 		databaseConnectionInstance.executeQuery();
 
 		socket.emit('load game');
