@@ -5,7 +5,6 @@ var port = process.env.PORT || 3000;
 
 require ('mootools');
 
-
 //my exports
 var ba    = require('./application');
 var gc    = require('./gameclient');
@@ -26,10 +25,12 @@ io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
+		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
+ 		//db.executeQuery(function(resp,query_string)
  		db.executeQuery(function(resp)
                 {
-                        console.log(resp);
-                        console.log(resp[0].username);
+                        //console.log(resp);
+                        //console.log(resp[0].username);
                         if (resp[0].username == 'jbreslin')
                         {
                                 //return true;
@@ -41,7 +42,6 @@ io.on('connection', function(socket)
                                 //return false;
 				console.log('we have a problem');
                         }
-
                 });
 	});
 });
