@@ -16,21 +16,18 @@ setInterval(onTimerTick, 33);
 
 function onTimerTick()
 {
-                //console.log('tick');
-                //console.log('size:' + breslinApplicationInstance.mGameClientsArray.length);
-                        for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
-                        {
-                                if (breslinApplicationInstance.mGameClientsArray[i].mLoggedIn == false)
-                                {
-                                        console.log('client: ' + i + ' is not logged in');
-                                }
-                                else
-                                {
-                                        console.log('client: ' + i + ' is logged in');
-                                }
-                        }
+	for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
+	{
+		if (breslinApplicationInstance.mGameClientsArray[i].mLoggedIn == false)
+                {
+			//console.log('client: ' + i + ' is not logged in');
+                }
+                else
+                {
+                	//console.log('client: ' + i + ' is logged in');
+                }
+	}
 }
-
 
 /******************
 	ROOT NAMESPACE
