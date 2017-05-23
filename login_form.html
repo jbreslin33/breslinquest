@@ -15,7 +15,7 @@
     	<script>
         	$(function ()
         	{
-                	var socket = io();
+                	var socket = io('/login');
                 	$('form').submit(function()
                 	{
                         	socket.emit('login attempt', $('#u').val(), $('#p').val());

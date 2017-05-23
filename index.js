@@ -11,22 +11,41 @@ var gc    = require('./gameclient');
 var db    = require('./db');
 
 var breslinApplicationInstance = new ba();
-var databaseConnectionInstance = new db();
+
 
 app.get('/', function(req, res)
 {
   	res.sendFile(__dirname + '/login_form.html');
 });
 
-app.post('/login', function (req, res) {
+var io_login = io.of('/login');  
+io_login.on('connection', function(socket){  
+    console.log('Connected to login namespace');
+});
+//iosa.emit('stats', { data: 'some data' });  
+
+io_login.on('connection', function(socket)
+{
+	console.log('callin io_login connection');
+	socket.on('login attempt', function(clientUsername,clientPassword)
+	{
+		console.log('callin login attempt in io_login connection on server');
+	});
+});
+
+app.post('/', function (req, res) {
   	//res.sendFile(__dirname + '/simple.html');
+	console.log('callin login  on server');
 })
 
 io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
+		console.log('callin login attempt on server');
+		/*
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
+		var databaseConnectionInstance = new db(query_string);
  		databaseConnectionInstance.executeQuery(function(resp)
                 {
                         //console.log(resp);
@@ -43,6 +62,7 @@ io.on('connection', function(socket)
 				console.log('we have a problem');
                         }
                 });
+		*/
 	});
 });
 
