@@ -1,6 +1,5 @@
 var pg = require('pg');
 //var conString = "postgres://postgres:mibesfat@localhost/openrpg";
-var resp = [];
 
 var DatabaseConnection = new Class(
 {
@@ -33,6 +32,7 @@ var DatabaseConnection = new Class(
 		login_query.on("end", function (result) 
 		{
     			console.log(JSON.stringify(result.rows, null, "    "));
+    			//console.log('username:' + result.rows.username);
     			client.end();
 		});
 	}
