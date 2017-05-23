@@ -45,9 +45,13 @@ io_login.on('connection', function(socket)
 	console.log('callin io_login connection');
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
+		var gameClientInstance = new gc(breslinApplicationInstance,socket.id,clientUsername,clientPassword);
+		breslinApplicationInstance.addGameClient(gameClientInstance);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(query_string);
 		databaseConnectionInstance.executeQuery();
+
+		socket.emit('load game');
 	});
 });
 
