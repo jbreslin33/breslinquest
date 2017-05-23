@@ -1,6 +1,110 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<head>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
 	
 <body>
+<p id="hud"></p>
+
+<script>
+var myGamePiece;
+var mX = 0;
+var mY = 0;
+var mZ = 0;
+var mD = 0;
+
+
+document.getElementById("hud").innerHTML = "coordinates:";
+
+
+function startGame() {
+    myGameArea.start();
+}
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 300;
+        this.canvas.height = 300;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('keypress', function (e) {
+            e.preventDefault();
+            myGameArea.keys = (myGameArea.keys || []);
+            myGameArea.keys[e.keyCode] = (e.type == "keypress");
+        if (e.keyCode == 37)
+        {
+                mD = mD - 1;
+                if (mD < 0)
+                {
+                        mD = 3;
+                }
+                document.getElementById("hud").innerHTML = "mD:" + mD;
+        }
+
+        if (e.keyCode == 39)
+        {
+                mD = mD + 1;
+                if (mD > 3)
+                {
+                        mD = 0;
+                }
+                document.getElementById("hud").innerHTML = "mD:" + mD;
+        }
+
+        })
+
+        window.addEventListener('keyup', function (e) {
+        })
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+function drawImage(img) {
+ var imageObj = new Image();
+      imageObj.onload = function() {
+        myGameArea.context.drawImage(imageObj, 69, 50);
+      };
+      imageObj.src = '' + img;
+
+
+}
+
+function updateGameArea() {
+if (mD == 0)
+{
+        drawImage("src/images/wall.jpg");
+}
+if (mD == 1)
+{
+        drawImage("src/images/hallway.jpg");
+}
+if (mD == 2)
+{
+        drawImage("src/images/wall.jpg");
+}
+if (mD == 3)
+{
+        drawImage("src/images/hallway.jpg");
+}
+
+}
+</script>
+
+
 
 	<ul id="messages"></ul>
 	<form action="">
