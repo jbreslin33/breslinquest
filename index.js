@@ -67,6 +67,13 @@ io.on('connection', function(socket)
 			if (breslinApplicationInstance.mGameClientsArray[i].mSocketID == socket.id)
 			{
 				console.log('found client and updating move:' + socket.id);
+
+				/*
+
+					0
+				       3 1
+					2
+				*/
 			 	if (move_key_code == 37)
 				{
 		
@@ -85,8 +92,27 @@ io.on('connection', function(socket)
 						 breslinApplicationInstance.mGameClientsArray[i].mD = 0;
 					}	
 				}		
+			 	if (move_key_code == 38)
+				{
+					if (breslinApplicationInstance.mGameClientsArray[i].mD == 0)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY + 1 ;
+					}	
+					if (breslinApplicationInstance.mGameClientsArray[i].mD == 1)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX + 1 ;
+					}	
+					if (breslinApplicationInstance.mGameClientsArray[i].mD == 2)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY - 1 ;
+					}	
+					if (breslinApplicationInstance.mGameClientsArray[i].mD == 3)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX - 1 ;
+					}	
+				}		
 
-				console.log('id:' + socket.id + ' mD:' + breslinApplicationInstance.mGameClientsArray[i].mD);  
+				console.log('id:' + socket.id + ' D:' + breslinApplicationInstance.mGameClientsArray[i].mD + ' X:' + breslinApplicationInstance.mGameClientsArray[i].mX + ' Y:' + breslinApplicationInstance.mGameClientsArray[i].mY + ' Z:' + breslinApplicationInstance.mGameClientsArray[i].mZ );  
 			}
 		}
 	});

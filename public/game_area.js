@@ -8,49 +8,31 @@ var GameArea = new Class(
 
 	start: function()
 	{
-	this.canvas.width = 300;
-        this.canvas.height = 300;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20); 
-        window.addEventListener('keypress', function (e) {
-            e.preventDefault();
-            gameArea.keys = (gameArea.keys || []);
-            gameArea.keys[e.keyCode] = (e.type == "keypress");
+		this.canvas.width = 300;
+        	this.canvas.height = 300;
+        	this.context = this.canvas.getContext("2d");
+        	document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        	this.frameNo = 0;
+        	this.interval = setInterval(updateGameArea, 20); 
 
-        if (e.keyCode == 37)
-        {
-                //server
-                socket.emit('move attempt', e.keyCode);
+        	window.addEventListener('keypress', function (e) 
+		{
+            		e.preventDefault();
+            		gameArea.keys = (gameArea.keys || []);
+            		gameArea.keys[e.keyCode] = (e.type == "keypress");
 
-                //client
-                mD = mD - 1;
-                if (mD < 0)
-                {
-                        mD = 3;
-                }
-                document.getElementById("hud").innerHTML = "mD:" + mD;
-        }
+        		if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+        		{
+                		//server
+                		socket.emit('move attempt', e.keyCode);
 
-        if (e.keyCode == 39)
-        {
-                //server
-                socket.emit('move attempt', e.keyCode);
+				//dead reckoning????
+        		}
+        	})
 
-                mD = mD + 1;
-                if (mD > 3)
-                {
-                        mD = 0;
-                }
-                document.getElementById("hud").innerHTML = "mD:" + mD;
-        }
-
-        })
-
-        window.addEventListener('keyup', function (e) {
-        })
-
+        	window.addEventListener('keyup', function (e) 
+		{
+       		})
 	},
     
 	stop : function() 
