@@ -1,6 +1,10 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <head>
+<script type="text/javascript" src="/mootools-core-1.5.1-full-compat-yc.js"></script>
+<script type="text/javascript" src="/testclass.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <style>
 canvas {
     border:1px solid #d3d3d3;
@@ -11,12 +15,17 @@ canvas {
 	
 <body>
 <p id="hud"></p>
-	
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
 
 <script>
 var socket = io('');
+
+//mootools
+var testClass = new TestClass();
+
+
+
+
 
 var myGamePiece;
 var mX = 0;
