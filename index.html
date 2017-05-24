@@ -11,8 +11,13 @@ canvas {
 	
 <body>
 <p id="hud"></p>
+	
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
 <script>
+var socket = io('');
+
 var myGamePiece;
 var mX = 0;
 var mY = 0;
@@ -42,6 +47,11 @@ var myGameArea = {
             myGameArea.keys[e.keyCode] = (e.type == "keypress");
         if (e.keyCode == 37)
         {
+		//server
+                socket.emit('login attempt', $('#u').val(), $('#p').val());
+
+
+		//client
                 mD = mD - 1;
                 if (mD < 0)
                 {
@@ -108,13 +118,10 @@ if (mD == 3)
 		<button>Send</button>
 	</form>
 
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     	<script>
         	$(function ()
         	{
-                	var socket = io('');
                 	$('form').submit(function()
                 	{
                         	socket.emit('login attempt', $('#u').val(), $('#p').val());
