@@ -40,7 +40,7 @@ function onTimerTick()
 *****************/
 app.get('/', function(req, res)
 {
-  	res.sendFile(__dirname + '/login_form.html');
+  	res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', function (req, res) {
