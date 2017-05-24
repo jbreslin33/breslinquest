@@ -118,7 +118,7 @@ if (mD == 3)
     	<script>
         	$(function ()
         	{
-                	var socket = io('/login');
+                	var socket = io('');
                 	$('form').submit(function()
                 	{
                         	socket.emit('login attempt', $('#u').val(), $('#p').val());

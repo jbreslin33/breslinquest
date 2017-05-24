@@ -57,9 +57,9 @@ app.post('/login', function (req, res) {
   	//res.sendFile(__dirname + '/simple.html');
 })
 
-var io_login = io.of('/login'); 
+//var io_login = io.of('/login'); 
  
-io_login.on('connection', function(socket)
+io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
