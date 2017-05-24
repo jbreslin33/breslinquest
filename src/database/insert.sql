@@ -1,5 +1,6 @@
 --users
 insert into users (username,password) values ('jbreslin','Iggles_13');
+insert into users (username,password) values ('bbreslin','soccer12');
 
 --race
 insert into race (name) values ('Human');

@@ -15,7 +15,8 @@ var GameArea = new Class(
         	this.frameNo = 0;
         	this.interval = setInterval(updateGameArea, 20); 
 
-        	window.addEventListener('keypress', function (e) 
+        	//window.addEventListener('keypress', function (e) 
+        	window.addEventListener('keydown', function (e) 
 		{
             		e.preventDefault();
             		gameArea.keys = (gameArea.keys || []);
