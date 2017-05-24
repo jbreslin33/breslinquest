@@ -12,6 +12,8 @@ canvas {
 <body>
 <p id="hud"></p>
 
+<img src="/images/PandaWizard.png">
+
 <script>
 var myGamePiece;
 var mX = 0;
@@ -86,6 +88,11 @@ function drawImage(img) {
 function updateGameArea() {
 if (mD == 0)
 {
+        drawImage("/images/wall.jpg");
+}
+/*
+if (mD == 0)
+{
         drawImage("/public/wall.jpg");
 }
 if (mD == 1)
@@ -100,6 +107,7 @@ if (mD == 3)
 {
         drawImage("/public/hallway.jpg");
 }
+*/
 
 }
 </script>
