@@ -2,7 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <head>
 <script type="text/javascript" src="/mootools-core-1.5.1-full-compat-yc.js"></script>
-<script type="text/javascript" src="/testclass.js"></script>
 <script type="text/javascript" src="/game_area.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -21,13 +20,6 @@ canvas {
 <script>
 var socket = io('');
 
-//mootools
-var testClass = new TestClass();
-
-
-
-
-
 var myGamePiece;
 var mX = 0;
 var mY = 0;
@@ -35,16 +27,19 @@ var mZ = 0;
 var mD = 0;
 
 document.getElementById("hud").innerHTML = "coordinates:";
+	
+var gameArea = new GameArea();
 
 
-function startGame() {
-    myGameArea.start();
+function startGame() 
+{
+   	gameArea.start();
 }
 
 function drawImage(img) {
  var imageObj = new Image();
       imageObj.onload = function() {
-        myGameArea.context.drawImage(imageObj, 69, 50);
+        gameArea.context.drawImage(imageObj, 69, 50);
       };
       imageObj.src = '' + img;
 }
