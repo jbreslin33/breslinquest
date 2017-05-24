@@ -14,8 +14,6 @@ var ba    = require('./application');
 var gc    = require('./gameclient');
 var db    = require('./db');
 
-
-
 var breslinApplicationInstance = new ba();
 
 setInterval(onTimerTick, 33);
@@ -43,22 +41,10 @@ app.get('/', function(req, res)
   	res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/', function (req, res) {
-  	//res.sendFile(__dirname + '/simple.html');
+app.post('/', function (req, res) 
+{
 })
 
-/******************
-	LOGIN NAMESPACE
-//iosa.emit('stats', { data: 'some data' });  
-*****************/
-//root namespace above will will return page to client which will take us into login namespace
-
-app.post('/login', function (req, res) {
-  	//res.sendFile(__dirname + '/simple.html');
-})
-
-//var io_login = io.of('/login'); 
- 
 io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
