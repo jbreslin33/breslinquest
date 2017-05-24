@@ -112,6 +112,29 @@ io.on('connection', function(socket)
 					}	
 				}		
 
+                                if (move_key_code == 40)
+                                {
+                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 0)
+                                        {
+                                                 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY - 1 ;
+                                        }
+                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 1)
+                                        {
+                                                 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX - 1 ;
+                                        }
+                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 2)
+                                        {
+                                                 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY + 1 ;
+                                        }
+                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 3)
+                                        {
+                                                 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX + 1 ;
+                                        }
+                                }
+
+
+
+
 				console.log('id:' + socket.id + ' D:' + breslinApplicationInstance.mGameClientsArray[i].mD + ' X:' + breslinApplicationInstance.mGameClientsArray[i].mX + ' Y:' + breslinApplicationInstance.mGameClientsArray[i].mY + ' Z:' + breslinApplicationInstance.mGameClientsArray[i].mZ );  
 			}
 		}
