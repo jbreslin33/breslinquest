@@ -35,6 +35,9 @@ var GameArea = new Class(
 
         if (e.keyCode == 39)
         {
+                //server
+                socket.emit('move attempt', e.keyCode);
+
                 mD = mD + 1;
                 if (mD > 3)
                 {

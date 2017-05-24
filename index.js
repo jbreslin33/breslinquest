@@ -60,6 +60,35 @@ io.on('connection', function(socket)
 	socket.on('move attempt', function(move_key_code)
 	{
 		console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
+		
+		//let loop thru clients and update this guy
+ 		for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
+        	{
+			if (breslinApplicationInstance.mGameClientsArray[i].mSocketID == socket.id)
+			{
+				console.log('found client and updating move:' + socket.id);
+			 	if (move_key_code == 37)
+				{
+		
+					breslinApplicationInstance.mGameClientsArray[i].mD = breslinApplicationInstance.mGameClientsArray[i].mD - 1;
+					if (breslinApplicationInstance.mGameClientsArray[i].mD < 0)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mD = 3;
+					}	
+				}		
+			 	if (move_key_code == 39)
+				{
+		
+					breslinApplicationInstance.mGameClientsArray[i].mD = breslinApplicationInstance.mGameClientsArray[i].mD + 1;
+					if (breslinApplicationInstance.mGameClientsArray[i].mD > 3)
+					{
+						 breslinApplicationInstance.mGameClientsArray[i].mD = 0;
+					}	
+				}		
+
+				console.log('id:' + socket.id + ' mD:' + breslinApplicationInstance.mGameClientsArray[i].mD);  
+			}
+		}
 	});
 });
 

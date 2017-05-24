@@ -12,6 +12,12 @@ var GameClient = new Class(
         	this.mServerUsername = 0;
         	this.mServerPassword = 0;
 
+		//movement
+		this.mD = 0;
+		this.mX = 0;
+		this.mY = 0;
+		this.mZ = 0;
+
         	this.mLoggedIn = false;
         }
 });
