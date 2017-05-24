@@ -57,6 +57,10 @@ io.on('connection', function(socket)
 
 		socket.emit('load game');
 	});
+	socket.on('move attempt', function(move_key_code)
+	{
+		console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
+	});
 });
 
 http.listen(port, function(){

@@ -31,7 +31,6 @@ function startGame() {
     myGameArea.start();
 }
 
-
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -45,11 +44,11 @@ var myGameArea = {
             e.preventDefault();
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = (e.type == "keypress");
+
         if (e.keyCode == 37)
         {
 		//server
-                socket.emit('login attempt', $('#u').val(), $('#p').val());
-
+                socket.emit('move attempt', e.keyCode);
 
 		//client
                 mD = mD - 1;
@@ -88,8 +87,6 @@ function drawImage(img) {
         myGameArea.context.drawImage(imageObj, 69, 50);
       };
       imageObj.src = '' + img;
-
-
 }
 
 function updateGameArea() {
