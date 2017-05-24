@@ -14,15 +14,15 @@ var ba    = require('./application');
 var gc    = require('./gameclient');
 var db    = require('./db');
 
-var breslinApplicationInstance = new ba();
+var mApp = new ba();
 
 setInterval(onTimerTick, 33);
 
 function onTimerTick()
 {
-	for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
+	for (i = 0; i < mApp.mGameClientsArray.length; i++)
 	{
-		if (breslinApplicationInstance.mGameClientsArray[i].mLoggedIn == false)
+		if (mApp.mGameClientsArray[i].mLoggedIn == false)
                 {
 			//console.log('client: ' + i + ' is not logged in');
                 }
@@ -49,10 +49,10 @@ io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		var gameClientInstance = new gc(breslinApplicationInstance,socket.id,clientUsername,clientPassword);
-		breslinApplicationInstance.addGameClient(gameClientInstance);
+		var gameClientInstance = new gc(mApp,socket.id,clientUsername,clientPassword);
+		mApp.addGameClient(gameClientInstance);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
-                var databaseConnectionInstance = new db(breslinApplicationInstance,query_string);
+                var databaseConnectionInstance = new db(mApp,query_string);
 		databaseConnectionInstance.executeQuery();
 
 		socket.emit('load game');
@@ -62,9 +62,9 @@ io.on('connection', function(socket)
 		console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
 		
 		//let loop thru clients and update this guy
- 		for (i = 0; i < breslinApplicationInstance.mGameClientsArray.length; i++)
+ 		for (i = 0; i < mApp.mGameClientsArray.length; i++)
         	{
-			if (breslinApplicationInstance.mGameClientsArray[i].mSocketID == socket.id)
+			if (mApp.mGameClientsArray[i].mSocketID == socket.id)
 			{
 				console.log('found client and updating move:' + socket.id);
 
@@ -77,65 +77,65 @@ io.on('connection', function(socket)
 			 	if (move_key_code == 37)
 				{
 		
-					breslinApplicationInstance.mGameClientsArray[i].mD = breslinApplicationInstance.mGameClientsArray[i].mD - 1;
-					if (breslinApplicationInstance.mGameClientsArray[i].mD < 0)
+					mApp.mGameClientsArray[i].mD = mApp.mGameClientsArray[i].mD - 1;
+					if (mApp.mGameClientsArray[i].mD < 0)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mD = 3;
+						 mApp.mGameClientsArray[i].mD = 3;
 					}	
 				}		
 			 	if (move_key_code == 39)
 				{
 		
-					breslinApplicationInstance.mGameClientsArray[i].mD = breslinApplicationInstance.mGameClientsArray[i].mD + 1;
-					if (breslinApplicationInstance.mGameClientsArray[i].mD > 3)
+					mApp.mGameClientsArray[i].mD = mApp.mGameClientsArray[i].mD + 1;
+					if (mApp.mGameClientsArray[i].mD > 3)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mD = 0;
+						 mApp.mGameClientsArray[i].mD = 0;
 					}	
 				}		
 			 	if (move_key_code == 38)
 				{
-					if (breslinApplicationInstance.mGameClientsArray[i].mD == 0)
+					if (mApp.mGameClientsArray[i].mD == 0)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY + 1 ;
+						 mApp.mGameClientsArray[i].mY = mApp.mGameClientsArray[i].mY + 1 ;
 					}	
-					if (breslinApplicationInstance.mGameClientsArray[i].mD == 1)
+					if (mApp.mGameClientsArray[i].mD == 1)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX + 1 ;
+						 mApp.mGameClientsArray[i].mX = mApp.mGameClientsArray[i].mX + 1 ;
 					}	
-					if (breslinApplicationInstance.mGameClientsArray[i].mD == 2)
+					if (mApp.mGameClientsArray[i].mD == 2)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY - 1 ;
+						 mApp.mGameClientsArray[i].mY = mApp.mGameClientsArray[i].mY - 1 ;
 					}	
-					if (breslinApplicationInstance.mGameClientsArray[i].mD == 3)
+					if (mApp.mGameClientsArray[i].mD == 3)
 					{
-						 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX - 1 ;
+						 mApp.mGameClientsArray[i].mX = mApp.mGameClientsArray[i].mX - 1 ;
 					}	
 				}		
 
                                 if (move_key_code == 40)
                                 {
-                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 0)
+                                        if (mApp.mGameClientsArray[i].mD == 0)
                                         {
-                                                 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY - 1 ;
+                                                 mApp.mGameClientsArray[i].mY = mApp.mGameClientsArray[i].mY - 1 ;
                                         }
-                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 1)
+                                        if (mApp.mGameClientsArray[i].mD == 1)
                                         {
-                                                 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX - 1 ;
+                                                 mApp.mGameClientsArray[i].mX = mApp.mGameClientsArray[i].mX - 1 ;
                                         }
-                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 2)
+                                        if (mApp.mGameClientsArray[i].mD == 2)
                                         {
-                                                 breslinApplicationInstance.mGameClientsArray[i].mY = breslinApplicationInstance.mGameClientsArray[i].mY + 1 ;
+                                                 mApp.mGameClientsArray[i].mY = mApp.mGameClientsArray[i].mY + 1 ;
                                         }
-                                        if (breslinApplicationInstance.mGameClientsArray[i].mD == 3)
+                                        if (mApp.mGameClientsArray[i].mD == 3)
                                         {
-                                                 breslinApplicationInstance.mGameClientsArray[i].mX = breslinApplicationInstance.mGameClientsArray[i].mX + 1 ;
+                                                 mApp.mGameClientsArray[i].mX = mApp.mGameClientsArray[i].mX + 1 ;
                                         }
                                 }
 
 
 
 
-				console.log('id:' + socket.id + ' D:' + breslinApplicationInstance.mGameClientsArray[i].mD + ' X:' + breslinApplicationInstance.mGameClientsArray[i].mX + ' Y:' + breslinApplicationInstance.mGameClientsArray[i].mY + ' Z:' + breslinApplicationInstance.mGameClientsArray[i].mZ );  
+				console.log('id:' + socket.id + ' D:' + mApp.mGameClientsArray[i].mD + ' X:' + mApp.mGameClientsArray[i].mX + ' Y:' + mApp.mGameClientsArray[i].mY + ' Z:' + mApp.mGameClientsArray[i].mZ );  
 			}
 		}
 	});

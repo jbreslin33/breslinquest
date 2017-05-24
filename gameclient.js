@@ -4,7 +4,7 @@ var GameClient = new Class(
 {
         initialize: function(bapp,socketid,clientUsername,clientPassword)
         {
-		this.mApplication = bapp
+		this.mApp = bapp
         	this.mSocketID = socketid;
         	this.mUserID = 0;
         	this.mClientUsername = clientUsername;
