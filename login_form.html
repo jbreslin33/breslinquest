@@ -12,15 +12,12 @@ canvas {
 <body>
 <p id="hud"></p>
 
-<img src="/images/PandaWizard.png">
-
 <script>
 var myGamePiece;
 var mX = 0;
 var mY = 0;
 var mZ = 0;
 var mD = 0;
-
 
 document.getElementById("hud").innerHTML = "coordinates:";
 
@@ -90,24 +87,18 @@ if (mD == 0)
 {
         drawImage("/images/wall.jpg");
 }
-/*
-if (mD == 0)
-{
-        drawImage("/public/wall.jpg");
-}
 if (mD == 1)
 {
-        drawImage("/public/hallway.jpg");
+        drawImage("/images/hallway.jpg");
 }
 if (mD == 2)
 {
-        drawImage("/public/wall.jpg");
+        drawImage("/images/wall.jpg");
 }
 if (mD == 3)
 {
-        drawImage("/public/hallway.jpg");
+        drawImage("/images/hallway.jpg");
 }
-*/
 
 }
 </script>
