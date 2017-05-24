@@ -15,6 +15,7 @@ CREATE TABLE users (
         first_name text,
         last_name text,
 	email text,
+	socket_id text,
         banned_id integer NOT NULL default 0,
         PRIMARY KEY (id)
 );

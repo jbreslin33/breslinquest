@@ -11,7 +11,7 @@ require ('mootools');
 
 //my exports
 var ba    = require('./application');
-var gc    = require('./gameclient');
+var User  = require('./user');
 var db    = require('./db');
 
 var mApp = new ba();
@@ -49,8 +49,8 @@ io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		var gameClientInstance = new gc(mApp,socket.id,clientUsername,clientPassword);
-		mApp.addGameClient(gameClientInstance);
+		var user = new User(mApp,socket.id,clientUsername,clientPassword);
+		mApp.addGameClient(user);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(mApp,query_string);
 		databaseConnectionInstance.executeQuery();

@@ -3,6 +3,7 @@ var Application = new Class(
         initialize: function()
         {
       		this.mGameClientsArray = new Array(); 
+      		this.mCharactersArray = new Array(); 
 	},
 
         addGameClient: function(gc)
