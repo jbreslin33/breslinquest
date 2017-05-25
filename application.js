@@ -1,5 +1,6 @@
 var pg = require('pg');
 var User  = require('./user');
+var Party  = require('./party');
 
 var Application = new Class(
 {
@@ -7,20 +8,26 @@ var Application = new Class(
         {
       		this.mUsersArray = new Array(); 
       		this.mCharactersArray = new Array(); 
+		this.mPartiesArray = new Array();
 
 		this.loadUsers();
+		this.loadParties();
 	},
         
 	addUser: function(user)
         {
 		this.mUsersArray.push(user);
         },
+	
+	addParty: function(party)
+        {
+		this.mPartiesArray.push(party);
+        },
 
 	loadUsers: function()
 	{
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
                 var queryString = "select * from users;";
-                console.log('queryString:' + queryString);
 
                 var client = new pg.Client(conString);
                 client.connect();
@@ -35,10 +42,9 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        console.log('creating user ' + row.username + ' and adding to mUserArray');
+                        //console.log('creating user ' + row.username + ' and adding to mUserArray');
                 	var user = new User(this,0,row.id,row.username,row.password,row.first_name,row.last_name,row.email,row.banned_id);
        			this.addUser(user);
-			//this.mUsersArray.push(user);
 
                 }.bind(this));
                 query.on("end", function (result)
@@ -46,6 +52,37 @@ var Application = new Class(
                         client.end();
                 }.bind(this));
 	},
+
+        loadParties: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from parties;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        console.log('creating party ' + row.name + ' and adding to mPartiesArray');
+			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.userid);
+
+                        this.addParty(party);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
 
 	updateUser: function(move_key_code,socket_id)
 	{
