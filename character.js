@@ -13,7 +13,8 @@ var Character = new Class(
 		this.current_hitpoints = 0;
 		this.level = 0;
 		this.experience = 0;
-		
+
+		//if you have a party id your movement should come from party? or are we going to be more tactical?		
 		this.party_id = 0;
 
 		//movement
