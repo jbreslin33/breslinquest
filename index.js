@@ -59,7 +59,6 @@ io.on('connection', function(socket)
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
-		//console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
 		mApp.updateUser(move_key_code,socket.id);
 	});
 });
