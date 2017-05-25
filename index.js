@@ -51,9 +51,10 @@ io.on('connection', function(socket)
 	{
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(mApp,query_string);
-		databaseConnectionInstance.executeQuery(clientUsername);
+		databaseConnectionInstance.executeQuery(clientUsername,socket.id);
 
-		socket.emit('pick party');
+		//socket.emit('pick party');
+		socket.emit('load game');
 	});
 	socket.on('move attempt', function(move_key_code)
 	{

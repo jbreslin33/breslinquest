@@ -49,6 +49,7 @@ var Application = new Class(
 
 	updateUser: function(move_key_code,socket_id)
 	{
+		console.log('mk:' + move_key_code + ' for ' + socket_id);
                 //let loop thru clients and update this guy
                 for (i = 0; i < this.mUsersArray.length; i++)
                 {
