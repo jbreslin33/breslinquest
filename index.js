@@ -53,8 +53,34 @@ io.on('connection', function(socket)
                 var databaseConnectionInstance = new db(mApp,query_string);
 		databaseConnectionInstance.executeQuery(clientUsername,socket.id);
 
-		//socket.emit('pick party');
-		socket.emit('load game');
+		var userid = 0;
+
+		//get user_id
+		for (i=0; i < mApp.mUsersArray.length; i++)
+		{
+			if (mApp.mUsersArray[i].username == clientUsername)
+			{
+				userid = mApp.mUsersArray[i].id;	
+				console.log('userid found:' + userid);
+			} 
+		} 
+		
+
+		var partyNameArray  = new Array();
+		var partyIDArray    = new Array();
+			 
+		for (i=0; i < mApp.mPartiesArray.length; i++)
+		{
+			if (mApp.mPartiesArray[i].user_id == userid)
+			{
+				console.log('adding to aray: ' + mApp.mPartiesArray[i].name); 
+				partyNameArray.push(mApp.mPartiesArray[i].name);
+				partyIDArray.push(mApp.mPartiesArray[i].id);
+			} 
+		} 
+
+		socket.emit('pick party');
+		//socket.emit('load game');
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
