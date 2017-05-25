@@ -65,7 +65,6 @@ io.on('connection', function(socket)
 			} 
 		} 
 		
-
 		var partyNameArray  = new Array();
 		var partyIDArray    = new Array();
 			 
@@ -73,13 +72,12 @@ io.on('connection', function(socket)
 		{
 			if (mApp.mPartiesArray[i].user_id == userid)
 			{
-				console.log('adding to aray: ' + mApp.mPartiesArray[i].name); 
 				partyNameArray.push(mApp.mPartiesArray[i].name);
 				partyIDArray.push(mApp.mPartiesArray[i].id);
 			} 
 		} 
 
-		socket.emit('pick party');
+		socket.emit('pick party',partyNameArray,partyIDArray);
 		//socket.emit('load game');
 	});
 	socket.on('move attempt', function(move_key_code)

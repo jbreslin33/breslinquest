@@ -88,13 +88,16 @@ if (mD == 3)
 				document.getElementById("p").setAttribute("type", "hidden");
 				startGame();
                 	});
-                	socket.on('pick party', function(msg)
+                	socket.on('pick party', function(msg,partyNameArray,partyIDArray)
                 	{
 				//remove login
 				document.getElementById("u").setAttribute("type", "hidden");
 				document.getElementById("p").setAttribute("type", "hidden");
 
 				//fill party select
+				console.log('picking party');
+				console.log('length of party:' + partyNameArray.length);
+				//for (i=0; i < partyNameArray
 				console.log('picking party');
     				var x = document.createElement("SELECT");
     				x.setAttribute("id", "mySelect");
