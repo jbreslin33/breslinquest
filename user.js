@@ -10,6 +10,7 @@ var Users = new Class(
 		this.email = 0;
         	this.socket_id = socketid;
 		this.banned_id = 0;
+		this.party_id = 0;
 
 		//app
 		this.mApp = bapp

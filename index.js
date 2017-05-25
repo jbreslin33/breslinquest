@@ -20,9 +20,9 @@ setInterval(onTimerTick, 33);
 
 function onTimerTick()
 {
-	for (i = 0; i < mApp.mGameClientsArray.length; i++)
+	for (i = 0; i < mApp.mUsersArray.length; i++)
 	{
-		if (mApp.mGameClientsArray[i].mLoggedIn == false)
+		if (mApp.mUsersArray[i].mLoggedIn == false)
                 {
 			//console.log('client: ' + i + ' is not logged in');
                 }
@@ -50,7 +50,7 @@ io.on('connection', function(socket)
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
 		var user = new User(mApp,socket.id,clientUsername,clientPassword);
-		mApp.addGameClient(user);
+		mApp.addUser(user);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(mApp,query_string);
 		databaseConnectionInstance.executeQuery();
@@ -59,8 +59,8 @@ io.on('connection', function(socket)
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
-		console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
-		mApp.updateSocketObject(move_key_code,socket.id);
+		//console.log('client id:' + socket.id + ' key_code:' + move_key_code);   
+		mApp.updateUser(move_key_code,socket.id);
 	});
 });
 

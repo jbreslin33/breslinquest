@@ -2,21 +2,21 @@ var Application = new Class(
 {
         initialize: function()
         {
-      		this.mGameClientsArray = new Array(); 
+      		this.mUsersArray = new Array(); 
       		this.mCharactersArray = new Array(); 
 	},
 
-        addGameClient: function(gc)
+        addUser: function(user)
         {
-		this.mGameClientsArray.push(gc);
+		this.mUsersArray.push(user);
         },
 
-	updateSocketObject: function(move_key_code,socket_id)
+	updateUser: function(move_key_code,socket_id)
 	{
                 //let loop thru clients and update this guy
-                for (i = 0; i < this.mGameClientsArray.length; i++)
+                for (i = 0; i < this.mUsersArray.length; i++)
                 {
-                        if (this.mGameClientsArray[i].mSocketID == socket_id)
+                        if (this.mUsersArray[i].socket_id == socket_id)
                         {
                                 console.log('found client and updating move:' + socket_id);
                                 /*
@@ -26,60 +26,60 @@ var Application = new Class(
                                 */
                                 if (move_key_code == 37)
                                 {
-                                        this.mGameClientsArray[i].mD = this.mGameClientsArray[i].mD - 1;
-                                        if (this.mGameClientsArray[i].mD < 0)
+                                        this.mUsersArray[i].d = this.mUsersArray[i].d - 1;
+                                        if (this.mUsersArray[i].d < 0)
                                         {
-                                                 this.mGameClientsArray[i].mD = 3;
+                                                 this.mUsersArray[i].d = 3;
                                         }
                                 }
                                 if (move_key_code == 39)
                                 {
-                                        this.mGameClientsArray[i].mD = this.mGameClientsArray[i].mD + 1;
-                                        if (this.mGameClientsArray[i].mD > 3)
+                                        this.mUsersArray[i].d = this.mUsersArray[i].d + 1;
+                                        if (this.mUsersArray[i].d > 3)
                                         {
-                                                 this.mGameClientsArray[i].mD = 0;
+                                                 this.mUsersArray[i].d = 0;
                                         }
                                 }
                                 if (move_key_code == 38)
                                 {
-                                        if (this.mGameClientsArray[i].mD == 0)
+                                        if (this.mUsersArray[i].d == 0)
                                         {
-                                                 this.mGameClientsArray[i].mY = this.mGameClientsArray[i].mY + 1 ;
+                                                 this.mUsersArray[i].y = this.mUsersArray[i].y + 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 1)
+                                        if (this.mUsersArray[i].d == 1)
                                         {
-                                                 this.mGameClientsArray[i].mX = this.mGameClientsArray[i].mX + 1 ;
+                                                 this.mUsersArray[i].x = this.mUsersArray[i].x + 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 2)
+                                        if (this.mUsersArray[i].d == 2)
                                         {
-                                                 this.mGameClientsArray[i].mY = this.mGameClientsArray[i].mY - 1 ;
+                                                 this.mUsersArray[i].y = this.mUsersArray[i].y - 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 3)
+                                        if (this.mUsersArray[i].d == 3)
                                         {
-                                                 this.mGameClientsArray[i].mX = this.mGameClientsArray[i].mX - 1 ;
+                                                 this.mUsersArray[i].x = this.mUsersArray[i].x - 1 ;
                                         }
                                 }
 
                                 if (move_key_code == 40)
                                 {
-                                        if (this.mGameClientsArray[i].mD == 0)
+                                        if (this.mUsersArray[i].d == 0)
                                         {
-                                                 this.mGameClientsArray[i].mY = this.mGameClientsArray[i].mY - 1 ;
+                                                 this.mUsersArray[i].y = this.mUsersArray[i].y - 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 1)
+                                        if (this.mUsersArray[i].d == 1)
                                         {
-                                                 this.mGameClientsArray[i].mX = this.mGameClientsArray[i].mX - 1 ;
+                                                 this.mUsersArray[i].x = this.mUsersArray[i].x - 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 2)
+                                        if (this.mUsersArray[i].d == 2)
                                         {
-                                                 this.mGameClientsArray[i].mY = this.mGameClientsArray[i].mY + 1 ;
+                                                 this.mUsersArray[i].y = this.mUsersArray[i].y + 1 ;
                                         }
-                                        if (this.mGameClientsArray[i].mD == 3)
+                                        if (this.mUsersArray[i].d == 3)
                                         {
-                                                 this.mGameClientsArray[i].mX = this.mGameClientsArray[i].mX + 1 ;
+                                                 this.mUsersArray[i].x = this.mUsersArray[i].x + 1 ;
                                         }
                                 }
-                                console.log('id:' + socket_id + ' D:' + this.mGameClientsArray[i].mD + ' X:' + this.mGameClientsArray[i].mX + ' Y:' + this.mGameClientsArray[i].mY + ' Z:' + this.mGameClientsArray[i].mZ );
+                                console.log('id:' + socket_id + ' D:' + this.mUsersArray[i].d + ' X:' + this.mUsersArray[i].x + ' Y:' + this.mUsersArray[i].y + ' Z:' + this.mUsersArray[i].z );
                         }
                 }
 	}
