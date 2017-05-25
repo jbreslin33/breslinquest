@@ -9,7 +9,7 @@ var DatabaseConnection = new Class(
 		this.mQueryString = query_string;
 	},
 
-        executeQuery: function()
+        executeQuery: function(usernameAttempt,socketid)
         {
 		var qs = this.mQueryString;
 
@@ -32,7 +32,12 @@ var DatabaseConnection = new Class(
     			client.end();
 			for (i = 0; i < this.mApp.mUsersArray.length; i++)
 			{
-				this.mApp.mUsersArray[i].mLoggedIn = true;
+				//this.mApp.mUsersArray[i].mLoggedIn = true;
+				if (this.mApp.mUsersArray[i].username == usernameAttempt)
+				{
+					this.mApp.mUsersArray[i].mLoggedIn = true;
+					this.mApp.mUsersArray[i].socket_id = socketid;
+				}
 			}
 		}.bind(this));
 	}

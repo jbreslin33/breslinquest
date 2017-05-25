@@ -15,7 +15,6 @@ var User  = require('./user');
 var db    = require('./db');
 
 var mApp = new ba();
-//mApp.loadUsers();
 
 setInterval(onTimerTick, 33);
 
@@ -50,11 +49,9 @@ io.on('connection', function(socket)
 {
 	socket.on('login attempt', function(clientUsername,clientPassword)
 	{
-		//var user = new User(mApp,socket.id,clientUsername,clientPassword);
-		//mApp.addUser(user);
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(mApp,query_string);
-		databaseConnectionInstance.executeQuery();
+		databaseConnectionInstance.executeQuery(clientUsername);
 
 		socket.emit('pick party');
 	});
