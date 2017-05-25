@@ -35,6 +35,18 @@ function startGame()
 {
    	gameArea.start();
 }
+function removeLoginElements()
+{
+	//remove login
+ 	var ue = document.getElementById('u');
+    	ue.parentNode.removeChild(ue);
+ 
+	var pe = document.getElementById('p');
+    	pe.parentNode.removeChild(pe);
+ 		
+	var lbe = document.getElementById('loginbutton');
+	lbe.parentNode.removeChild(lbe);
+}
 
 function drawImage(img) {
  var imageObj = new Image();
@@ -67,7 +79,7 @@ if (mD == 3)
 	<form action="">
 		<input id="u" autocomplete="off" />
       		<input id="p" autocomplete="off" />
-		<button>Login</button>
+		<button id="loginbutton">Login</button>
 	</form>
 
 
@@ -83,9 +95,7 @@ if (mD == 3)
                 	});
                 	socket.on('load game', function(msg)
                 	{
-				//remove login
-				document.getElementById("u").setAttribute("type", "hidden");
-				document.getElementById("p").setAttribute("type", "hidden");
+				removeLoginElements();
 				startGame();
                 	});
                 	socket.on('pick party', function(partyNameArray,partyIDArray)
@@ -94,16 +104,11 @@ if (mD == 3)
     				x.setAttribute("id", "partySelect");
     				document.body.appendChild(x);
 
-				//remove login
-				document.getElementById("u").setAttribute("type", "hidden");
-				document.getElementById("p").setAttribute("type", "hidden");
+				removeLoginElements();
 
 				//fill party select
-				console.log('picking party');
-				console.log('length of party:' + partyNameArray.length);
 				for (i=0; i < partyNameArray.length; i++)
 				{
-					console.log('in theory adding:' + partyNameArray[i]); 
     					var z = document.createElement("option");
     					z.setAttribute("value", "" + partyIDArray[i]);
     					var t = document.createTextNode("" + partyNameArray[i]);
