@@ -2,10 +2,19 @@ var LoginScreen = new Class(
 {
         initialize: function()
         {
-		this.btn = document.createElement("BUTTON");
-    		this.btnText = document.createTextNode("YO CLICK ME");
-    		this.btn.appendChild(this.btnText);
-    		document.body.appendChild(this.btn);        
+		this.button = document.createElement("BUTTON");
+    		this.buttonText = document.createTextNode("LOGIN");
+    		this.button.appendChild(this.buttonText);
+    		document.body.appendChild(this.button);        
+
+		this.button.onclick = this.loginClicked;
+	},
+
+	loginClicked: function()
+	{
+		console.log('login be clicked');
 	}
+
+	
 });
 
