@@ -86,8 +86,21 @@ if (mD == 3)
 				//remove login
 				document.getElementById("u").setAttribute("type", "hidden");
 				document.getElementById("p").setAttribute("type", "hidden");
-
 				startGame();
+                	});
+                	socket.on('pick party', function(msg)
+                	{
+				//fill party select
+				console.log('picking party');
+    				var x = document.createElement("SELECT");
+    				x.setAttribute("id", "mySelect");
+    				document.body.appendChild(x);
+
+    				var z = document.createElement("option");
+    				z.setAttribute("value", "volvocar");
+    				var t = document.createTextNode("Volvo");
+    				z.appendChild(t);
+    				document.getElementById("mySelect").appendChild(z);
                 	});
       		});
     	</script>

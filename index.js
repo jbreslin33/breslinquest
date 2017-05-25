@@ -55,7 +55,7 @@ io.on('connection', function(socket)
                 var databaseConnectionInstance = new db(mApp,query_string);
 		databaseConnectionInstance.executeQuery();
 
-		socket.emit('load game');
+		socket.emit('pick party');
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
