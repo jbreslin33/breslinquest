@@ -88,8 +88,12 @@ if (mD == 3)
 				document.getElementById("p").setAttribute("type", "hidden");
 				startGame();
                 	});
-                	socket.on('pick party', function(msg,partyNameArray,partyIDArray)
+                	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
+    				var x = document.createElement("SELECT");
+    				x.setAttribute("id", "partySelect");
+    				document.body.appendChild(x);
+
 				//remove login
 				document.getElementById("u").setAttribute("type", "hidden");
 				document.getElementById("p").setAttribute("type", "hidden");
@@ -97,17 +101,16 @@ if (mD == 3)
 				//fill party select
 				console.log('picking party');
 				console.log('length of party:' + partyNameArray.length);
-				//for (i=0; i < partyNameArray
-				console.log('picking party');
-    				var x = document.createElement("SELECT");
-    				x.setAttribute("id", "mySelect");
-    				document.body.appendChild(x);
+				for (i=0; i < partyNameArray.length; i++)
+				{
+					console.log('in theory adding:' + partyNameArray[i]); 
+    					var z = document.createElement("option");
+    					z.setAttribute("value", "" + partyIDArray[i]);
+    					var t = document.createTextNode("" + partyNameArray[i]);
+    					z.appendChild(t);
+    					document.getElementById("partySelect").appendChild(z);
+				}
 
-    				var z = document.createElement("option");
-    				z.setAttribute("value", "volvocar");
-    				var t = document.createTextNode("Volvo");
-    				z.appendChild(t);
-    				document.getElementById("mySelect").appendChild(z);
                 	});
       		});
     	</script>
