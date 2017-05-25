@@ -1,17 +1,19 @@
 var pg = require('pg');
 var User  = require('./user');
 var Party  = require('./party');
+var Character  = require('./character');
 
 var Application = new Class(
 {
         initialize: function()
         {
       		this.mUsersArray = new Array(); 
-      		this.mCharactersArray = new Array(); 
 		this.mPartiesArray = new Array();
+      		this.mCharactersArray = new Array(); 
 
 		this.loadUsers();
 		this.loadParties();
+		this.loadCharacters();
 	},
         
 	addUser: function(user)
@@ -22,6 +24,11 @@ var Application = new Class(
 	addParty: function(party)
         {
 		this.mPartiesArray.push(party);
+        },
+
+	addCharacter: function(character)
+        {
+		this.mCharactersArray.push(character);
         },
 
 	loadUsers: function()
@@ -83,6 +90,36 @@ var Application = new Class(
                 }.bind(this));
         },
 
+        loadCharacters: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from characters;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        console.log('creating character ' + row.name + ' owned by user_id ' + row.user_id + ' and adding to mCharactersArray');
+//        initialize: function(bapp,id,name,userid,raceid,classid,d,x,y,z,fullhitpoints,currenthitpoints,level,experience,partyid)
+                        var character = new Character(this,row.id,row.name,row.user_id,row.race_id,row.class_id,row.d,row.x,row.y,row.z,row.full_hitpoints,row.current_hitpoints,row.level,row.experience,row.party_id);
+
+                        this.addCharacter(character);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
 
 	updateUser: function(move_key_code,socket_id)
 	{

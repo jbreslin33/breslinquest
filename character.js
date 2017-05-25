@@ -1,30 +1,30 @@
 var Character = new Class(
 {
-        initialize: function(bapp)
+        initialize: function(bapp,id,name,userid,raceid,classid,d,x,y,z,fullhitpoints,currenthitpoints,level,experience,partyid)
         {
 		this.mClientID = 0;
 	
-		this.id = 0;
-		this.user_id = 0;
-		this.race_id
-		this.class_id
+		this.id = id;
+		this.name = name;
+		this.user_id = userid;
+		this.race_id = raceid;
+		this.class_id = classid;
 		
-		this.full_hitpoints = 0;
-		this.current_hitpoints = 0;
-		this.level = 0;
-		this.experience = 0;
+		//movement
+		this.d = d;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		
+		this.full_hitpoints = fullhitpoints;
+		this.current_hitpoints = currenthitpoints;
+		this.level = level;
+		this.experience = experience;
 
 		//if you have a party id your movement should come from party? or are we going to be more tactical?		
-		this.party_id = 0;
-
-		//movement
-		this.d = 0;
-		this.x = 0;
-		this.y = 0;
-		this.z = 0;
-        }
-
-
+		this.party_id = partyid;
+        },
+	
 	setPosition: function(d,x,y,z)	
 	{
 		this.d = d;
@@ -33,8 +33,7 @@ var Character = new Class(
 		this.z = z;
 
 		//update db
-
 	}
 });
 
-module.exports = GameClient;
+module.exports = Character;
