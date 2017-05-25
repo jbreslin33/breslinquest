@@ -27,6 +27,8 @@ insert into characters (race_id,x,y,z,d,full_hitpoints,current_hitpoints,level,e
 --party
 insert into parties (name,user_id) values ('Classic',1);
 insert into parties (name,user_id) values ('Modern',1);
+insert into parties (name,user_id) values ('Classic',2);
+insert into parties (name,user_id) values ('Modern',2);
 
 
 

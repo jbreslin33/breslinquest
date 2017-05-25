@@ -71,8 +71,8 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        console.log('creating party ' + row.name + ' and adding to mPartiesArray');
-			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.userid);
+                        console.log('creating party ' + row.name + ' owned by user_id ' + row.user_id + ' and adding to mPartiesArray');
+			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
 
                         this.addParty(party);
 
