@@ -15,7 +15,7 @@ var User  = require('./user');
 var db    = require('./db');
 
 var mApp = new ba();
-mApp.loadUsers();
+//mApp.loadUsers();
 
 setInterval(onTimerTick, 33);
 

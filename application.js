@@ -7,6 +7,8 @@ var Application = new Class(
         {
       		this.mUsersArray = new Array(); 
       		this.mCharactersArray = new Array(); 
+
+		this.loadUsers();
 	},
         
 	addUser: function(user)
