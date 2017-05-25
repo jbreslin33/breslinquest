@@ -10,6 +10,8 @@ var Users = new Class(
 		this.email = 0;
         	this.socket_id = socketid;
 		this.banned_id = 0;
+
+		//if there is a party id then the pary is active
 		this.party_id = 0;
 
 		//app
