@@ -2,16 +2,18 @@ var pg = require('pg');
 
 var Users = new Class(
 {
-        initialize: function(bapp,socketid,clientUsername,clientPassword)
+// var user = new User(this,0,row.id,row.username,row.password,row.first_name,row.last_name,row.email,row.banned_id);
+
+        initialize: function(bapp,socketid,id,clientUsername,clientPassword,firstname,lastname,email,bannedid)
         {
-		this.id = 0;
+		this.id = id;
 		this.username = clientUsername;
 		this.password = clientPassword;
-		this.first_name = 0;
-		this.last_name = 0;
-		this.email = 0;
+		this.first_name = firstname;
+		this.last_name = lastname;
+		this.email = email;
         	this.socket_id = socketid;
-		this.banned_id = 0;
+		this.banned_id = bannedid;
 
 		//if there is a party id then the pary is active
 		this.party_id = 0;
@@ -28,7 +30,7 @@ var Users = new Class(
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 		var queryString = "select * from users where username = '" + this.username + "';";
-		console.log('queryString:' + queryString);
+		console.log('loading user ' + this.username + ' stats from db');
 
                 var client = new pg.Client(conString);
                 client.connect();

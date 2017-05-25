@@ -90,6 +90,10 @@ if (mD == 3)
                 	});
                 	socket.on('pick party', function(msg)
                 	{
+				//remove login
+				document.getElementById("u").setAttribute("type", "hidden");
+				document.getElementById("p").setAttribute("type", "hidden");
+
 				//fill party select
 				console.log('picking party');
     				var x = document.createElement("SELECT");
