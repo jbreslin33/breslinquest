@@ -18,7 +18,21 @@ var Application = new Class(
 
 	collisionCheck: function()
 	{
-		
+		//check for party to party collision
+                for (i=0; i < this.mPartiesArray.length; i++)
+		{
+			var partyA = this.mPartiesArray[i];	
+                	for (j=0; j < this.mPartiesArray.length; j++)
+			{
+				var partyB = this.mPartiesArray[j];	
+				
+				//check for collision between partyA and partyB
+				if (partyA.x == partyB.y && partyA.y == partyB.y && partyA.z == partyB.z)
+				{
+					console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
+				}
+			}
+		}
 	},
 
         getPartyByID: function(partyid)
@@ -138,8 +152,7 @@ var Application = new Class(
                 {
                         result.addRow(row);
                         console.log('creating character ' + row.name + ' owned by user_id ' + row.user_id + ' and adding to mCharactersArray');
-//        initialize: function(bapp,id,name,userid,raceid,classid,d,x,y,z,fullhitpoints,currenthitpoints,level,experience,partyid)
-                        var character = new Character(this,row.id,row.name,row.user_id,row.race_id,row.class_id,row.d,row.x,row.y,row.z,row.full_hitpoints,row.current_hitpoints,row.level,row.experience,row.party_id);
+                        var character = new Character(this,row.id,row.name,row.user_id,row.race_id,row.class_id,row.full_hitpoints,row.current_hitpoints,row.level,row.experience,row.party_id);
 
                         this.addCharacter(character);
 

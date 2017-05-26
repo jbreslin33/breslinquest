@@ -46,7 +46,6 @@ CREATE TABLE class (
         PRIMARY KEY (id)
 );
 
-
 --CHARACTERS
 CREATE TABLE characters (
         id SERIAL,
@@ -54,10 +53,6 @@ CREATE TABLE characters (
 	user_id integer, 
 	race_id integer, --human,elf,dwarf,halfling,kobold,goblin,orc,dragon,demon,wraith,stone_golem
 	class_id integer, --wizard,thief,fighter,cleric
-	x integer DEFAULT 0, 
-	y integer DEFAULT 0, 
-	z integer DEFAULT 0, 
-	d integer DEFAULT 0, 
 	full_hitpoints integer, 
 	current_hitpoints integer, 
 	level integer DEFAULT 1, 
@@ -68,10 +63,7 @@ CREATE TABLE characters (
 	FOREIGN KEY (party_id) REFERENCES parties(id),
 	FOREIGN KEY (race_id) REFERENCES race(id),
 	FOREIGN KEY (class_id) REFERENCES class(id)
-
 );
-
-
 
 --PARTIES_CHARACTERS
 CREATE TABLE parties_characters (
