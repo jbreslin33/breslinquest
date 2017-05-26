@@ -26,6 +26,11 @@ var Users = new Class(
 		this.loadDatabase();
         },
 
+	setPartyID: function(id)
+	{
+		this.party_id = id;
+	},	
+
         loadDatabase: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";

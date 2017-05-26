@@ -15,6 +15,17 @@ var Application = new Class(
 		this.loadParties();
 		this.loadCharacters();
 	},
+
+	getUserBySocketID: function(socketid)
+	{
+                for (i=0; i < this.mUsersArray.length; i++)
+                {
+                        if (this.mUsersArray[i].socket_id == socketid)
+                        {
+                                return this.mUsersArray[i];
+                        }
+                }
+	},
         
 	addUser: function(user)
         {
