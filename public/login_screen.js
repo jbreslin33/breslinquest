@@ -10,16 +10,11 @@ var LoginScreen = new Class(
     		this.button.appendChild(this.buttonText);
     		document.body.appendChild(this.button);        
 
-		this.t = this;
+		var that = this;
 
-		this.button.onclick = this.loginClicked(this);
-/*
-		this.button.addEventListener('click', function()
-		{
-			//this.loginClicked(this);
-			console.log('login be clicked:' + this.t.usernameInput.value);
-		});
-*/
+		//this.button.onclick = loginClicked(this);
+		
+
 		//username input
 		this.usernameInput = document.createElement("INPUT");	
 		this.usernameInput.setAttribute("type","text");
@@ -30,25 +25,31 @@ var LoginScreen = new Class(
 		this.passwordInput = document.createElement("INPUT");	
 		this.passwordInput.setAttribute("type","text");
 		document.body.appendChild(this.passwordInput);
-	},
+	/*	
+		function loginClicked()
+		{
+			console.log('id:' + that.usernameInput.value);
+		}	 
+*/
+		
+		this.button.addEventListener('click', function()
+		{
+			//this.loginClicked(this);
+			console.log('login be clicked:' + that.usernameInput.value);
+		});
+	}
 /*
  setInterval(() => {
     this.age++; // |this| properly refers to the person object
   }, 1000);
 */
-
-	loginClicked: function() () => {
-	//{
-		//console.log('login be clicked:' +  $('#u').val());
-		//console.log('id:' + document.getElementById('usernameInputID').value);
-		console.log('id:' + this.usernameInput.value);
-		//console.log('login be clicked:' + ls.usernameInput.value + ':' + ls.passwordInput.value);
+/*
+	loginClicked: function() 
+	{
+		console.log('id:' + that.usernameInput.value);
 		//socket.emit('login attempt', $('#u').val(), $('#p').val());
 		//socket.emit('login attempt', param.usernameInput.value,param.passwordInput.value);
-
 	}
-
-
-	
+*/
 });
 
