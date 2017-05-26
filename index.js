@@ -78,7 +78,6 @@ io.on('connection', function(socket)
 		} 
 
 		socket.emit('pick party',partyNameArray,partyIDArray);
-		//socket.emit('load game');
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
@@ -88,6 +87,7 @@ io.on('connection', function(socket)
 	{
 		var user = mApp.getUserBySocketID(socket.id);
 		console.log('picked this party:' + party_id + ' for ' + user.username);
+		socket.emit('load game');
 	});
 });
 
