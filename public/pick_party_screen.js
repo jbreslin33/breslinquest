@@ -28,7 +28,8 @@ var PickPartyScreen = new Class(
 		
 		this.button.addEventListener('click', function()
 		{
-			that.mSocket.emit('picked party', '1');
+			var partyid = that.mSelect.options[that.mSelect.selectedIndex].value;
+			that.mSocket.emit('picked party', partyid);
 		});
 
 /*
