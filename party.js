@@ -19,8 +19,13 @@ var Party = new Class(
 		this.mApp = bapp
 
 		//battles
-		this.mOpponentParty = 0;
+		this.mEnemyParty = 0;
         },
+
+	setEnemyParty: function(enemy)
+	{
+		this.mEnemyParty = enemy;
+	},
 	
 	setPosition: function(d,x,y,z)
 	{

@@ -2,6 +2,8 @@ var pg = require('pg');
 var User  = require('./user');
 var Party  = require('./party');
 var Character  = require('./character');
+var Battle  = require('./battle');
+var BattleParty  = require('./battle_party');
 
 var Application = new Class(
 {
@@ -10,6 +12,7 @@ var Application = new Class(
       		this.mUsersArray = new Array(); 
 		this.mPartiesArray = new Array();
       		this.mCharactersArray = new Array(); 
+      		this.mBattlesArray = new Array(); 
 
 		this.loadUsers();
 		this.loadParties();
@@ -24,7 +27,11 @@ var Application = new Class(
 			var partyA = this.mPartiesArray[i];	
 			if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
 			{
-                		//at origin no battles allowed!		
+                		//at origin no battles allowed and must not already be in battle!		
+			}
+			else if (partyA.mEnemyParty != 0)
+			{
+				//already have enemy
 			}
 			else
 			{	
@@ -33,7 +40,11 @@ var Application = new Class(
 					var partyB = this.mPartiesArray[j];	
 					if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
 					{
-                				//at origin no battles allowed!		
+                				//at origin no battles allowed		
+					}
+					else if (partyB.mEnemyParty != 0)
+					{
+						//already have enemy
 					}
 					else
 					{
@@ -43,6 +54,7 @@ var Application = new Class(
 							if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
 							{
 								console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
+								var battle = new Battle(this,0,partyA,partyB);
 							}
 						}
 					}
