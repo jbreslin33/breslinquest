@@ -34,9 +34,6 @@ var Party = new Class(
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 		
                 var queryString = 'update parties set d = ' + this.d + ', x = ' + this.x + ', y = ' + this.y + ', z = ' + this.z + ';';
-//update parties set d = 1, x = 2, y = 3, z = 4 where user_id = 1 AND name = 'Classic';
-
-                console.log('update party db:' + queryString);
 
                 var client = new pg.Client(conString);
                 client.connect();
@@ -47,10 +44,6 @@ var Party = new Class(
                         {
                                 throw err;
                         }
-                });
-                query.on("row", function (row,result)
-                {
-                        //result.addRow(row);
                 });
                 query.on("end", function (result)
                 {
