@@ -163,7 +163,7 @@ var Application = new Class(
                 if (move_key_code == 39)
                 {
                 	party.d = party.d + 1;
-                        if (party.d > 0)
+                        if (party.d > 3)
                         {
                         	party.d = 0;
                         }
@@ -187,7 +187,7 @@ var Application = new Class(
                         	party.x = party.x - 1 ;
                         }
                 }
-                if (move_key_code == 37)
+                if (move_key_code == 40)
                 {
                 	if (party.d == 0)
                         {
