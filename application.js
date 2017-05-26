@@ -167,8 +167,6 @@ var Application = new Class(
                         {
                         	cd = 3;
                         }
-			nd = cd;
-			console.log('cd:' + cd);
                 }
                 if (move_key_code == 39)
                 {
@@ -177,47 +175,49 @@ var Application = new Class(
                         {
                         	cd = 0;
                         }
-			nd = cd;
-			console.log('cd:' + cd);
                 }
                 if (move_key_code == 38)
                 {
-                	if (party.d == 0)
+                	if (cd == 0)
                         {
-                        	party.y = party.y + 1 ;
+                        	cy++;
                         }
-                        if (party.d == 1)
+                        if (cd == 1)
                         {
-                        	party.x = party.x + 1 ;
+                        	cx++;
                         }
-                        if (party.d == 2)
+                        if (cd == 2)
                         {
-                        	party.y = party.y - 1 ;
+                        	cy--;
                         }
-                        if (party.d == 3)
+                        if (cd == 3)
                         {
-                        	party.x = party.x - 1 ;
+                        	cx--;
                         }
                 }
                 if (move_key_code == 40)
                 {
-                	if (party.d == 0)
+                	if (cd == 0)
                         {
-                        	party.y = party.y - 1 ;
+                        	cy--;
                         }
-                        if (party.d == 1)
+                        if (cd == 1)
                         {
-                        	party.x = party.x - 1 ;
+                        	cx--;
                         }
-                        if (party.d == 2)
+                        if (cd == 2)
                         {
-                        	party.y = party.y + 1 ;
+                        	cy++;
                         }
-                        if (party.d == 3)
+                        if (cd == 3)
                         {
-                        	party.x = party.x + 1 ;
+                        	cx++;
                         }
 		}
+		nd = cd;
+		nx = cx;
+		ny = cy;
+		nz = cz;
 		party.setPosition(nd,nx,ny,nz);
 	}
 });

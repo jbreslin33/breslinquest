@@ -23,6 +23,7 @@ var Party = new Class(
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		console.log('d:' + d + ' x:' + x + 'y:' + y + 'z:' + z);  
 	},
 
 	getd: function()
