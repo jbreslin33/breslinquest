@@ -22,14 +22,30 @@ var Application = new Class(
                 for (i=0; i < this.mPartiesArray.length; i++)
 		{
 			var partyA = this.mPartiesArray[i];	
-                	for (j=0; j < this.mPartiesArray.length; j++)
+			if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
 			{
-				var partyB = this.mPartiesArray[j];	
-				
-				//check for collision between partyA and partyB
-				if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
+                		//at origin no battles allowed!		
+			}
+			else
+			{	
+				for (j=0; j < this.mPartiesArray.length; j++)
 				{
-					console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
+					var partyB = this.mPartiesArray[j];	
+					if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
+					{
+                				//at origin no battles allowed!		
+					}
+					else
+					{
+						if (partyA != partyB)
+						{		
+							//check for collision between partyA and partyB
+							if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
+							{
+								console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
+							}
+						}
+					}
 				}
 			}
 		}
