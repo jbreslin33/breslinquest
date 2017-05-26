@@ -14,7 +14,7 @@ var ba    = require('./application');
 var User  = require('./user');
 var db    = require('./db');
 
-var mApp = new ba();
+var mApp = new ba(io);
 
 setInterval(onTimerTick, 33);
 
@@ -42,7 +42,7 @@ io.on('connection', function(socket)
 	{
 		var query_string = "SELECT username, password FROM users where username = '" + clientUsername + "';";
                 var databaseConnectionInstance = new db(mApp,query_string);
-		databaseConnectionInstance.executeQuery(clientUsername,socket.id);
+		databaseConnectionInstance.executeQuery(clientUsername,socket.id,socket);
 
 		var userid = 0;
 
@@ -52,7 +52,6 @@ io.on('connection', function(socket)
 			if (mApp.mUsersArray[i].username == clientUsername)
 			{
 				userid = mApp.mUsersArray[i].id;	
-				console.log('userid found:' + userid);
 			} 
 		} 
 		
@@ -78,7 +77,6 @@ io.on('connection', function(socket)
 	{
 		var user = mApp.getUserBySocketID(socket.id);
 		user.setPartyID(party_id);
-		console.log('picked this party:' + party_id + ' for ' + user.username);
 		socket.emit('load game');
 	});
 });

@@ -67,6 +67,10 @@ if (mD == 3)
     	<script>
         	$(function ()
         	{
+                	socket.on('battle', function(msg)
+                	{
+				console.log('battle!!!');
+                	});
                 	socket.on('load game', function(msg)
                 	{
 				startGame();

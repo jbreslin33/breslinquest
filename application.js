@@ -7,8 +7,9 @@ var BattleParty  = require('./battle_party');
 
 var Application = new Class(
 {
-        initialize: function()
+        initialize: function(io)
         {
+		this.mIO = io;
       		this.mUsersArray = new Array(); 
 		this.mPartiesArray = new Array();
       		this.mCharactersArray = new Array(); 
@@ -54,6 +55,7 @@ var Application = new Class(
 							if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
 							{
 								console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
+								//io.sockets.socket(savedSocketId).emit(...)
 								var battle = new Battle(this,0,partyA,partyB);
 							}
 						}
@@ -70,10 +72,24 @@ var Application = new Class(
                         if (this.mPartiesArray[i].id == partyid)
                         {
 				var party = this.mPartiesArray[i];
-				console.log('partyname:' + party.name);
                                 return party;
                         }
                 }
+		return 0;
+        },
+
+        getUserByID: function(userid)
+        {
+                for (i=0; i < this.mUsersArray.length; i++)
+                {
+                        if (this.mUsersArray[i].id == userid)
+                        {
+                                var user = this.mUsersArray[i];
+                                return user;
+                        }
+                }
+		return 0;
+			
         },
 
 	getUserBySocketID: function(socketid)
@@ -85,6 +101,7 @@ var Application = new Class(
                                 return this.mUsersArray[i];
                         }
                 }
+		return 0;
 	},
         
 	addUser: function(user)
@@ -190,11 +207,18 @@ var Application = new Class(
                         client.end();
                 }.bind(this));
         },
+/*
+	handleUserMove: function(move_key_code,user)
+	{
+
+	},
+*/
 
 	userMove: function(move_key_code,socket_id)
 	{
 		var user = this.getUserBySocketID(socket_id);	
 		var party = this.getPartyByID(user.party_id);	
+
 
 		var cd = party.getd();
 		var cx = party.getx();
