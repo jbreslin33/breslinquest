@@ -27,6 +27,30 @@ var LoginScreen = new Class(
 		{
 			that.mSocket.emit('login attempt', that.usernameInput.value, that.passwordInput.value);
 		});
+	},
+	
+	removeLoginElements: function()
+	{
+        	this.usernameInput.parentNode.removeChild(this.usernameInput);
+        	this.passwordInput.parentNode.removeChild(this.passwordInput);
+        	this.button.parentNode.removeChild(this.button);
 	}
+
+/*
+
+function removeLoginElements()
+{
+        //remove login
+        var ue = document.getElementById('u');
+        ue.parentNode.removeChild(ue);
+
+        var pe = document.getElementById('p');
+        pe.parentNode.removeChild(pe);
+
+        var lbe = document.getElementById('loginbutton');
+        lbe.parentNode.removeChild(lbe);
+}
+
+*/
 });
 

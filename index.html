@@ -35,19 +35,6 @@ function startGame()
    	gameArea.start();
 }
 
-function removeLoginElements()
-{
-	//remove login
- 	var ue = document.getElementById('u');
-    	ue.parentNode.removeChild(ue);
- 
-	var pe = document.getElementById('p');
-    	pe.parentNode.removeChild(pe);
- 		
-	var lbe = document.getElementById('loginbutton');
-	lbe.parentNode.removeChild(lbe);
-}
-
 function drawImage(img) {
  var imageObj = new Image();
       imageObj.onload = function() {
@@ -76,35 +63,21 @@ if (mD == 3)
 
 }
 </script>
-	<form action="">
-		<input id="u" autocomplete="off" />
-      		<input id="p" autocomplete="off" />
-		<button id="loginbutton">Login</button>
-	</form>
-
-
     	<script>
         	$(function ()
         	{
-                	$('form').submit(function()
-                	{
-                        	socket.emit('login attempt', $('#u').val(), $('#p').val());
-                        	$('#u').val('');
-                        	$('#p').val('');
-                        	return false;
-                	});
                 	socket.on('load game', function(msg)
                 	{
-				removeLoginElements();
+				//removeLoginElements();
 				startGame();
                 	});
                 	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
+				loginScreen.removeLoginElements();		
+
     				var x = document.createElement("SELECT");
     				x.setAttribute("id", "partySelect");
     				document.body.appendChild(x);
-
-				removeLoginElements();
 
 				//fill party select
 				for (i=0; i < partyNameArray.length; i++)
@@ -115,7 +88,6 @@ if (mD == 3)
     					z.appendChild(t);
     					document.getElementById("partySelect").appendChild(z);
 				}
-
                 	});
       		});
     	</script>
