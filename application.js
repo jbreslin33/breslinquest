@@ -16,6 +16,11 @@ var Application = new Class(
 		this.loadCharacters();
 	},
 
+	collisionCheck: function()
+	{
+		
+	},
+
         getPartyByID: function(partyid)
         {
                 for (i=0; i < this.mPartiesArray.length; i++)

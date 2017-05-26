@@ -18,6 +18,7 @@ var mApp = new ba();
 
 setInterval(onTimerTick, 33);
 
+//game loop check for collisions
 function onTimerTick()
 {
 	for (i = 0; i < mApp.mUsersArray.length; i++)

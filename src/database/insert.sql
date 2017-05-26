@@ -19,21 +19,24 @@ insert into class (name) values ('Palidan');
 insert into class (name) values ('Ranger');
 insert into class (name) values ('Illusionist');
 
---characters
-insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values ('Julius',1,1,1,0,0,0,0,13,13,1,0);
-insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values ('Ren Blackis',1,4,4,0,0,0,0,13,13,1,0);
-insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values ('Phantazar',1,1,8,0,0,0,0,13,13,1,0);
-insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values ('Midget Man',1,5,3,0,0,0,0,13,13,1,0);
-insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values ('Barton',1,1,5,0,0,0,0,13,13,1,0);
-
---monsters
-insert into characters (race_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience) values (2,2,0,0,0,3,3,1,0);
-
 --party
 insert into parties (name,user_id) values ('Classic',1);
 insert into parties (name,user_id) values ('Modern',1);
 insert into parties (name,user_id) values ('Classic',2);
 insert into parties (name,user_id) values ('Modern',2);
+
+--monster party!
+insert into parties(name) values ('kobold party of one');
+
+--characters
+insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Julius',1,1,1,0,0,0,0,13,13,1,0,1);
+insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Ren Blackis',1,4,4,0,0,0,0,13,13,1,0,1);
+insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Phantazar',1,1,8,0,0,0,0,13,13,1,0,1);
+insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Midget Man',1,5,3,0,0,0,0,13,13,1,0,1);
+insert into characters (name,user_id,race_id,class_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Barton',1,1,5,0,0,0,0,13,13,1,0,1);
+
+--monsters
+insert into characters (race_id,x,y,z,d,full_hitpoints,current_hitpoints,level,experience,party_id) values (2,2,0,0,0,3,3,1,0,5);
 
 
 
