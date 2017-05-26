@@ -26,7 +26,7 @@ insert into parties (name,user_id) values ('The Lightning',2);
 insert into parties (name,user_id) values ('The Vikings',2);
 
 --monster party!
-insert into parties(name,x,y) values ('kobold party of one',1,1);
+insert into parties(name,x,y) values ('kobold and orc party of two',1,1);
 
 --characters
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Julius',1,1,1,13,13,1,0,1);
@@ -37,6 +37,7 @@ insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hit
 
 --monsters
 insert into characters (race_id,full_hitpoints,current_hitpoints,level,experience,party_id) values (6,3,3,1,0,5);
+insert into characters (race_id,full_hitpoints,current_hitpoints,level,experience,party_id) values (4,5,5,1,0,5);
 
 
 
