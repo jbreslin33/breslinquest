@@ -27,7 +27,7 @@ var Application = new Class(
 				var partyB = this.mPartiesArray[j];	
 				
 				//check for collision between partyA and partyB
-				if (partyA.x == partyB.y && partyA.y == partyB.y && partyA.z == partyB.z)
+				if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
 				{
 					console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
 				}

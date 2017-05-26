@@ -21,17 +21,7 @@ setInterval(onTimerTick, 33);
 //game loop check for collisions
 function onTimerTick()
 {
-	for (i = 0; i < mApp.mUsersArray.length; i++)
-	{
-		if (mApp.mUsersArray[i].mLoggedIn == false)
-                {
-			//console.log('client: ' + i + ' is not logged in');
-                }
-                else
-                {
-                	//console.log('client: ' + i + ' is logged in');
-                }
-	}
+	mApp.collisionCheck();	
 }
 
 /******************
