@@ -10,10 +10,6 @@ var LoginScreen = new Class(
     		this.button.appendChild(this.buttonText);
     		document.body.appendChild(this.button);        
 
-		var that = this;
-
-		//this.button.onclick = loginClicked(this);
-		
 
 		//username input
 		this.usernameInput = document.createElement("INPUT");	
@@ -25,12 +21,8 @@ var LoginScreen = new Class(
 		this.passwordInput = document.createElement("INPUT");	
 		this.passwordInput.setAttribute("type","text");
 		document.body.appendChild(this.passwordInput);
-	/*	
-		function loginClicked()
-		{
-			console.log('id:' + that.usernameInput.value);
-		}	 
-*/
+		
+		var that = this;
 		
 		this.button.addEventListener('click', function()
 		{
@@ -38,18 +30,5 @@ var LoginScreen = new Class(
 			console.log('login be clicked:' + that.usernameInput.value);
 		});
 	}
-/*
- setInterval(() => {
-    this.age++; // |this| properly refers to the person object
-  }, 1000);
-*/
-/*
-	loginClicked: function() 
-	{
-		console.log('id:' + that.usernameInput.value);
-		//socket.emit('login attempt', $('#u').val(), $('#p').val());
-		//socket.emit('login attempt', param.usernameInput.value,param.passwordInput.value);
-	}
-*/
 });
 
