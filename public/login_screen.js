@@ -10,7 +10,6 @@ var LoginScreen = new Class(
     		this.button.appendChild(this.buttonText);
     		document.body.appendChild(this.button);        
 
-
 		//username input
 		this.usernameInput = document.createElement("INPUT");	
 		this.usernameInput.setAttribute("type","text");
@@ -28,6 +27,7 @@ var LoginScreen = new Class(
 		{
 			//this.loginClicked(this);
 			console.log('login be clicked:' + that.usernameInput.value);
+			socket.emit('login attempt', that.usernameInput.value, that.passwordInput.value);
 		});
 	}
 });
