@@ -25,9 +25,7 @@ var LoginScreen = new Class(
 		
 		this.button.addEventListener('click', function()
 		{
-			//this.loginClicked(this);
-			console.log('login be clicked:' + that.usernameInput.value);
-			socket.emit('login attempt', that.usernameInput.value, that.passwordInput.value);
+			that.mSocket.emit('login attempt', that.usernameInput.value, that.passwordInput.value);
 		});
 	}
 });
