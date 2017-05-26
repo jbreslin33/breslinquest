@@ -27,19 +27,8 @@ var mY = 0;
 var mZ = 0;
 var mD = 0;
 
-document.getElementById("hud").innerHTML = "coordinates:";
-
-
 var gameArea = new GameArea();
-/*
-var btn = document.createElement("BUTTON");
-    var t = document.createTextNode("CLICK ME");
-    btn.appendChild(t);
-    document.body.appendChild(btn);
-*/
-var loginScreen = new LoginScreen();
-
-
+var loginScreen = new LoginScreen(socket);
 
 function startGame() 
 {
