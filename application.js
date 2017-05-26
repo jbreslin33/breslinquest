@@ -16,6 +16,19 @@ var Application = new Class(
 		this.loadCharacters();
 	},
 
+        getPartyByID: function(partyid)
+        {
+                for (i=0; i < this.mPartiesArray.length; i++)
+                {
+                        if (this.mPartiesArray[i].id == partyid)
+                        {
+				var party = this.mPartiesArray[i];
+				console.log('partyname:' + party.name);
+                                return party;
+                        }
+                }
+        },
+
 	getUserBySocketID: function(socketid)
 	{
                 for (i=0; i < this.mUsersArray.length; i++)
@@ -135,75 +148,65 @@ var Application = new Class(
 	updateUser: function(move_key_code,socket_id)
 	{
 		console.log('mk:' + move_key_code + ' for ' + socket_id);
-                //let loop thru clients and update this guy
-                for (i = 0; i < this.mUsersArray.length; i++)
+                //let loop thru clients and update this guys party
+		var user = this.getUserBySocketID(socket_id);	
+		console.log('user.pid:' + user.party_id);
+		var party = this.getPartyByID(user.party_id);	
+                if (move_key_code == 37)
                 {
-                        if (this.mUsersArray[i].socket_id == socket_id)
+                	party.d = party.d - 1;
+                        if (party.d < 0)
                         {
-                                console.log('found client and updating move:' + socket_id);
-                                /*
-                                        0
-                                       3 1
-                                        2
-                                */
-                                if (move_key_code == 37)
-                                {
-                                        this.mUsersArray[i].d = this.mUsersArray[i].d - 1;
-                                        if (this.mUsersArray[i].d < 0)
-                                        {
-                                                 this.mUsersArray[i].d = 3;
-                                        }
-                                }
-                                if (move_key_code == 39)
-                                {
-                                        this.mUsersArray[i].d = this.mUsersArray[i].d + 1;
-                                        if (this.mUsersArray[i].d > 3)
-                                        {
-                                                 this.mUsersArray[i].d = 0;
-                                        }
-                                }
-                                if (move_key_code == 38)
-                                {
-                                        if (this.mUsersArray[i].d == 0)
-                                        {
-                                                 this.mUsersArray[i].y = this.mUsersArray[i].y + 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 1)
-                                        {
-                                                 this.mUsersArray[i].x = this.mUsersArray[i].x + 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 2)
-                                        {
-                                                 this.mUsersArray[i].y = this.mUsersArray[i].y - 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 3)
-                                        {
-                                                 this.mUsersArray[i].x = this.mUsersArray[i].x - 1 ;
-                                        }
-                                }
-
-                                if (move_key_code == 40)
-                                {
-                                        if (this.mUsersArray[i].d == 0)
-                                        {
-                                                 this.mUsersArray[i].y = this.mUsersArray[i].y - 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 1)
-                                        {
-                                                 this.mUsersArray[i].x = this.mUsersArray[i].x - 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 2)
-                                        {
-                                                 this.mUsersArray[i].y = this.mUsersArray[i].y + 1 ;
-                                        }
-                                        if (this.mUsersArray[i].d == 3)
-                                        {
-                                                 this.mUsersArray[i].x = this.mUsersArray[i].x + 1 ;
-                                        }
-                                }
-                                console.log('id:' + socket_id + ' D:' + this.mUsersArray[i].d + ' X:' + this.mUsersArray[i].x + ' Y:' + this.mUsersArray[i].y + ' Z:' + this.mUsersArray[i].z );
+                        	party.d = 3;
                         }
                 }
+                if (move_key_code == 39)
+                {
+                	party.d = party.d + 1;
+                        if (party.d > 0)
+                        {
+                        	party.d = 0;
+                        }
+                }
+                if (move_key_code == 38)
+                {
+                	if (party.d == 0)
+                        {
+                        	party.y = party.y + 1 ;
+                        }
+                        if (party.d == 1)
+                        {
+                        	party.x = party.x + 1 ;
+                        }
+                        if (party.d == 2)
+                        {
+                        	party.y = party.y - 1 ;
+                        }
+                        if (party.d == 3)
+                        {
+                        	party.x = party.x - 1 ;
+                        }
+                }
+                if (move_key_code == 37)
+                {
+                	if (party.d == 0)
+                        {
+                        	party.y = party.y - 1 ;
+                        }
+                        if (party.d == 1)
+                        {
+                        	party.x = party.x - 1 ;
+                        }
+                        if (party.d == 2)
+                        {
+                        	party.y = party.y + 1 ;
+                        }
+                        if (party.d == 3)
+                        {
+                        	party.x = party.x + 1 ;
+                        }
+		}
+                console.log('id:' + socket_id + ' d:' + party.d + ' x:' + party.x + ' y:' + party.y + ' z:' + party.z );
 	}
 });
 module.exports = Application;

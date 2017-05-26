@@ -86,6 +86,7 @@ io.on('connection', function(socket)
 	socket.on('picked party', function(party_id)
 	{
 		var user = mApp.getUserBySocketID(socket.id);
+		user.setPartyID(party_id);
 		console.log('picked this party:' + party_id + ' for ' + user.username);
 		socket.emit('load game');
 	});
