@@ -147,26 +147,38 @@ var Application = new Class(
 
 	userMove: function(move_key_code,socket_id)
 	{
-		console.log('mk:' + move_key_code + ' for ' + socket_id);
-                //let loop thru clients and update this guys party
 		var user = this.getUserBySocketID(socket_id);	
-		console.log('user.pid:' + user.party_id);
 		var party = this.getPartyByID(user.party_id);	
+
+		var cd = party.getd();
+		var cx = party.getx();
+		var cy = party.gety();
+		var cz = party.getz();
+
+		var nd = 0;
+		var nx = 0;
+		var ny = 0;
+		var nz = 0;
+
                 if (move_key_code == 37)
                 {
-                	party.d = party.d - 1;
-                        if (party.d < 0)
+                	cd--;
+                        if (cd < 0)
                         {
-                        	party.d = 3;
+                        	cd = 3;
                         }
+			nd = cd;
+			console.log('cd:' + cd);
                 }
                 if (move_key_code == 39)
                 {
-                	party.d = party.d + 1;
-                        if (party.d > 3)
+                	cd++;
+                        if (cd > 3)
                         {
-                        	party.d = 0;
+                        	cd = 0;
                         }
+			nd = cd;
+			console.log('cd:' + cd);
                 }
                 if (move_key_code == 38)
                 {
@@ -206,7 +218,7 @@ var Application = new Class(
                         	party.x = party.x + 1 ;
                         }
 		}
-                console.log('id:' + socket_id + ' d:' + party.d + ' x:' + party.x + ' y:' + party.y + ' z:' + party.z );
+		party.setPosition(nd,nx,ny,nz);
 	}
 });
 module.exports = Application;

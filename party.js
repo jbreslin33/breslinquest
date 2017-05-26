@@ -15,7 +15,49 @@ var Party = new Class(
 
 		//app
 		this.mApp = bapp
-        }
+        },
+	
+	setPosition: function(d,x,y,z)
+	{
+		this.d = d;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	},
+
+	getd: function()
+	{
+		return this.d;
+	},
+	getx: function()
+	{
+		return this.x;
+	},
+	gety: function()
+	{
+		return this.y;
+	},
+	getz: function()
+	{
+		return this.z;
+	},
+
+	setd: function(d)
+	{
+		this.d = d;
+	},
+	setx: function(x)
+	{
+		this.x = x;
+	},
+	sety: function(y)
+	{
+		this.y = y;
+	},
+	setz: function(z)
+	{
+		this.z = z;
+	}	
 });
 
 module.exports = Party;
