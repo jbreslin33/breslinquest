@@ -17,6 +17,9 @@ var Party = new Class(
 
 		//app
 		this.mApp = bapp
+
+		//battles
+		this.mOpponentParty = 0;
         },
 	
 	setPosition: function(d,x,y,z)

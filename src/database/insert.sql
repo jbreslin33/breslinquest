@@ -22,8 +22,8 @@ insert into class (name) values ('Illusionist');
 --party
 insert into parties (name,user_id) values ('Classic',1);
 insert into parties (name,user_id) values ('Modern',1);
-insert into parties (name,user_id) values ('Classic',2);
-insert into parties (name,user_id) values ('Modern',2);
+insert into parties (name,user_id) values ('The Lightning',2);
+insert into parties (name,user_id) values ('The Vikings',2);
 
 --monster party!
 insert into parties(name,x,y) values ('kobold party of one',1,1);

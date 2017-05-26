@@ -1,6 +1,5 @@
-DROP TABLE battle_characters;
+DROP TABLE battle_parties;
 DROP TABLE battle;
-DROP TABLE parties_characters;
 DROP TABLE characters;
 DROP TABLE race;
 DROP TABLE class;
@@ -23,14 +22,13 @@ CREATE TABLE users (
 --PARTIES
 CREATE TABLE parties (
         id SERIAL,
-        name text,
+        name text UNIQUE,
         x integer DEFAULT 0,
         y integer DEFAULT 0,
         z integer DEFAULT 0,
         d integer DEFAULT 0,
-	user_id integer,
+	user_id integer, -- 0 for npcs
 	FOREIGN KEY (user_id) REFERENCES users(id),
-	UNIQUE (user_id,name),
         PRIMARY KEY (id)
 );
 
@@ -65,28 +63,18 @@ CREATE TABLE characters (
 	FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
---PARTIES_CHARACTERS
-CREATE TABLE parties_characters (
-        id SERIAL,
-	party_id integer,
-	character_id integer,
-        PRIMARY KEY (id),
-	FOREIGN KEY (party_id) REFERENCES parties(id),
-	FOREIGN KEY (character_id) REFERENCES characters(id)
-);
-
 CREATE TABLE battle (
 	id SERIAL,
         PRIMARY KEY (id)
 );
 
-CREATE TABLE battle_characters (
+CREATE TABLE battle_parties (
 	id SERIAL,
 	battle_id integer,
-	character_id integer,
+	party_id integer,
         PRIMARY KEY (id),
 	FOREIGN KEY (battle_id) REFERENCES battle(id),
-	FOREIGN KEY (character_id) REFERENCES characters(id)
+	FOREIGN KEY (party_id) REFERENCES parties(id)
 );
 
 
