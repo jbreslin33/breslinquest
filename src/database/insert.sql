@@ -26,7 +26,7 @@ insert into parties (name,user_id) values ('Classic',2);
 insert into parties (name,user_id) values ('Modern',2);
 
 --monster party!
-insert into parties(name) values ('kobold party of one');
+insert into parties(name,x,y) values ('kobold party of one',1,1);
 
 --characters
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Julius',1,1,1,13,13,1,0,1);

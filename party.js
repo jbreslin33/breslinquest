@@ -33,7 +33,7 @@ var Party = new Class(
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
 		
-                var queryString = 'update parties set d = ' + this.d + ', x = ' + this.x + ', y = ' + this.y + ', z = ' + this.z + ';';
+                var queryString = 'update parties set d = ' + this.d + ', x = ' + this.x + ', y = ' + this.y + ', z = ' + this.z + ' where id = ' + this.id + ';';
 
                 var client = new pg.Client(conString);
                 client.connect();
