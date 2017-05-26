@@ -84,6 +84,10 @@ io.on('connection', function(socket)
 	{
 		mApp.updateUser(move_key_code,socket.id);
 	});
+	socket.on('picked party', function(party_id)
+	{
+		console.log('picked this party:' + party_id);
+	});
 });
 
 http.listen(port, function(){

@@ -75,24 +75,7 @@ if (mD == 3)
                 	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
 				loginScreen.removeLoginElements();		
-
-				var pickPartyScreen = new PickPartyScreen(socket);
-				
-/*
-    				var x = document.createElement("SELECT");
-    				x.setAttribute("id", "partySelect");
-    				document.body.appendChild(x);
-
-				//fill party select
-				for (i=0; i < partyNameArray.length; i++)
-				{
-    					var z = document.createElement("option");
-    					z.setAttribute("value", "" + partyIDArray[i]);
-    					var t = document.createTextNode("" + partyNameArray[i]);
-    					z.appendChild(t);
-    					document.getElementById("partySelect").appendChild(z);
-				}
-*/
+				var pickPartyScreen = new PickPartyScreen(socket,partyNameArray,partyIDArray);
                 	});
       		});
     	</script>
