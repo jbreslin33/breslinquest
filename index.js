@@ -22,6 +22,11 @@ setInterval(onTimerTick, 33);
 function onTimerTick()
 {
 	mApp.collisionCheck();	
+
+	//handle battles
+	mApp.conductBattles();
+	
+	
 }
 
 /******************

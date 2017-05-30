@@ -17,9 +17,6 @@ var Party = new Class(
 
 		//app
 		this.mApp = bapp
-
-		//battles
-		this.mEnemyParty = 0;
         },
 
 	setEnemyParty: function(enemy)

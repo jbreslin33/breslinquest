@@ -20,43 +20,111 @@ var Application = new Class(
 		this.loadCharacters();
 	},
 
+	conductBattles: function()
+	{
+                for (i=0; i < this.mBattlesArray.length; i++)
+		{
+						
+
+		}
+	},
+	
+	inBattle: function(party)
+	{
+		for (b=0; b < this.mBattlesArray.length; b++)
+                {
+                	for (p=0; p < this.mBattlesArray[b].mPartiesArray.length; p++)
+                        {
+                        	if (this.mBattlesArray[b].mPartiesArray[p] == party)
+                                {
+                                        return true;
+                                }
+                        }
+        	}
+		return false;
+	},
+
+        getBattle: function(party)
+        {
+                for (b=0; b < this.mBattlesArray.length; b++)
+                {
+                        for (p=0; p < this.mBattlesArray[b].mPartiesArray.length; p++)
+                        {
+                                if (this.mBattlesArray[b].mPartiesArray[p] == party)
+                                {
+                                        return this.mBattlesArray[b];
+                                }
+                        }
+                }
+                return false;
+        },
+
+	
+	atOrigin: function(party)
+	{
+		if (party.x == 0 && party.y == 0 && party.z == 0)
+		{
+			return true;
+		}	
+		return false;
+	},
+
+	collisionTwo: function(partya,partyj)
+	{
+		if (partya.x == partyj.x && partya.y == partyj.y && partya.z == partyj.z)
+		{
+			return true;
+		}
+		return false;
+	},
+
 	collisionCheck: function()
 	{
 		//check for party to party collision
                 for (i=0; i < this.mPartiesArray.length; i++)
 		{
-			var partyA = this.mPartiesArray[i];	
-			if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
+			var partyA = this.mPartiesArray[i];			
+			//is partyA already in a battle?
+
+			if (this.inBattle(partyA))
 			{
-                		//at origin no battles allowed and must not already be in battle!		
+				//a already in battle
 			}
-			else if (partyA.mEnemyParty != 0)
+			else if (this.atOrigin(partyA))
 			{
-				//already have enemy
+                		//a at origin no battles allowed and must not already be in battle!	
 			}
 			else
 			{	
 				for (j=0; j < this.mPartiesArray.length; j++)
 				{
-					var partyB = this.mPartiesArray[j];	
-					if (partyA.x == 0 && partyA.y == 0 && partyA.z == 0)
+					var partyJ = this.mPartiesArray[j];	
+					if (this.atOrigin(partyJ))
 					{
-                				//at origin no battles allowed		
+                				//j at origin no battles allowed		
 					}
-					else if (partyB.mEnemyParty != 0)
+					if (partyA == partyJ)
 					{
-						//already have enemy
+						//same parties!
 					}
 					else
 					{
-						if (partyA != partyB)
-						{		
-							//check for collision between partyA and partyB
-							if (partyA.x == partyB.x && partyA.y == partyB.y && partyA.z == partyB.z)
+						//check for collision between partyA and partyB
+						if (this.collisionTwo(partyA,partyJ))
+						{
+							if (this.inBattle(partyJ))
 							{
-								console.log('battle between ' + partyA.name + ' and ' + partyB.name); 
-								//io.sockets.socket(savedSocketId).emit(...)
-								var battle = new Battle(this,0,partyA,partyB);
+								var battle = this.getBattle(partyJ);
+								battle.addParty(partyA);
+								console.log('join battle between ' + partyA.name + ' and ' + partyJ.name); 
+							}
+							else //create new battle
+							{
+								console.log('create battle for ' + partyA.name + ' and ' + partyJ.name); 
+								var battle = new Battle(this,0);
+								this.mBattlesArray.push(battle);
+								battle.addParty(partyA);
+								//battle.addParty(partyJ);
 							}
 						}
 					}
