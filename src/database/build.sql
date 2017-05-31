@@ -1,3 +1,5 @@
+DROP TABLE armor;
+DROP TABLE weapons;
 DROP TABLE battle_parties;
 DROP TABLE battle;
 DROP TABLE characters;
@@ -41,6 +43,20 @@ CREATE TABLE race (
 CREATE TABLE class (
         id SERIAL,
         name text UNIQUE,
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE weapons (
+        id SERIAL,
+        name text UNIQUE,
+        damage integer,
+        PRIMARY KEY (id)
+);
+
+CREATE TABLE armor (
+        id SERIAL,
+        name text UNIQUE,
+        protection integer,
         PRIMARY KEY (id)
 );
 

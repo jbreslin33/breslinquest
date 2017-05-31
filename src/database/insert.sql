@@ -19,6 +19,22 @@ insert into class (name) values ('Palidan');
 insert into class (name) values ('Ranger');
 insert into class (name) values ('Illusionist');
 
+--weapons
+insert into weapons (name,damage) values ('Two-handed Sword',12);
+insert into weapons (name,damage) values ('Long Sword',10);
+insert into weapons (name,damage) values ('Bastard Sword',8);
+insert into weapons (name,damage) values ('Short Sword',6);
+insert into weapons (name,damage) values ('Dagger',4);
+insert into weapons (name,damage) values ('Mace',7);
+insert into weapons (name,damage) values ('Long Bow',6);
+insert into weapons (name,damage) values ('Crossbow',4);
+
+insert into armor (name,protection) values ('Platinum',-8); --I think you should need to do 9 points of damage to even damage player 1 point.
+insert into armor (name,protection) values ('Bronze',-6);
+insert into armor (name,protection) values ('Chain Mail',-4);
+insert into armor (name,protection) values ('Leather',-2);
+insert into armor (name,protection) values ('Shield',-2);
+
 --party
 insert into parties (name,user_id) values ('Classic',1);
 insert into parties (name,user_id) values ('Modern',1);
