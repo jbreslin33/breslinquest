@@ -1,6 +1,6 @@
 var Character = new Class(
 {
-        initialize: function(bapp,id,name,userid,raceid,classid,fullhitpoints,currenthitpoints,level,experience,partyid)
+        initialize: function(bapp,id,name,userid,raceid,classid,fullhitpoints,currenthitpoints,level,experience,partyid,action)
         {
 		this.mClientID = 0;
 	
@@ -17,6 +17,8 @@ var Character = new Class(
 
 		//if you have a party id your movement should come from party? or are we going to be more tactical?		
 		this.party_id = partyid;
+		this.action = action; //1 attack, 2 defend, 3 flee 
+
         }
 });
 

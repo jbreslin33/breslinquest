@@ -56,6 +56,7 @@ CREATE TABLE characters (
 	level integer DEFAULT 1, 
 	experience integer DEFAULT 0, 
 	party_id integer, --can monsters be in parties???? can parties be bigger than 6??? hordes???? of parties and monsters???? economies of scale the bigger the party the less the share of experience points so you want to find a balance.
+	action integer, --default action to perform 
         PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (party_id) REFERENCES parties(id),

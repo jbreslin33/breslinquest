@@ -15,34 +15,26 @@ var Battle = new Class(
 		//mAttackerIndex
 		this.mAttackerIndex = 0;
 
+		this.mCurrentCharacter = 0;
+
 		this.mRound = 0;
+
+		this.mWaitingOn = 0;
+
+		// wait time for user
+		this.mWaitTimeThreshold = 5000;
+		this.mWaitTime = 0;
         },
 	
 	update: function()
 	{
-		console.log('attacker userid:' + this.mPartiesArray[this.mAttackerIndex].user_id ); 
-		if (this.mPartiesArray[this.mAttackerIndex].user_id > 0)
+		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
 		{
-			console.log('need user response');
-		} 
-		else
-		{
-			for (var i=0; i < this.mApp.mCharactersArray.length; i++)
+			var character = this.mApp.mCharactersArray[i];
+			if (this.inBattle(character))
 			{
-				var character = this.mApp.mCharactersArray[i]; 
-				var partyid = this.mPartiesArray[this.mAttackerIndex].id;
-				if (partyid == character.party_id)
-				{
-					console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
-				}
+				console.log('' + character.name + ' performs ' + character.action + '!');
 			}
-		}
-
-		this.mAttackerIndex++;
-
-		if (this.mAttackerIndex >= this.mPartiesArray.length)
-		{
-			this.mAttackerIndex = 0;	
 		}
 	},
 
