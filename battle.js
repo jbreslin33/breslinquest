@@ -14,10 +14,31 @@ var Battle = new Class(
 
 		//mAttackerIndex
 		this.mAttackerIndex = 0;
+
+		this.mRound = 0;
         },
 	
 	update: function()
 	{
+		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
+		{
+			var character = this.mApp.mCharactersArray[i]; 
+			var partyid = this.mPartiesArray[this.mAttackerIndex].id;
+			if (partyid == character.party_id)
+			{
+				console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
+			}
+		}
+
+		this.mAttackerIndex++;
+
+		if (this.mAttackerIndex >= this.mPartiesArray.length)
+		{
+			this.mAttackerIndex = 0;	
+		}
+	
+	
+/*
 		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
 		{
 			var character = this.mApp.mCharactersArray[i]; 
@@ -26,7 +47,8 @@ var Battle = new Class(
 				console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
 			}
 		}
-		//console.log('parties in battle:' + this.mPartiesArray.length);
+*/
+		
 	},
 
 	inBattle: function(character)
