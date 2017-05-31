@@ -24,8 +24,7 @@ var Application = new Class(
 	{
                 for (i=0; i < this.mBattlesArray.length; i++)
 		{
-						
-
+			this.mBattlesArray[i].update();						
 		}
 	},
 	
@@ -116,15 +115,14 @@ var Application = new Class(
 							{
 								var battle = this.getBattle(partyJ);
 								battle.addParty(partyA);
-								console.log('join battle between ' + partyA.name + ' and ' + partyJ.name); 
+								console.log('' + partyA.name + ' joining battle'); 
 							}
 							else //create new battle
 							{
-								console.log('create battle for ' + partyA.name + ' and ' + partyJ.name); 
+								console.log('' + partyA.name + ' creating and joing battle'); 
 								var battle = new Battle(this,0);
 								this.mBattlesArray.push(battle);
 								battle.addParty(partyA);
-								//battle.addParty(partyJ);
 							}
 						}
 					}
