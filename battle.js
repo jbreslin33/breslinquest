@@ -18,7 +18,7 @@ var Battle = new Class(
 	
 	update: function()
 	{
-		for (i=0; i < this.mApp.mCharactersArray.length; i++)
+		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
 		{
 			var character = this.mApp.mCharactersArray[i]; 
 			if (this.inBattle(character))
@@ -31,9 +31,9 @@ var Battle = new Class(
 
 	inBattle: function(character)
 	{
-		for (p=0; p < this.mPartiesArray.length; p++)
+		for (var i=0; i < this.mPartiesArray.length; i++)
 		{
-			var party = this.mPartiesArray[p];
+			var party = this.mPartiesArray[i];
 			if (character.party_id == party.id)
 			{
 				return true;
