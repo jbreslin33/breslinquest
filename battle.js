@@ -30,12 +30,26 @@ var Battle = new Class(
 	{
 		if (this.mWaitTime > this.mWaitTimeThreshold)
 		{
-			for (var i=0; i < this.mApp.mCharactersArray.length; i++)
+			for (var a=0; a < this.mApp.mCharactersArray.length; a++) //loop thru characters to pick next attacker
 			{
-				var character = this.mApp.mCharactersArray[i];
-				if (this.inBattle(character))
+				var attacker = this.mApp.mCharactersArray[a];
+				if (this.inBattle(attacker))
 				{
-					console.log('' + character.name + ' performs ' + character.action + '!');
+					for (var b=0; b < this.mPartiesArray.length; b++) //check parties in battle in grab one not same as attacker
+					{
+						if (this.mPartiesArray[b].id != attacker.party_id)
+						{
+							var partyToAttack = this.mApp.getPartyByID(this.mPartiesArray[b].id);
+							for (var c=0; c < this.mApp.mCharactersArray.length; c++) //loop thru characters to pick a defender
+							{
+								if (this.mApp.mCharactersArray[c].party_id == partyToAttack.id) //is potential defender in same party as party you wish to attack?
+								{
+									var defender = this.mApp.mCharactersArray[c]; 
+									console.log('' + attacker.name + ' performs ' + attacker.action + ' on ' + defender.name);
+								}		
+							}
+						}  
+					}
 				}
 			}
 			this.mWaitTime = 0;
@@ -43,7 +57,6 @@ var Battle = new Class(
 
 			console.log('ROUND: ' + this.mRound);
 		}
-
 		this.mWaitTime++;
 	},
 
