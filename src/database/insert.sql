@@ -1,5 +1,5 @@
 --users
-insert into users (username,password,first_name,last_name) values ('jbreslin','Iggles_13','Jim','Breslin');
+insert into users (username,password,first_name,last_name) values ('j','j','Jim','Breslin');
 insert into users (username,password) values ('bbreslin','soccer12');
 
 --race
@@ -29,11 +29,15 @@ insert into parties (name,user_id) values ('The Vikings',2);
 insert into parties(name,x,y) values ('kobold and orc party of two',1,1);
 
 --characters
+--jim
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Julius',1,1,1,13,13,1,0,1);
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Ren Blackis',1,4,4,13,13,1,0,1);
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Phantazar',1,1,8,13,13,1,0,1);
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Midget Man',1,5,3,13,13,1,0,1);
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Barton',1,1,5,13,13,1,0,1);
+
+--brian
+insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id) values ('Legolas',1,1,5,13,13,1,0,3);
 
 --monsters
 insert into characters (race_id,full_hitpoints,current_hitpoints,level,experience,party_id) values (6,3,3,1,0,5);
