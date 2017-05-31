@@ -17,7 +17,14 @@ var Character = new Class(
 
 		//if you have a party id your movement should come from party? or are we going to be more tactical?		
 		this.party_id = partyid;
+
+
+		//battle
 		this.action = action; //1 attack, 2 defend, 3 flee 
+		this.attack = 0; //default 0 is closest opponent
+
+		this.weapon = 0;
+
 
         }
 });

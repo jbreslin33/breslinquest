@@ -45,8 +45,6 @@ var Battle = new Class(
 		}
 
 		this.mWaitTime++;
-
-
 	},
 
 	inBattle: function(character)
