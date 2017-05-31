@@ -22,20 +22,31 @@ var Battle = new Class(
 		this.mWaitingOn = 0;
 
 		// wait time for user
-		this.mWaitTimeThreshold = 5000;
+		this.mWaitTimeThreshold = 100;
 		this.mWaitTime = 0;
         },
 	
 	update: function()
 	{
-		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
+		if (this.mWaitTime > this.mWaitTimeThreshold)
 		{
-			var character = this.mApp.mCharactersArray[i];
-			if (this.inBattle(character))
+			for (var i=0; i < this.mApp.mCharactersArray.length; i++)
 			{
-				console.log('' + character.name + ' performs ' + character.action + '!');
+				var character = this.mApp.mCharactersArray[i];
+				if (this.inBattle(character))
+				{
+					console.log('' + character.name + ' performs ' + character.action + '!');
+				}
 			}
+			this.mWaitTime = 0;
+			this.mRound++;
+
+			console.log('ROUND: ' + this.mRound);
 		}
+
+		this.mWaitTime++;
+
+
 	},
 
 	inBattle: function(character)
