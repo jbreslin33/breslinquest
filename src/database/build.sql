@@ -27,7 +27,7 @@ CREATE TABLE parties (
         y integer DEFAULT 0,
         z integer DEFAULT 0,
         d integer DEFAULT 0,
-	user_id integer, -- 0 for npcs
+	user_id integer, -- null for npcs
 	FOREIGN KEY (user_id) REFERENCES users(id),
         PRIMARY KEY (id)
 );

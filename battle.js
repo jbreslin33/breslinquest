@@ -20,13 +20,21 @@ var Battle = new Class(
 	
 	update: function()
 	{
-		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
+		console.log('attacker userid:' + this.mPartiesArray[this.mAttackerIndex].user_id ); 
+		if (this.mPartiesArray[this.mAttackerIndex].user_id > 0)
 		{
-			var character = this.mApp.mCharactersArray[i]; 
-			var partyid = this.mPartiesArray[this.mAttackerIndex].id;
-			if (partyid == character.party_id)
+			console.log('need user response');
+		} 
+		else
+		{
+			for (var i=0; i < this.mApp.mCharactersArray.length; i++)
 			{
-				console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
+				var character = this.mApp.mCharactersArray[i]; 
+				var partyid = this.mPartiesArray[this.mAttackerIndex].id;
+				if (partyid == character.party_id)
+				{
+					console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
+				}
 			}
 		}
 
@@ -36,19 +44,6 @@ var Battle = new Class(
 		{
 			this.mAttackerIndex = 0;	
 		}
-	
-	
-/*
-		for (var i=0; i < this.mApp.mCharactersArray.length; i++)
-		{
-			var character = this.mApp.mCharactersArray[i]; 
-			if (this.inBattle(character))
-			{
-				console.log('' + character.name + ' of party ' + character.party_id + ' swings his sword!');	
-			}
-		}
-*/
-		
 	},
 
 	inBattle: function(character)
