@@ -24,9 +24,12 @@ var Character = new Class(
 		this.attack = 0; //default 0 is closest opponent
 
 		this.weapon = 0;
-
-
-        }
+        },
+		
+	setDamage: function(damage)
+	{
+		this.current_hitpoints = this.current_hitpoints - damage;	
+	}
 });
 
 module.exports = Character;
