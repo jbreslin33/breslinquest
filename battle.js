@@ -35,20 +35,27 @@ var Battle = new Class(
 				var attacker = this.mApp.mCharactersArray[a];
 				if (this.inBattle(attacker))
 				{
+					//get party to attack
+					var partyToAttack = 0;
 					for (var b=0; b < this.mPartiesArray.length; b++) //check parties in battle in grab one not same as attacker
 					{
 						if (this.mPartiesArray[b].id != attacker.party_id)
 						{
-							var partyToAttack = this.mApp.getPartyByID(this.mPartiesArray[b].id);
-							for (var c=0; c < this.mApp.mCharactersArray.length; c++) //loop thru characters to pick a defender
-							{
-								if (this.mApp.mCharactersArray[c].party_id == partyToAttack.id) //is potential defender in same party as party you wish to attack?
-								{
-									var defender = this.mApp.mCharactersArray[c]; 
-									console.log('' + attacker.name + ' performs ' + attacker.action + ' on ' + defender.name);
-								}		
-							}
-						}  
+							partyToAttack = this.mApp.getPartyByID(this.mPartiesArray[b].id);
+						}
+					}
+
+					//loop thru characters and find a defender to attack with attacker
+					var c = 0; 	
+					var defender = 0;
+					while (c < this.mApp.mCharactersArray.length && defender == 0)
+					{
+						if (this.mApp.mCharactersArray[c].party_id == partyToAttack.id) //is potential defender in same party as party you wish to attack?
+						{
+							defender = this.mApp.mCharactersArray[c]; 
+							console.log('' + attacker.name + ' performs ' + attacker.action + ' on ' + defender.name);
+						}		
+						c++;
 					}
 				}
 			}
