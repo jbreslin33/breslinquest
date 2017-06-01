@@ -56,8 +56,8 @@ insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hit
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Legolas',1,1,5,13,13,1,0,3,1);
 
 --monsters
-insert into characters (race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values (6,3,3,1,0,5,1);
-insert into characters (race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values (4,5,5,1,0,5,1);
+insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Abog',6,3,3,1,0,5,1);
+insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Brghlu',4,5,5,1,0,5,1);
 
 
 
