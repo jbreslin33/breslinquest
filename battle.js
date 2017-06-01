@@ -50,7 +50,8 @@ var Battle = new Class(
 					var defender = 0;
 					while (c < this.mApp.mCharactersArray.length && defender == 0)
 					{
-						if (this.mApp.mCharactersArray[c].party_id == partyToAttack.id) //is potential defender in same party as party you wish to attack?
+						var potentialDefender = this.mApp.mCharactersArray[c]; 
+						if (this.mApp.mCharactersArray[c].party_id == partyToAttack.id && potentialDefender.current_hitpoints > 0) //is potential defender in same party as party you wish to attack AND alive?
 						{
 							defender = this.mApp.mCharactersArray[c]; 
 							console.log('' + attacker.name + ' performs ' + attacker.action + ' on ' + defender.name);
