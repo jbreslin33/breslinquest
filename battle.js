@@ -31,7 +31,7 @@ var Battle = new Class(
                 for (var i=0; i < this.mPartiesArray.length; i++)
                 {
                         var p = this.mPartiesArray[i];
-                        if (p.party_id == party.id)
+                        if (p.id == party.id)
                         {
                                 return true;
                         }
@@ -55,6 +55,9 @@ var Battle = new Class(
 
 	update: function()
 	{
+		//are parties still alive??? 
+		
+	
 		if (this.mWaitTime > this.mWaitTimeThreshold)
 		{
 			console.log('ROUND: ' + this.mRound);
