@@ -21,15 +21,15 @@ var Party = new Class(
 
         inBattle: function()
         {
-                for (b=0; b < this.mApp.mBattlesArray.length; b++)
+                for (var b=0; b < this.mApp.mBattlesArray.length; b++)
                 {
-                        for (p=0; p < this.mApp.mBattlesArray[b].mPartiesArray.length; p++)
+                        for (var p=0; p < this.mApp.mBattlesArray[b].mPartiesArray.length; p++)
                         {
                                 if (this.mApp.mBattlesArray[b].mPartiesArray[p] == this)
                                 {
                                         return true;
                                 }
-                        }
+                       }
                 }
                 return false;
         },

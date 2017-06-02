@@ -22,7 +22,7 @@ var Application = new Class(
 
 	conductBattles: function()
 	{
-                for (i=0; i < this.mBattlesArray.length; i++)
+                for (var i=0; i < this.mBattlesArray.length; i++)
 		{
 			this.mBattlesArray[i].update();						
 		}
@@ -30,9 +30,9 @@ var Application = new Class(
 	
         getBattle: function(party)
         {
-                for (b=0; b < this.mBattlesArray.length; b++)
+                for (var b=0; b < this.mBattlesArray.length; b++)
                 {
-                        for (p=0; p < this.mBattlesArray[b].mPartiesArray.length; p++)
+                        for (var p=0; p < this.mBattlesArray[b].mPartiesArray.length; p++)
                         {
                                 if (this.mBattlesArray[b].mPartiesArray[p] == party)
                                 {
@@ -65,13 +65,16 @@ var Application = new Class(
 	collisionCheck: function()
 	{
 		//check for party to party collision
-                for (i=0; i < this.mPartiesArray.length; i++)
+                for (var i=0; i < this.mPartiesArray.length; i++)
 		{
 			var partyA = this.mPartiesArray[i];			
 			//is partyA already in a battle?
 
+			//console.log('checking ' + partyA.name);
+
 			if (partyA.inBattle())
 			{
+				//console.log('' + partyA.name + ' already in battle');
 				//a already in battle
 			}
 			else if (this.atOrigin(partyA))
@@ -80,7 +83,7 @@ var Application = new Class(
 			}
 			else
 			{	
-				for (j=0; j < this.mPartiesArray.length; j++)
+				for (var j=0; j < this.mPartiesArray.length; j++)
 				{
 					var partyJ = this.mPartiesArray[j];	
 					if (this.atOrigin(partyJ))
@@ -271,7 +274,10 @@ var Application = new Class(
 		var user = this.getUserBySocketID(socket_id);	
 		var party = this.getPartyByID(user.party_id);	
 
-		
+		if (party.inBattle())
+		{
+			return;
+		}
 
 
 		var cd = party.getd();
