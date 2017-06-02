@@ -19,6 +19,21 @@ var Party = new Class(
 		this.mApp = bapp
         },
 
+        inBattle: function()
+        {
+                for (b=0; b < this.mApp.mBattlesArray.length; b++)
+                {
+                        for (p=0; p < this.mApp.mBattlesArray[b].mPartiesArray.length; p++)
+                        {
+                                if (this.mApp.mBattlesArray[b].mPartiesArray[p] == this)
+                                {
+                                        return true;
+                                }
+                        }
+                }
+                return false;
+        },
+
 	setEnemyParty: function(enemy)
 	{
 		this.mEnemyParty = enemy;

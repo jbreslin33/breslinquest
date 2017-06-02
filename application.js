@@ -28,21 +28,6 @@ var Application = new Class(
 		}
 	},
 	
-	inBattle: function(party)
-	{
-		for (b=0; b < this.mBattlesArray.length; b++)
-                {
-                	for (p=0; p < this.mBattlesArray[b].mPartiesArray.length; p++)
-                        {
-                        	if (this.mBattlesArray[b].mPartiesArray[p] == party)
-                                {
-                                        return true;
-                                }
-                        }
-        	}
-		return false;
-	},
-
         getBattle: function(party)
         {
                 for (b=0; b < this.mBattlesArray.length; b++)
@@ -85,7 +70,7 @@ var Application = new Class(
 			var partyA = this.mPartiesArray[i];			
 			//is partyA already in a battle?
 
-			if (this.inBattle(partyA))
+			if (partyA.inBattle())
 			{
 				//a already in battle
 			}
@@ -111,7 +96,7 @@ var Application = new Class(
 						//check for collision between partyA and partyB
 						if (this.collisionTwo(partyA,partyJ))
 						{
-							if (this.inBattle(partyJ))
+							if (partyJ.inBattle())
 							{
 								var battle = this.getBattle(partyJ);
 								battle.addParty(partyA);
@@ -282,8 +267,11 @@ var Application = new Class(
 
 	userMove: function(move_key_code,socket_id)
 	{
+
 		var user = this.getUserBySocketID(socket_id);	
 		var party = this.getPartyByID(user.party_id);	
+
+		
 
 
 		var cd = party.getd();

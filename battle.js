@@ -36,7 +36,7 @@ var Battle = new Class(
 	
 				if (potentialAttacker.current_hitpoints > 0)
 				{
-					if (this.inBattle(potentialAttacker))
+					if (potentialAttacker.inBattle())
 					{
 						var attacker = potentialAttacker;
 						//get party to attack
@@ -81,19 +81,6 @@ var Battle = new Class(
 			console.log('ROUND: ' + this.mRound);
 		}
 		this.mWaitTime++;
-	},
-
-	inBattle: function(character)
-	{
-		for (var i=0; i < this.mPartiesArray.length; i++)
-		{
-			var party = this.mPartiesArray[i];
-			if (character.party_id == party.id)
-			{
-				return true;
-			}	
-		}
-		return false;
 	},
 
 	addParty: function(party)

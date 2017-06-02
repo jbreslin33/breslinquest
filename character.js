@@ -3,6 +3,7 @@ var Character = new Class(
         initialize: function(bapp,id,name,userid,raceid,classid,fullhitpoints,currenthitpoints,level,experience,partyid,action)
         {
 		this.mClientID = 0;
+		this.mApp = bapp;
 	
 		this.id = id;
 		this.name = name;
@@ -29,7 +30,20 @@ var Character = new Class(
 	setDamage: function(damage)
 	{
 		this.current_hitpoints = this.current_hitpoints - damage;	
-	}
+	},
+
+        inBattle: function()
+        {
+                for (var i=0; i < this.mApp.mPartiesArray.length; i++)
+                {
+                        var party = this.mApp.mPartiesArray[i];
+                        if (this.party_id == party.id)
+                        {
+                                return true;
+                        }
+                }
+                return false;
+        }
 });
 
 module.exports = Character;
