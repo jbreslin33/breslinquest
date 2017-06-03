@@ -21,10 +21,14 @@ setInterval(onTimerTick, 33);
 //game loop check for collisions
 function onTimerTick()
 {
+
+	//collision check should destroy battles as well.....
 	mApp.collisionCheck();	
 
 	//handle battles
 	mApp.conductBattles();
+
+	//move players...
 	
 	
 }

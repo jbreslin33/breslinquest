@@ -19,6 +19,22 @@ var Party = new Class(
 		this.mApp = bapp
         },
 
+	isPartyAlive: function()
+	{
+                for (var c=0; c < this.mApp.mCharactersArray.length; c++)
+		{
+			var character = this.mApp.mCharactersArray[c];
+			if (character.party_id == this.id)
+			{
+				if (character.current_hitpoints > 0)
+				{
+					return true;
+				}	
+			}	
+		}
+		return false;
+	},
+
         inBattle: function()
         {
                 for (var b=0; b < this.mApp.mBattlesArray.length; b++)

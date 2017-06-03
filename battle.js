@@ -52,21 +52,19 @@ var Battle = new Class(
                 }
                 return false;
         },
-
+	
 	update: function()
 	{
-		//are parties still alive??? 
-		
-	
-		if (this.mWaitTime > this.mWaitTimeThreshold)
-		{
-			console.log('ROUND: ' + this.mRound);
+		console.log('update battle length of array is:' + this.mApp.mBattlesArray.length);
+		//if (this.mWaitTime > this.mWaitTimeThreshold)
+		//{
+			//console.log('ROUND: ' + this.mRound);
 			this.handleCombat();
-			this.mRound++;
-			this.mWaitTime = 0;
+		//	this.mRound++;
+		//	this.mWaitTime = 0;
 			console.log('------------------------------------------------');
-		}
-		this.mWaitTime++;
+		//}
+		//this.mWaitTime++;
 	},
 	
 	handleCombat: function()

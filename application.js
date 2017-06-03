@@ -13,6 +13,8 @@ var Application = new Class(
       		this.mUsersArray = new Array(); 
 		this.mPartiesArray = new Array();
       		this.mCharactersArray = new Array(); 
+
+		//should battles array be reset?????? after every update
       		this.mBattlesArray = new Array(); 
 
 		this.loadUsers();
@@ -62,8 +64,11 @@ var Application = new Class(
 		return false;
 	},
 
+//should we be instead creating battle rounds????
+
 	collisionCheck: function()
 	{
+		this.mBattlesArray = [];
 		//check for party to party collision
                 for (var i=0; i < this.mPartiesArray.length; i++)
 		{
@@ -77,6 +82,11 @@ var Application = new Class(
 				//console.log('' + partyA.name + ' already in battle');
 				//a already in battle
 			}
+			else if (!partyA.isPartyAlive())
+			{
+				//party dead		
+			}
+
 			else if (this.atOrigin(partyA))
 			{
                 		//a at origin no battles allowed and must not already be in battle!	
@@ -90,9 +100,13 @@ var Application = new Class(
 					{
                 				//j at origin no battles allowed		
 					}
-					if (partyA == partyJ)
+					else if (partyA == partyJ)
 					{
 						//same parties!
+					}
+					else if (!partyJ.isPartyAlive())
+					{
+						//party dead		
 					}
 					else
 					{
