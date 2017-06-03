@@ -52,11 +52,7 @@ var Battle = new Class(
                 }
                 return false;
         },
-<<<<<<< HEAD
 	
-	update: function()
-=======
-
 	update: function()
 	{
 		if (this.mWaitTime > this.mWaitTimeThreshold)
@@ -71,7 +67,6 @@ var Battle = new Class(
 	},
 	
 	handleCombat: function()
->>>>>>> parent of 1f6c34e... party
 	{
 		for (var a=0; a < this.mApp.mCharactersArray.length; a++) //loop thru characters to pick next attacker
 		{

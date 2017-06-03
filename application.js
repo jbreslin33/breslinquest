@@ -21,27 +21,16 @@ var Application = new Class(
 		this.loadParties();
 		this.loadCharacters();
 
-
-                // wait time for user
-                this.mWaitTimeThreshold = 100;
-                this.mWaitTime = 0;
-
 	},
 
 	update: function()
 	{
 		this.collisionCheck();
 
-		//do a round slow....
-		if (this.mWaitTime > this.mWaitTimeThreshold)
+		for (var b=0; b < this.mBattlesArray.length; b++)
 		{
-                	for (var i=0; i < this.mBattlesArray.length; i++)
-			{
-				this.mBattlesArray[i].update();						
-			}
-			this.mWaitTime = 0;
+			this.mBattlesArray[b].update();						
 		}
-		this.mWaitTime++;
 	},
 	
         getBattle: function(party)
@@ -82,7 +71,7 @@ var Application = new Class(
 
 	collisionCheck: function()
 	{
-		this.mBattlesArray = [];
+		//this.mBattlesArray = [];
 		//check for party to party collision
                 for (var i=0; i < this.mPartiesArray.length; i++)
 		{
