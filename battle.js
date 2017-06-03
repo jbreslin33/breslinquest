@@ -31,7 +31,7 @@ var Battle = new Class(
                 for (var i=0; i < this.mPartiesArray.length; i++)
                 {
                         var p = this.mPartiesArray[i];
-                        if (p.id == party.id)
+                        if (p.party_id == party.id)
                         {
                                 return true;
                         }
@@ -52,8 +52,26 @@ var Battle = new Class(
                 }
                 return false;
         },
+<<<<<<< HEAD
 	
 	update: function()
+=======
+
+	update: function()
+	{
+		if (this.mWaitTime > this.mWaitTimeThreshold)
+		{
+			console.log('ROUND: ' + this.mRound);
+			this.handleCombat();
+			this.mRound++;
+			this.mWaitTime = 0;
+			console.log('------------------------------------------------');
+		}
+		this.mWaitTime++;
+	},
+	
+	handleCombat: function()
+>>>>>>> parent of 1f6c34e... party
 	{
 		for (var a=0; a < this.mApp.mCharactersArray.length; a++) //loop thru characters to pick next attacker
 		{
