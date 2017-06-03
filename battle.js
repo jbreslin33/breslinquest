@@ -55,20 +55,6 @@ var Battle = new Class(
 	
 	update: function()
 	{
-		console.log('update battle length of array is:' + this.mApp.mBattlesArray.length);
-		//if (this.mWaitTime > this.mWaitTimeThreshold)
-		//{
-			//console.log('ROUND: ' + this.mRound);
-			this.handleCombat();
-		//	this.mRound++;
-		//	this.mWaitTime = 0;
-			console.log('------------------------------------------------');
-		//}
-		//this.mWaitTime++;
-	},
-	
-	handleCombat: function()
-	{
 		for (var a=0; a < this.mApp.mCharactersArray.length; a++) //loop thru characters to pick next attacker
 		{
 			var potentialAttacker = this.mApp.mCharactersArray[a];
@@ -122,7 +108,7 @@ var Battle = new Class(
 		var user = this.mApp.getUserByID(party.user_id);
 		if (user != 0)
 		{
-			console.log('user.socket_id:' + user.socket_id);
+			//console.log('user.socket_id:' + user.socket_id);
 			user.socket.emit('battle');	
 		}
 	}

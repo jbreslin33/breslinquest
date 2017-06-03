@@ -20,14 +20,28 @@ var Application = new Class(
 		this.loadUsers();
 		this.loadParties();
 		this.loadCharacters();
+
+
+                // wait time for user
+                this.mWaitTimeThreshold = 100;
+                this.mWaitTime = 0;
+
 	},
 
-	conductBattles: function()
+	update: function()
 	{
-                for (var i=0; i < this.mBattlesArray.length; i++)
+		this.collisionCheck();
+
+		//do a round slow....
+		if (this.mWaitTime > this.mWaitTimeThreshold)
 		{
-			this.mBattlesArray[i].update();						
+                	for (var i=0; i < this.mBattlesArray.length; i++)
+			{
+				this.mBattlesArray[i].update();						
+			}
+			this.mWaitTime = 0;
 		}
+		this.mWaitTime++;
 	},
 	
         getBattle: function(party)
@@ -117,11 +131,11 @@ var Application = new Class(
 							{
 								var battle = this.getBattle(partyJ);
 								battle.addParty(partyA);
-								console.log('' + partyA.name + ' joining battle'); 
+								//console.log('' + partyA.name + ' joining battle'); 
 							}
 							else //create new battle
 							{
-								console.log('' + partyA.name + ' creating and joing battle'); 
+								//console.log('' + partyA.name + ' creating and joing battle'); 
 								var battle = new Battle(this,0);
 								this.mBattlesArray.push(battle);
 								battle.addParty(partyA);
