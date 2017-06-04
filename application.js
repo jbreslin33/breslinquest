@@ -3,7 +3,6 @@ var User  = require('./user');
 var Party  = require('./party');
 var Character  = require('./character');
 var Battle  = require('./battle');
-var BattleParty  = require('./battle_party');
 
 var Application = new Class(
 {
