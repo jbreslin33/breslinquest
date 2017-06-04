@@ -1,3 +1,5 @@
+var pg = require('pg');
+
 var Character = new Class(
 {
         initialize: function(bapp,id,name,userid,raceid,classid,fullhitpoints,currenthitpoints,level,experience,partyid,action)
@@ -30,7 +32,31 @@ var Character = new Class(
 	setDamage: function(damage)
 	{
 		this.current_hitpoints = this.current_hitpoints - damage;	
-	}
+		this.dbSetDamage();
+	},
+
+        dbSetDamage: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+
+                var queryString = 'update characters set current_hitpoints = ' + this.current_hitpoints + ' where id = ' + this.id + ';';
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
 });
 
 module.exports = Character;
