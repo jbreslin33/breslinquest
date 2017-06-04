@@ -16,8 +16,6 @@ var Battle = new Class(
 		//rounds
 		this.mRoundsArray = new Array();
 
-		this.mWaitingOn = 0;
-
 		// wait time for user
 		this.mWaitTimeThreshold = 100;
 		this.mWaitTime = 0;
@@ -34,6 +32,27 @@ var Battle = new Class(
 			this.mWaitTime = 0;
 		}
 		this.mWaitTime++;
+	},
+
+	isNoOneLeftToFight: function()
+	{
+		var totalParties = 0;
+        	for (var p=0; p < this.mPartiesArray.length; p++)
+                {
+                	var party = this.mPartiesArray[p];
+                        if (party.isPartyAlive())
+                        {
+				totalParties++;
+                        }
+                }
+		if (totalParties <= 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false
+		}
 	},
 
         partyInBattle: function(party)

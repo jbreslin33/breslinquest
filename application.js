@@ -26,6 +26,16 @@ var Application = new Class(
 	{
 		this.collisionCheck();
 
+		//lets clean up finished battles			
+		for (var b=0; b < this.mBattlesArray.length; b++)
+		{
+			if (this.mBattlesArray[b].isNoOneLeftToFight())
+			{
+				this.mBattlesArray.splice(b,1);	
+			}
+		}
+
+		//run unfinished battles
 		for (var b=0; b < this.mBattlesArray.length; b++)
 		{
 			this.mBattlesArray[b].update();						
