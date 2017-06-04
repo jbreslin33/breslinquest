@@ -27,10 +27,11 @@ var Battle = new Class(
 	{
 		if (this.mWaitTime > this.mWaitTimeThreshold)
 		{
-			console.log('ROUND: ' + this.mRoundsArray.length);
-			var round = new Round(this.mApp,this);
-			this.mWaitTime = 0;
 			console.log('------------------------------------------------');
+			var round = new Round(this.mApp,this);
+			this.mRoundsArray.push(round);
+			console.log('ROUND: ' + this.mRoundsArray.length);
+			this.mWaitTime = 0;
 		}
 		this.mWaitTime++;
 	},
