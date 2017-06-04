@@ -24,6 +24,10 @@ var Application = new Class(
 
 	update: function()
 	{
+		//process all user moves first
+		this.processUserMoves();
+	
+		//check for collisions, you may want to not check those you checked earlier in processUserMoves to save processing power	
 		this.collisionCheck();
 
 		//lets clean up finished battles			
@@ -76,7 +80,62 @@ var Application = new Class(
 		return false;
 	},
 
-//should we be instead creating battle rounds????
+	privateCollisionCheck: function(partyA)
+	{
+		if (partyA.inBattle())
+                {
+                        //console.log('' + partyA.name + ' already in battle');
+                       	//a already in battle
+                }
+                else if (!partyA.isPartyAlive())
+                {
+                        //party dead
+                }
+
+                else if (this.atOrigin(partyA))
+                {
+                        //a at origin no battles allowed and must not already be in battle!
+                }
+                else
+                {
+  			for (var j=0; j < this.mPartiesArray.length; j++)
+                        {
+                        	var partyJ = this.mPartiesArray[j];
+                                if (this.atOrigin(partyJ))
+                                {
+                                        //j at origin no battles allowed
+                                }
+                                else if (partyA == partyJ)
+                                {
+                                        //same parties!
+                                }
+                                else if (!partyJ.isPartyAlive())
+                                {
+                                	//party dead
+                                }
+                                else
+                                {
+                                	//check for collision between partyA and partyB
+                                        if (this.collisionTwo(partyA,partyJ))
+                                        {
+                                        	if (partyJ.inBattle())
+                                                {
+                                                        var battle = this.getBattle(partyJ);
+                                                        battle.addParty(partyA);
+                                                        console.log('PRIVATE CHECK: ' + partyA.name + ' joining battle');
+                                                }
+                                                else //create new battle
+                                                {
+                                                	console.log('PRIVATE CHECK:' + partyA.name + ' creating and joing battle');
+                                                        var battle = new Battle(this,0);
+                                                        this.mBattlesArray.push(battle);
+                                                        battle.addParty(partyA);
+                                                }
+                                        }
+                                }
+			}
+		}
+	},
 
 	collisionCheck: function()
 	{
@@ -287,94 +346,98 @@ var Application = new Class(
                         client.end();
                 }.bind(this));
         },
-/*
-	handleUserMove: function(move_key_code,user)
+	
+	storeUserMoves: function(move_key,socket_id)
 	{
-
-	},
-*/
-
-	userMove: function(move_key_code,socket_id)
-	{
-
 		var user = this.getUserBySocketID(socket_id);	
-		var party = this.getPartyByID(user.party_id);	
+		user.mMovesArray.push(move_key);
+	},
 
-		if (party.inBattle())
+	processUserMoves: function()
+	{
+		for (var u = 0; u < this.mUsersArray.length; u++)
 		{
-			return;
+			var user = this.mUsersArray[u];
+			var party = this.getPartyByID(user.party_id);	
+
+			if (user.mMovesArray.length > 0 && party.inBattle() == false)
+			{
+				//grab earliest move and then delete it
+				var move_key_code = user.mMovesArray[0];
+				user.mMovesArray.splice(0,1);
+
+				var cd = party.getd();
+				var cx = party.getx();
+				var cy = party.gety();
+				var cz = party.getz();
+
+				var nd = 0;
+				var nx = 0;
+				var ny = 0;
+				var nz = 0;
+
+                		if (move_key_code == 37)
+                		{
+                			cd--;
+                        		if (cd < 0)
+                        		{
+                        			cd = 3;
+                        		}
+                		}
+                		if (move_key_code == 39)
+                		{
+                			cd++;
+                        		if (cd > 3)
+                        		{
+                        			cd = 0;
+                        		}
+                		}
+                		if (move_key_code == 38)
+                		{
+                			if (cd == 0)
+                        		{
+                        			cy++;
+                        		}
+                        		if (cd == 1)
+                        		{
+                        			cx++;
+                        		}
+                        		if (cd == 2)
+                        		{
+                        			cy--;
+                        		}
+                        		if (cd == 3)
+                        		{
+                        			cx--;
+                        		}
+                		}
+                		if (move_key_code == 40)
+                		{
+                			if (cd == 0)
+                        		{
+                        			cy--;
+                        		}
+                        		if (cd == 1)
+                        		{
+                        			cx--;
+                        		}
+                        		if (cd == 2)
+                        		{
+                        			cy++;
+                       			} 
+                        		if (cd == 3)
+                        		{
+                        			cx++;
+                        		}
+				}
+				nd = cd;
+				nx = cx;
+				ny = cy;
+				nz = cz;
+				party.setPosition(nd,nx,ny,nz);
+				this.privateCollisionCheck(party);
+			}
 		}
-
-
-		var cd = party.getd();
-		var cx = party.getx();
-		var cy = party.gety();
-		var cz = party.getz();
-
-		var nd = 0;
-		var nx = 0;
-		var ny = 0;
-		var nz = 0;
-
-                if (move_key_code == 37)
-                {
-                	cd--;
-                        if (cd < 0)
-                        {
-                        	cd = 3;
-                        }
-                }
-                if (move_key_code == 39)
-                {
-                	cd++;
-                        if (cd > 3)
-                        {
-                        	cd = 0;
-                        }
-                }
-                if (move_key_code == 38)
-                {
-                	if (cd == 0)
-                        {
-                        	cy++;
-                        }
-                        if (cd == 1)
-                        {
-                        	cx++;
-                        }
-                        if (cd == 2)
-                        {
-                        	cy--;
-                        }
-                        if (cd == 3)
-                        {
-                        	cx--;
-                        }
-                }
-                if (move_key_code == 40)
-                {
-                	if (cd == 0)
-                        {
-                        	cy--;
-                        }
-                        if (cd == 1)
-                        {
-                        	cx--;
-                        }
-                        if (cd == 2)
-                        {
-                        	cy++;
-                        }
-                        if (cd == 3)
-                        {
-                        	cx++;
-                        }
-		}
-		nd = cd;
-		nx = cx;
-		ny = cy;
-		nz = cz;
-		party.setPosition(nd,nx,ny,nz);
 	}
 });
 module.exports = Application;

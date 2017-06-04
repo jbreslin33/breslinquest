@@ -72,7 +72,7 @@ io.on('connection', function(socket)
 	});
 	socket.on('move attempt', function(move_key_code)
 	{
-		mApp.userMove(move_key_code,socket.id);
+		mApp.storeUserMoves(move_key_code,socket.id);
 	});
 	socket.on('picked party', function(party_id)
 	{

@@ -24,6 +24,9 @@ var Users = new Class(
         	this.mLoggedIn = false;
 
 		this.loadDatabase();
+
+		//movement
+		this.mMovesArray = new Array();
         },
 
 	setPartyID: function(id)
