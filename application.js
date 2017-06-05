@@ -63,31 +63,19 @@ var Application = new Class(
 			var worldDirection = 0;
 			if (worldPoint != 0)
 			{
-				console.log('A worldPoint.id:' + worldPoint.id + ' party.d:' + party.d);
 				worldDirection = this.getWorldDirectionByWorldPointIDAndDirection(worldPoint.id,party.d);
 			}
-			//console.log('worldPoint.id:' + worldPoint.id + ' worldDirection.id:' + worldDirection.id);
 			
 			if (user.socket != 0)
 			{
-				console.log('B socket username:' + user.username);
 				if (worldPoint != 0)
 				{
-					console.log('C worldPoint id:' + worldPoint.id);
 					if (worldDirection != 0)
 					{
-						console.log('D worldDirection id:' + worldDirection.id);
-						console.log('D show: d:' + worldDirection.d + ' x:' + worldPoint.x + ' y:' + worldPoint.y + ' z:' + worldPoint.z); 
 	           				user.socket.emit('show','' + worldDirection.picture);
 					}
 				}
 			}
-/*
-			if (user.socket != 0 && worldPoint != 0 && worldDirection != 0)
-			{
-	           		user.socket.emit('show','' + worldDirection.picture);
-			}
-*/
 		}
 	},
 	
@@ -129,7 +117,6 @@ var Application = new Class(
 	{
 		if (partyA.inBattle())
                 {
-                        //console.log('' + partyA.name + ' already in battle');
                        	//a already in battle
                 }
                 else if (!partyA.isPartyAlive())
@@ -167,11 +154,9 @@ var Application = new Class(
                                                 {
                                                         var battle = this.getBattle(partyJ);
                                                         battle.addParty(partyA);
-                                                        console.log('PRIVATE CHECK: ' + partyA.name + ' joining battle');
                                                 }
                                                 else //create new battle
                                                 {
-                                                	console.log('PRIVATE CHECK:' + partyA.name + ' creating and joing battle');
                                                         var battle = new Battle(this,0);
                                                         this.mBattlesArray.push(battle);
                                                         battle.addParty(partyA);
@@ -191,11 +176,9 @@ var Application = new Class(
 			var partyA = this.mPartiesArray[i];			
 			//is partyA already in a battle?
 
-			//console.log('checking ' + partyA.name);
 
 			if (partyA.inBattle())
 			{
-				//console.log('' + partyA.name + ' already in battle');
 				//a already in battle
 			}
 			else if (!partyA.isPartyAlive())
@@ -233,11 +216,9 @@ var Application = new Class(
 							{
 								var battle = this.getBattle(partyJ);
 								battle.addParty(partyA);
-								//console.log('' + partyA.name + ' joining battle'); 
 							}
 							else //create new battle
 							{
-								//console.log('' + partyA.name + ' creating and joing battle'); 
 								var battle = new Battle(this,0);
 								this.mBattlesArray.push(battle);
 								battle.addParty(partyA);
@@ -264,15 +245,12 @@ var Application = new Class(
 
         getWorldDirectionByWorldPointIDAndDirection: function(world_point_id,d)
         {
-		console.log('world_point_id:' + world_point_id + ' d:' + d);
                 for (var w=0; w < this.mWorldDirectionsArray.length; w++)
                 {
 
 			var worldDirection = this.mWorldDirectionsArray[w]; 
-			console.log('AAAAAAAAAAAAAAAA worldDirection.d:' + worldDirection.d);
                         if (worldDirection.world_point_id == world_point_id && worldDirection.d == d)
                         {
-				console.log('BBBBBBBBBBBBBB worldDirection.d:' + worldDirection.d);
                                 return worldDirection;
                         }
                 }
@@ -417,7 +395,6 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        //console.log('creating user ' + row.username + ' and adding to mUserArray');
                 	var user = new User(this,0,row.id,row.username,row.password,row.first_name,row.last_name,row.email,row.banned_id);
        			this.addUser(user);
 
@@ -446,7 +423,6 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        console.log('creating party ' + row.name + ' owned by user_id ' + row.user_id + ' and adding to mPartiesArray');
 			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
 
                         this.addParty(party);
@@ -476,7 +452,6 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        console.log('creating character ' + row.name + ' owned by user_id ' + row.user_id + ' and adding to mCharactersArray');
                         var character = new Character(this,row.id,row.name,row.user_id,row.race_id,row.class_id,row.full_hitpoints,row.current_hitpoints,row.level,row.experience,row.party_id,row.action);
 
                         this.addCharacter(character);
