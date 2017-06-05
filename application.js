@@ -58,20 +58,13 @@ var Application = new Class(
 		{
 			var user = this.mUsersArray[u]
 			var party = this.getPartyByID(user.party_id);
-			if (party.d == 0 || party.d == 2)
+
+			var worldPoint = this.getWorldPointByCoordinates(party.x,party.y,party.z);	
+			var worldDirection = this.getWorldDirectionByWorldPointIDAndDirection(worldPoint.id,party.d);
+
+			if (user.socket != 0)
 			{
-				if (user.socket != 0)
-				{
-	           			user.socket.emit('show','/images/hallway.jpg');
-				}
-			}
-			else if (party.d == 1 || party.d == 3)
-			{
-   				//var user = this.mApp.getUserByID(party.user_id);
-				if (user.socket != 0)
-				{
-	           			user.socket.emit('show','/images/wall.jpg');
-				}
+	           		user.socket.emit('show','' + worldDirection.picture);
 			}
 		}
 	},
@@ -233,6 +226,32 @@ var Application = new Class(
 			}
 		}
 	},
+        
+	getWorldPointByCoordinates: function(x,y,z)
+        {
+                for (var w=0; w < this.mWorldPointsArray.length; w++)
+                {
+                        if (this.mWorldPointsArray[w].x == x && this.mWorldPointsArray[w].y == y && this.mWorldPointsArray[w].z == z)
+                        {
+				var worldPoint = this.mWorldPointsArray[w];
+                                return worldPoint;
+                        }
+                }
+		return 0;
+        },
+
+        getWorldDirectionByWorldPointIDAndDirection: function(world_point_id,d)
+        {
+                for (var w=0; w < this.mWorldDirectionsArray.length; w++)
+                {
+			var worldDirection = this.mWorldDirectionsArray[w]; 
+                        if (worldDirection.world_point_id == world_point_id && worldDirection.d == d)
+                        {
+                                return worldDirection;
+                        }
+                }
+                return 0;
+        },
 
         getPartyByID: function(partyid)
         {
