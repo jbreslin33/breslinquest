@@ -57,7 +57,7 @@ var Application = new Class(
 	           			user.socket.emit('show','/images/hallway.jpg');
 				}
 			}
-			else
+			else if (party.d == 1 || party.d == 3)
 			{
    				//var user = this.mApp.getUserByID(party.user_id);
 				if (user.socket != 0)

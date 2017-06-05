@@ -44,23 +44,8 @@ function drawImage(img) {
       imageObj.src = '' + img;
 }
 
-function updateGameArea() {
-if (mD == 0)
+function updateGameArea() 
 {
-        drawImage("/images/wall.jpg");
-}
-if (mD == 1)
-{
-        drawImage("/images/hallway.jpg");
-}
-if (mD == 2)
-{
-        drawImage("/images/wall.jpg");
-}
-if (mD == 3)
-{
-        drawImage("/images/hallway.jpg");
-}
 
 }
 </script>
@@ -83,7 +68,6 @@ if (mD == 3)
                 	socket.on('show', function(show)
                 	{
 				drawImage("" + show);		
-				console.log('showing!');
                 	});
       		});
     	</script>
