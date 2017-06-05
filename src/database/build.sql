@@ -1,12 +1,12 @@
 DROP TABLE armor;
 DROP TABLE weapons;
-DROP TABLE battle_parties;
-DROP TABLE battle;
 DROP TABLE characters;
 DROP TABLE race;
 DROP TABLE class;
 DROP TABLE parties;
 DROP TABLE users;
+DROP TABLE world_directions;
+DROP TABLE world_points;
 
 --USERS
 CREATE TABLE users (
@@ -81,11 +81,21 @@ CREATE TABLE characters (
 );
 
 
-CREATE TABLE world (
+CREATE TABLE world_points (
         id SERIAL,
-        d integer,
         x integer,
         y integer,
         z integer,
-        PRIMARY KEY (id)
+        PRIMARY KEY (id),
+	UNIQUE (x,y,z)
+);
+
+CREATE TABLE world_directions (
+        id SERIAL,
+        d integer,
+        picture text,
+        passable integer,
+        world_points_id integer,
+        PRIMARY KEY (id),
+	FOREIGN KEY (world_points_id) REFERENCES world_points(id)
 );

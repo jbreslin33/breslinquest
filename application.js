@@ -3,6 +3,8 @@ var User  = require('./user');
 var Party  = require('./party');
 var Character  = require('./character');
 var Battle  = require('./battle');
+var WorldPoint  = require('./world_point');
+var WorldDirection  = require('./world_direction');
 
 var Application = new Class(
 {
@@ -16,11 +18,15 @@ var Application = new Class(
 		//should battles array be reset?????? after every update
       		this.mBattlesArray = new Array(); 
 
+		this.mWorldPointsArray = new Array();
+		this.mWorldDirectionsArray = new Array();
+
 		this.loadUsers();
 		this.loadParties();
 		this.loadCharacters();
 
-		//this.loadWorld();
+		this.loadWorldPoints();
+		this.loadWorldDirections();
 
 	},
 
@@ -266,6 +272,16 @@ var Application = new Class(
                 }
 		return 0;
 	},
+	
+	addWorldPoint: function(world_point)
+        {
+		this.mWorldPointsArray.push(world_point);
+        },
+	
+	addWorldDirection: function(world_direction)
+        {
+		this.mWorldDirectionsArray.push(world_direction);
+        },
         
 	addUser: function(user)
         {
@@ -280,6 +296,62 @@ var Application = new Class(
 	addCharacter: function(character)
         {
 		this.mCharactersArray.push(character);
+        },
+
+        loadWorldPoints: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from world_points;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        var worldPoint = new WorldPoint(this,row.id,row.x,row.y,row.z);
+                        this.addWorldPoint(worldPoint);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
+        loadWorldDirections: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from world_directions;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        var worldDirection = new WorldDirection(this,row.id,row.d,row.picture,row.passable,row.world_point_id);
+                        this.addWorldDirection(worldDirection);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
         },
 
 	loadUsers: function()
