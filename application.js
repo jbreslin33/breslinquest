@@ -44,6 +44,28 @@ var Application = new Class(
 		{
 			this.mBattlesArray[b].update();						
 		}
+
+		//update users
+		for (var u=0; u < this.mUsersArray.length; u++)
+		{
+			var user = this.mUsersArray[u]
+			var party = this.getPartyByID(user.party_id);
+			if (party.d == 0 || party.d == 2)
+			{
+				if (user.socket != 0)
+				{
+	           			user.socket.emit('show','/images/hallway.jpg');
+				}
+			}
+			else
+			{
+   				//var user = this.mApp.getUserByID(party.user_id);
+				if (user.socket != 0)
+				{
+	           			user.socket.emit('show','/images/wall.jpg');
+				}
+			}
+		}
 	},
 	
         getBattle: function(party)
@@ -206,7 +228,7 @@ var Application = new Class(
 
         getPartyByID: function(partyid)
         {
-                for (i=0; i < this.mPartiesArray.length; i++)
+                for (var i=0; i < this.mPartiesArray.length; i++)
                 {
                         if (this.mPartiesArray[i].id == partyid)
                         {
@@ -219,7 +241,7 @@ var Application = new Class(
 
         getUserByID: function(userid)
         {
-                for (i=0; i < this.mUsersArray.length; i++)
+                for (var i=0; i < this.mUsersArray.length; i++)
                 {
                         if (this.mUsersArray[i].id == userid)
                         {
@@ -233,7 +255,7 @@ var Application = new Class(
 
 	getUserBySocketID: function(socketid)
 	{
-                for (i=0; i < this.mUsersArray.length; i++)
+                for (var i=0; i < this.mUsersArray.length; i++)
                 {
                         if (this.mUsersArray[i].socket_id == socketid)
                         {

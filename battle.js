@@ -88,7 +88,7 @@ var Battle = new Class(
 		var user = this.mApp.getUserByID(party.user_id);
 		if (user != 0)
 		{
-			//console.log('user.socket_id:' + user.socket_id);
+			console.log('ADD PARTY user.socket_id:' + user.socket_id);
 			user.socket.emit('battle');	
 		}
 	}

@@ -67,18 +67,23 @@ if (mD == 3)
     	<script>
         	$(function ()
         	{
-                	socket.on('battle', function(msg)
+                	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
-				console.log('battle!!!');
+				loginScreen.removeLoginElements();		
+				var pickPartyScreen = new PickPartyScreen(socket,partyNameArray,partyIDArray);
                 	});
                 	socket.on('load game', function(msg)
                 	{
 				startGame();
                 	});
-                	socket.on('pick party', function(partyNameArray,partyIDArray)
+                	socket.on('battle', function(msg)
                 	{
-				loginScreen.removeLoginElements();		
-				var pickPartyScreen = new PickPartyScreen(socket,partyNameArray,partyIDArray);
+				console.log('battle!!!');
+                	});
+                	socket.on('show', function(show)
+                	{
+				drawImage("" + show);		
+				console.log('showing!');
                 	});
       		});
     	</script>

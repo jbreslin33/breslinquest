@@ -13,6 +13,7 @@ var Users = new Class(
 		this.last_name = lastname;
 		this.email = email;
         	this.socket_id = socketid;
+        	this.socket = 0;
 		this.banned_id = bannedid;
 
 		//if there is a party id then the pary is active
