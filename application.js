@@ -245,20 +245,15 @@ var Application = new Class(
 
 	getWorldDirection: function(d,x,y,z)
 	{
-		console.log('GET WORLD x:' + x + ' y:' + y + ' z:' + z);
 		var wp = this.getWorldPointByCoordinates(x,y,z);
                 for (var w=0; w < this.mWorldDirectionsArray.length; w++)
 		{
 			var wd = this.mWorldDirectionsArray[w]; 
-			console.log('A got wd:' + wd.passable);
-			console.log('A wd.world_point_id:' + wd.world_point_id + ' wp.id' + wp.id);
 			
 			if (wd.world_point_id == wp.id)
 			{
-				console.log('B got wd:' + wd.passable);
 				if (wd.d == d)
 				{
-					console.log('C got wd:' + wd.passable);
 					return wd;	
 				}
 			}
@@ -273,7 +268,6 @@ var Application = new Class(
                         if (this.mWorldPointsArray[w].x == x && this.mWorldPointsArray[w].y == y && this.mWorldPointsArray[w].z == z)
                         {
 				var wp = this.mWorldPointsArray[w];
-				console.log('XXXXXXXXXXX got wp:' + wp.id);
                                 return wp;
                         }
                 }
@@ -553,7 +547,6 @@ var Application = new Class(
                 		}
                 		if (move_key_code == 38)
                 		{
-					console.log('wd.passable:' + wd.passable);
 					if (wd.passable == 0)
 					{	
                 				if (cd == 0)
