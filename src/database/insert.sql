@@ -2,19 +2,71 @@
 
 --0,0,0
 insert into world_points (x,y,z) values (0,0,0);
-insert into world_points (x,y,z) values (0,-1,0);
 
--- 1
-insert into world_directions (d,picture,passable,world_point_id) values (0,'/images/wall.jpg',1,1);
-insert into world_directions (d,picture,passable,world_point_id) values (1,'/images/wall.jpg',1,1);
-insert into world_directions (d,picture,passable,world_point_id) values (2,'/images/dungeondoor.jpg',0,1);
-insert into world_directions (d,picture,passable,world_point_id) values (3,'/images/wall.jpg',1,1);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',0,1);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,1);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',2,1);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,1);
 
--- 2
-insert into world_directions (d,picture,passable,world_point_id) values (0,'/images/dungeondoor.jpg',0,2);
-insert into world_directions (d,picture,passable,world_point_id) values (1,'/images/openfield.jpg',0,2);
-insert into world_directions (d,picture,passable,world_point_id) values (2,'/images/openfield.jpg',0,2);
-insert into world_directions (d,picture,passable,world_point_id) values (3,'/images/openfield.jpg',0,2);
+insert into world_points (x,y,z) values (0,1,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,2);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,2);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',2,2);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,2);
+
+insert into world_points (x,y,z) values (0,2,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,3);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,3);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,3);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,3);
+
+insert into world_points (x,y,z) values (0,3,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,4);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,4);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,4);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,4);
+
+insert into world_points (x,y,z) values (0,4,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',0,5);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,5);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,5);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,5);
+
+insert into world_points (x,y,z) values (0,5,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,6);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/wall.jpg',1,6);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',2,6);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/wall.jpg',3,6);
+
+insert into world_points (x,y,z) values (0,6,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,7);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,7);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/hallway.jpg',2,7);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,7);
+
+insert into world_points (x,y,z) values (0,7,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,8);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,8);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/hallway.jpg',2,8);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,8);
+
+insert into world_points (x,y,z) values (0,8,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,9);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,9);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/hallway.jpg',2,9);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,9);
+
+insert into world_points (x,y,z) values (0,9,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,10);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,10);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/hallway.jpg',2,10);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,10);
+
+insert into world_points (x,y,z) values (0,10,0);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/wall.jpg',0,11);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',1,11);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/hallway.jpg',2,11);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/wall.jpg',3,11);
 
 --users
 insert into users (username,password,first_name,last_name) values ('j','j','Jim','Breslin');
