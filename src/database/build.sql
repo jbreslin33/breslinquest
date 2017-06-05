@@ -80,21 +80,12 @@ CREATE TABLE characters (
 	FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
-CREATE TABLE battle (
-	id SERIAL,
+
+CREATE TABLE world (
+        id SERIAL,
+        d integer,
+        x integer,
+        y integer,
+        z integer,
         PRIMARY KEY (id)
 );
-
-CREATE TABLE battle_parties (
-	id SERIAL,
-	battle_id integer,
-	party_id integer,
-        PRIMARY KEY (id),
-	FOREIGN KEY (battle_id) REFERENCES battle(id),
-	FOREIGN KEY (party_id) REFERENCES parties(id)
-);
-
-
-
-
-

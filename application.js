@@ -20,6 +20,8 @@ var Application = new Class(
 		this.loadParties();
 		this.loadCharacters();
 
+		//this.loadWorld();
+
 	},
 
 	update: function()
