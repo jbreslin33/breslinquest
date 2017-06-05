@@ -95,7 +95,7 @@ CREATE TABLE world_directions (
         d integer,
         picture text,
         passable integer,
-        world_points_id integer,
+        world_point_id integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (world_points_id) REFERENCES world_points(id)
+	FOREIGN KEY (world_point_id) REFERENCES world_points(id)
 );

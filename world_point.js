@@ -8,7 +8,7 @@ var WorldPoint = new Class(
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.z = y;
+		this.z = z;
         }
 });
 

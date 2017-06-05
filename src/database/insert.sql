@@ -2,19 +2,19 @@
 
 --0,0,0
 insert into world_points (x,y,z) values (0,0,0);
-insert into world_points (x,y,z) values (-1,0,0);
+insert into world_points (x,y,z) values (0,-1,0);
 
 -- 1
-insert into world_directions (d,picture,passable,world_points_id) values (0,'/images/wall.jpg',1,1);
-insert into world_directions (d,picture,passable,world_points_id) values (1,'/images/wall.jpg',1,1);
-insert into world_directions (d,picture,passable,world_points_id) values (2,'/images/dungeondoor.jpg',0,1);
-insert into world_directions (d,picture,passable,world_points_id) values (3,'/images/wall.jpg',1,1);
+insert into world_directions (d,picture,passable,world_point_id) values (0,'/images/wall.jpg',1,1);
+insert into world_directions (d,picture,passable,world_point_id) values (1,'/images/wall.jpg',1,1);
+insert into world_directions (d,picture,passable,world_point_id) values (2,'/images/dungeondoor.jpg',0,1);
+insert into world_directions (d,picture,passable,world_point_id) values (3,'/images/wall.jpg',1,1);
 
 -- 2
-insert into world_directions (d,picture,passable,world_points_id) values (0,'/images/dungeondoor.jpg',0,2);
-insert into world_directions (d,picture,passable,world_points_id) values (1,'/images/openfield.jpg',0,2);
-insert into world_directions (d,picture,passable,world_points_id) values (2,'/images/openfield.jpg',0,2);
-insert into world_directions (d,picture,passable,world_points_id) values (3,'/images/openfield.jpg',0,2);
+insert into world_directions (d,picture,passable,world_point_id) values (0,'/images/dungeondoor.jpg',0,2);
+insert into world_directions (d,picture,passable,world_point_id) values (1,'/images/openfield.jpg',0,2);
+insert into world_directions (d,picture,passable,world_point_id) values (2,'/images/openfield.jpg',0,2);
+insert into world_directions (d,picture,passable,world_point_id) values (3,'/images/openfield.jpg',0,2);
 
 --users
 insert into users (username,password,first_name,last_name) values ('j','j','Jim','Breslin');

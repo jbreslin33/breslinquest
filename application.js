@@ -60,12 +60,34 @@ var Application = new Class(
 			var party = this.getPartyByID(user.party_id);
 
 			var worldPoint = this.getWorldPointByCoordinates(party.x,party.y,party.z);	
-			var worldDirection = this.getWorldDirectionByWorldPointIDAndDirection(worldPoint.id,party.d);
-
+			var worldDirection = 0;
+			if (worldPoint != 0)
+			{
+				console.log('A worldPoint.id:' + worldPoint.id + ' party.d:' + party.d);
+				worldDirection = this.getWorldDirectionByWorldPointIDAndDirection(worldPoint.id,party.d);
+			}
+			//console.log('worldPoint.id:' + worldPoint.id + ' worldDirection.id:' + worldDirection.id);
+			
 			if (user.socket != 0)
+			{
+				console.log('B socket username:' + user.username);
+				if (worldPoint != 0)
+				{
+					console.log('C worldPoint id:' + worldPoint.id);
+					if (worldDirection != 0)
+					{
+						console.log('D worldDirection id:' + worldDirection.id);
+						console.log('D show: d:' + worldDirection.d + ' x:' + worldPoint.x + ' y:' + worldPoint.y + ' z:' + worldPoint.z); 
+	           				user.socket.emit('show','' + worldDirection.picture);
+					}
+				}
+			}
+/*
+			if (user.socket != 0 && worldPoint != 0 && worldDirection != 0)
 			{
 	           		user.socket.emit('show','' + worldDirection.picture);
 			}
+*/
 		}
 	},
 	
@@ -242,11 +264,15 @@ var Application = new Class(
 
         getWorldDirectionByWorldPointIDAndDirection: function(world_point_id,d)
         {
+		console.log('world_point_id:' + world_point_id + ' d:' + d);
                 for (var w=0; w < this.mWorldDirectionsArray.length; w++)
                 {
+
 			var worldDirection = this.mWorldDirectionsArray[w]; 
+			console.log('AAAAAAAAAAAAAAAA worldDirection.d:' + worldDirection.d);
                         if (worldDirection.world_point_id == world_point_id && worldDirection.d == d)
                         {
+				console.log('BBBBBBBBBBBBBB worldDirection.d:' + worldDirection.d);
                                 return worldDirection;
                         }
                 }
