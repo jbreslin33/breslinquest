@@ -10,6 +10,7 @@ var WorldDirection = new Class(
 
 		this.picture = picture; 
 		this.passable = passable; 
+		console.log('passable:' + this.passable);
         }
 
 });

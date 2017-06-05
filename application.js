@@ -229,6 +229,42 @@ var Application = new Class(
 			}
 		}
 	},
+
+	getWorldPointByID: function(id)
+	{
+                for (var w=0; w < this.mWorldPointsArray.length; w++)
+		{
+			var wp = this.mWorldPointsArray[w];
+			if (wp.id == id)
+			{
+				return wp;
+			}
+		}
+		return 0;
+	},
+
+	getWorldDirection: function(d,x,y,z)
+	{
+		console.log('GET WORLD x:' + x + ' y:' + y + ' z:' + z);
+		var wp = this.getWorldPointByCoordinates(x,y,z);
+                for (var w=0; w < this.mWorldDirectionsArray.length; w++)
+		{
+			var wd = this.mWorldDirectionsArray[w]; 
+			console.log('A got wd:' + wd.passable);
+			console.log('A wd.world_point_id:' + wd.world_point_id + ' wp.id' + wp.id);
+			
+			if (wd.world_point_id == wp.id)
+			{
+				console.log('B got wd:' + wd.passable);
+				if (wd.d == d)
+				{
+					console.log('C got wd:' + wd.passable);
+					return wd;	
+				}
+			}
+		}
+		return 0;
+	},
         
 	getWorldPointByCoordinates: function(x,y,z)
         {
@@ -236,8 +272,9 @@ var Application = new Class(
                 {
                         if (this.mWorldPointsArray[w].x == x && this.mWorldPointsArray[w].y == y && this.mWorldPointsArray[w].z == z)
                         {
-				var worldPoint = this.mWorldPointsArray[w];
-                                return worldPoint;
+				var wp = this.mWorldPointsArray[w];
+				console.log('XXXXXXXXXXX got wp:' + wp.id);
+                                return wp;
                         }
                 }
 		return 0;
@@ -480,12 +517,18 @@ var Application = new Class(
 			{
 				//grab earliest move and then delete it
 				var move_key_code = user.mMovesArray[0];
+
+
+				//if (wd.
+				
 				user.mMovesArray.splice(0,1);
 
 				var cd = party.getd();
 				var cx = party.getx();
 				var cy = party.gety();
 				var cz = party.getz();
+				
+				var wd = this.getWorldDirection(cd,cx,cy,cz);		
 
 				var nd = 0;
 				var nx = 0;
@@ -510,23 +553,28 @@ var Application = new Class(
                 		}
                 		if (move_key_code == 38)
                 		{
-                			if (cd == 0)
-                        		{
-                        			cy++;
-                        		}
-                        		if (cd == 1)
-                        		{
-                        			cx++;
-                        		}
-                        		if (cd == 2)
-                        		{
-                        			cy--;
-                        		}
-                        		if (cd == 3)
-                        		{
-                        			cx--;
-                        		}
+					console.log('wd.passable:' + wd.passable);
+					if (wd.passable == 0)
+					{	
+                				if (cd == 0)
+                        			{
+                        				cy++;
+                        			}
+                        			if (cd == 1)
+                        			{
+                        				cx++;
+                        			}
+                        			if (cd == 2)
+                        			{
+                        				cy--;
+                        			}
+                        			if (cd == 3)
+                        			{
+                        				cx--;
+                        			}
+					}
                 		}
+/*
                 		if (move_key_code == 40)
                 		{
                 			if (cd == 0)
@@ -546,10 +594,14 @@ var Application = new Class(
                         			cx++;
                         		}
 				}
+*/
 				nd = cd;
 				nx = cx;
 				ny = cy;
 				nz = cz;
+			
+						
+	
 				party.setPosition(nd,nx,ny,nz);
 				this.privateCollisionCheck(party);
 			}
