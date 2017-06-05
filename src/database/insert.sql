@@ -10,27 +10,27 @@ insert into world_directions (passable,picture,d,world_point_id) values (1,'/ima
 
 insert into world_points (x,y,z) values (0,1,0);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,2);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,2);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/riverside.jpg',1,2);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',2,2);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,2);
+insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/riverside.jpg',3,2);
 
 insert into world_points (x,y,z) values (0,2,0);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,3);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,3);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',1,3);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,3);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,3);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',3,3);
 
 insert into world_points (x,y,z) values (0,3,0);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',0,4);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,4);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',1,4);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,4);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,4);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',3,4);
 
 insert into world_points (x,y,z) values (0,4,0);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/dungeondoor.jpg',0,5);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',1,5);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',1,5);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',2,5);
-insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/openfield.jpg',3,5);
+insert into world_directions (passable,picture,d,world_point_id) values (1,'/images/riverside.jpg',3,5);
 
 insert into world_points (x,y,z) values (0,5,0);
 insert into world_directions (passable,picture,d,world_point_id) values (0,'/images/hallway.jpg',0,6);
