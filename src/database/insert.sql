@@ -112,7 +112,7 @@ insert into parties (name,user_id) values ('The Lightning',2);
 insert into parties (name,user_id) values ('The Vikings',2);
 
 --monster party!
-insert into parties(name,x,y) values ('kobold and orc party of two',1,1);
+insert into parties(name,x,y) values ('kobold and orc party of two',0,7);
 
 --characters
 --jim
