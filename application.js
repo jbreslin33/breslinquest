@@ -72,7 +72,7 @@ var Application = new Class(
 				{
 					if (worldDirection != 0)
 					{
-	           				user.socket.emit('show','' + worldDirection.picture);
+	           				user.socket.emit('show','' + worldDirection.url);
 					}
 				}
 			}
@@ -383,7 +383,8 @@ var Application = new Class(
         loadWorldDirections: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
-                var queryString = "select * from world_directions;";
+                //var queryString = "select * from world_directions;";
+		var queryString = "select * from world_directions JOIN pictures on world_directions.picture_id=pictures.id;";
 
                 var client = new pg.Client(conString);
                 client.connect();
@@ -398,7 +399,7 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        var worldDirection = new WorldDirection(this,row.id,row.d,row.picture,row.passable,row.world_point_id);
+                        var worldDirection = new WorldDirection(this,row.id,row.d,row.picture_id,row.url,row.passable,row.world_point_id);
                         this.addWorldDirection(worldDirection);
 
                 }.bind(this));

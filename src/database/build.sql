@@ -7,6 +7,7 @@ DROP TABLE parties;
 DROP TABLE users;
 DROP TABLE world_directions;
 DROP TABLE world_points;
+DROP TABLE pictures;
 
 --USERS
 CREATE TABLE users (
@@ -80,7 +81,13 @@ CREATE TABLE characters (
 	FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
-
+CREATE TABLE pictures (
+        id SERIAL,
+        name text,
+        url text,
+        PRIMARY KEY (id)
+);
+	
 CREATE TABLE world_points (
         id SERIAL,
         x integer,
@@ -93,9 +100,10 @@ CREATE TABLE world_points (
 CREATE TABLE world_directions (
         id SERIAL,
         d integer,
-        picture text,
-        passable integer,
+        picture_id integer,
         world_point_id integer,
+        passable integer,
         PRIMARY KEY (id),
-	FOREIGN KEY (world_point_id) REFERENCES world_points(id)
+	FOREIGN KEY (world_point_id) REFERENCES world_points(id),
+	FOREIGN KEY (picture_id) REFERENCES pictures(id)
 );
