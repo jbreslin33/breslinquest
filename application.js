@@ -5,6 +5,7 @@ var Character  = require('./character');
 var Battle  = require('./battle');
 var WorldPoint  = require('./world_point');
 var WorldDirection  = require('./world_direction');
+var Picture  = require('./picture');
 
 var Application = new Class(
 {
@@ -18,6 +19,7 @@ var Application = new Class(
 		//should battles array be reset?????? after every update
       		this.mBattlesArray = new Array(); 
 
+		this.mPicturesArray = new Array();
 		this.mWorldPointsArray = new Array();
 		this.mWorldDirectionsArray = new Array();
 
@@ -27,6 +29,7 @@ var Application = new Class(
 
 		this.loadWorldPoints();
 		this.loadWorldDirections();
+		this.loadPictures();
 
 	},
 
@@ -326,6 +329,11 @@ var Application = new Class(
                 }
 		return 0;
 	},
+
+	addPicture: function(picture)
+        {
+		this.mPicturesArray.push(picture);
+        },
 	
 	addWorldPoint: function(world_point)
         {
@@ -408,6 +416,35 @@ var Application = new Class(
                         client.end();
                 }.bind(this));
         },
+
+        loadPictures: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from pictures;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        var picture = new Picture(this,row.id,row.name,row.url);
+                        this.addPicture(picture);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
 
 	loadUsers: function()
 	{
