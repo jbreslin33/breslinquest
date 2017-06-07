@@ -55,20 +55,28 @@ io.on('connection', function(socket)
 				userid = mApp.mUsersArray[i].id;	
 			} 
 		} 
-		
-		var partyNameArray  = new Array();
-		var partyIDArray    = new Array();
-			 
-		for (i=0; i < mApp.mPartiesArray.length; i++)
-		{
-			if (mApp.mPartiesArray[i].user_id == userid)
-			{
-				partyNameArray.push(mApp.mPartiesArray[i].name);
-				partyIDArray.push(mApp.mPartiesArray[i].id);
-			} 
-		} 
 
-		socket.emit('pick party',partyNameArray,partyIDArray);
+		if (userid == 1)
+		{
+
+		}
+		else if (userid > 1)
+		{
+			var partyNameArray  = new Array();
+			var partyIDArray    = new Array();
+			 
+			for (i=0; i < mApp.mPartiesArray.length; i++)
+			{
+				if (mApp.mPartiesArray[i].user_id == userid)
+				{
+					partyNameArray.push(mApp.mPartiesArray[i].name);
+					partyIDArray.push(mApp.mPartiesArray[i].id);
+				}	 
+			} 
+			socket.emit('pick party',partyNameArray,partyIDArray);
+		}
+		
+
 	});
 	socket.on('move attempt', function(move_key_code)
 	{

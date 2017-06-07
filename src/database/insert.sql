@@ -77,6 +77,7 @@ insert into world_directions (passable,picture_id,d,world_point_id) values (0,5,
 insert into world_directions (passable,picture_id,d,world_point_id) values (1,2,3,11);
 
 --users
+insert into users (username,password,first_name,last_name) values ('d','m','Dungeon','Master');
 insert into users (username,password,first_name,last_name) values ('j','j','Jim','Breslin');
 insert into users (username,password) values ('bbreslin','soccer12');
 
@@ -114,10 +115,10 @@ insert into armor (name,protection) values ('Leather',-2);
 insert into armor (name,protection) values ('Shield',-2);
 
 --party
-insert into parties (name,user_id) values ('Classic',1);
-insert into parties (name,user_id) values ('Modern',1);
-insert into parties (name,user_id) values ('The Lightning',2);
-insert into parties (name,user_id) values ('The Vikings',2);
+insert into parties (name,user_id) values ('Classic',2);
+insert into parties (name,user_id) values ('Modern',2);
+insert into parties (name,user_id) values ('The Lightning',3);
+insert into parties (name,user_id) values ('The Vikings',3);
 
 --monster party!
 insert into parties(name,x,y) values ('kobold and orc party of two',0,7);
