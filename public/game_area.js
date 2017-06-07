@@ -22,12 +22,9 @@ var GameArea = new Class(
             		gameArea.keys = (gameArea.keys || []);
             		gameArea.keys[e.keyCode] = (e.type == "keypress");
 
-        		if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+        		if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39)
         		{
-                		//server
                 		socket.emit('move attempt', e.keyCode);
-
-				//dead reckoning????
         		}
         	})
 

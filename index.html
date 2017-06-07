@@ -52,6 +52,10 @@ function updateGameArea()
     	<script>
         	$(function ()
         	{
+                	socket.on('dm', function(msg)
+                	{
+				startGame();		
+                	});
                 	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
 				loginScreen.removeLoginElements();		

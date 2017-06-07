@@ -55,12 +55,13 @@ io.on('connection', function(socket)
 				userid = mApp.mUsersArray[i].id;	
 			} 
 		} 
-
+/*
 		if (userid == 1)
 		{
-
+			socket.emit('dm');
 		}
-		else if (userid > 1)
+*/
+		if (userid != 0)
 		{
 			var partyNameArray  = new Array();
 			var partyIDArray    = new Array();
@@ -75,8 +76,6 @@ io.on('connection', function(socket)
 			} 
 			socket.emit('pick party',partyNameArray,partyIDArray);
 		}
-		
-
 	});
 	socket.on('move attempt', function(move_key_code)
 	{

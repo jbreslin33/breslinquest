@@ -119,6 +119,7 @@ insert into parties (name,user_id) values ('Classic',2);
 insert into parties (name,user_id) values ('Modern',2);
 insert into parties (name,user_id) values ('The Lightning',3);
 insert into parties (name,user_id) values ('The Vikings',3);
+insert into parties (name,user_id) values ('Dungeon Master',1);
 
 --monster party!
 insert into parties(name,x,y) values ('kobold and orc party of two',0,7);
