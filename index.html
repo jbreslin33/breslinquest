@@ -31,6 +31,7 @@ var mD = 0;
 var gameArea = new GameArea();
 var loginScreen = new LoginScreen(socket);
 var pickPartyScreen = 0;
+var dmScreen = 0;
 
 function startGame() 
 {
@@ -60,8 +61,17 @@ function updateGameArea()
                 	});
                 	socket.on('load game', function(msg)
                 	{
+				console.log('load game');
 				startGame();
 				pickPartyScreen.removePickPartyElements();		
+
+                	});
+                	socket.on('load dm game', function(msg)
+                	{
+				console.log('load dm game');
+				startGame();
+				pickPartyScreen.removePickPartyElements();		
+
                 	});
                 	socket.on('battle', function(msg)
                 	{

@@ -85,7 +85,14 @@ io.on('connection', function(socket)
 	{
 		var user = mApp.getUserBySocketID(socket.id);
 		user.setPartyID(party_id);
-		socket.emit('load game');
+		if (user.username == 'd' && user.password == 'm')
+		{
+			socket.emit('load dm game');
+		}
+		else
+		{
+			socket.emit('load game');
+		}
 	});
 });
 
