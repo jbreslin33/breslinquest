@@ -32,13 +32,6 @@ var PickPartyScreen = new Class(
 			that.mSocket.emit('picked party', partyid);
 		});
 	},
-/*
-                this.usernameInput.parentNode.removeChild(this.usernameInput);
-                this.passwordInput.parentNode.removeChild(this.passwordInput);
-                this.button.parentNode.removeChild(this.button);
-*/
-
-	
 	removePickPartyElements: function()
 	{
         	this.mSelect.parentNode.removeChild(this.mSelect);

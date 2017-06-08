@@ -55,12 +55,6 @@ io.on('connection', function(socket)
 				userid = mApp.mUsersArray[i].id;	
 			} 
 		} 
-/*
-		if (userid == 1)
-		{
-			socket.emit('dm');
-		}
-*/
 		if (userid != 0)
 		{
 			var partyNameArray  = new Array();
@@ -87,7 +81,15 @@ io.on('connection', function(socket)
 		user.setPartyID(party_id);
 		if (user.username == 'd' && user.password == 'm')
 		{
-			socket.emit('load dm game');
+			//pictures
+			var picturesNameArray = new Array();
+			var picturesIDArray = new Array();
+			for (var p=0; p < mApp.mPicturesArray.length; p++)
+			{
+				
+			}
+			
+			socket.emit('load dm game',mApp);
 		}
 		else
 		{
