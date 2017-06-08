@@ -124,6 +124,7 @@ insert into parties (name,user_id) values ('Dungeon Master',1);
 --monster party!
 insert into parties(name,x,y) values ('kobold and orc party of two',0,7);
 
+
 --characters
 --jim
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Julius',1,1,1,13,13,1,0,1,1);
@@ -136,8 +137,8 @@ insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hit
 insert into characters (name,user_id,race_id,class_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Legolas',2,1,5,13,13,1,0,3,1);
 
 --monsters
-insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Abog',6,3,13,1,0,5,1);
-insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Brghlu',4,15,5,1,0,5,1);
+insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Abog',6,3,13,1,0,6,1);
+insert into characters (name,race_id,full_hitpoints,current_hitpoints,level,experience,party_id,action) values ('Brghlu',4,15,5,1,0,6,1);
 
 
 

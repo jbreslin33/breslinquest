@@ -30,6 +30,7 @@ var mD = 0;
 
 var gameArea = new GameArea();
 var loginScreen = new LoginScreen(socket);
+var pickPartyScreen = 0;
 
 function startGame() 
 {
@@ -52,18 +53,15 @@ function updateGameArea()
     	<script>
         	$(function ()
         	{
-                	socket.on('dm', function(msg)
-                	{
-				startGame();		
-                	});
                 	socket.on('pick party', function(partyNameArray,partyIDArray)
                 	{
 				loginScreen.removeLoginElements();		
-				var pickPartyScreen = new PickPartyScreen(socket,partyNameArray,partyIDArray);
+				pickPartyScreen = new PickPartyScreen(socket,partyNameArray,partyIDArray);
                 	});
                 	socket.on('load game', function(msg)
                 	{
 				startGame();
+				pickPartyScreen.removePickPartyElements();		
                 	});
                 	socket.on('battle', function(msg)
                 	{
