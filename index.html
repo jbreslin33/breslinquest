@@ -72,6 +72,7 @@ function updateGameArea()
 				console.log('load dm game');
 
 				startGame();
+				pickPartyScreen.removePickPartyElements();		
 				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray);
 
                 	});
