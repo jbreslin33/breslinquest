@@ -5,6 +5,7 @@
 <script type="text/javascript" src="/game_area.js"></script>
 <script type="text/javascript" src="/login_screen.js"></script>
 <script type="text/javascript" src="/pick_party_screen.js"></script>
+<script type="text/javascript" src="/dungeon_master_screen.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <style>
@@ -66,11 +67,12 @@ function updateGameArea()
 				pickPartyScreen.removePickPartyElements();		
 
                 	});
-                	socket.on('load dm game', function(msg)
+                	socket.on('load dm game', function(pictureIDArray,pictureNameArray)
                 	{
 				console.log('load dm game');
+
 				startGame();
-				pickPartyScreen.removePickPartyElements();		
+				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray);
 
                 	});
                 	socket.on('battle', function(msg)

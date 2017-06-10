@@ -82,14 +82,15 @@ io.on('connection', function(socket)
 		if (user.username == 'd' && user.password == 'm')
 		{
 			//pictures
-			var picturesNameArray = new Array();
 			var picturesIDArray = new Array();
+			var picturesNameArray = new Array();
 			for (var p=0; p < mApp.mPicturesArray.length; p++)
 			{
-				
+				var picture = mApp.mPicturesArray[p];	
+				picturesIDArray.push(picture.id);
+				picturesNameArray.push(picture.name);
 			}
-			
-			socket.emit('load dm game',mApp);
+			socket.emit('load dm game',picturesIDArray,picturesNameArray);
 		}
 		else
 		{
