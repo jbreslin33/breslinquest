@@ -27,6 +27,7 @@ var Application = new Class(
 		this.loadParties();
 		this.loadCharacters();
 
+		this.makeWorldPoints();
 		this.loadWorldPoints();
 		this.loadWorldDirections();
 		this.loadPictures();
@@ -360,6 +361,42 @@ var Application = new Class(
 		this.mCharactersArray.push(character);
         },
 
+        makeWorldPoints: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+		var queryString = "";
+		for (var x = 0; x < 100; x++)
+		{
+			for (var y = 0; y < 100; y++)
+			{
+				for (var z = 0; z < 100; z++)
+				{
+					queryString = queryString + "insert into world_points (x,y,z) values (" + x + "," + y + "," + z + ");";
+				}
+			}
+		}
+               	var client = new pg.Client(conString);
+               	client.connect();
+
+      		var query = client.query(queryString, function (err,result)
+      		{
+              		if (err)
+              		{
+                      		throw err;
+              		}
+      		});
+	 	query.on("row", function (row,result)
+       		{
+              		//result.addRow(row);
+              		//var worldPoint = new WorldPoint(this,row.id,row.x,row.y,row.z);
+              		//this.addWorldPoint(worldPoint);
+               	}.bind(this));
+                query.on("end", function (result)
+               	{
+               		client.end();
+               	}.bind(this));
+        },
+
         loadWorldPoints: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
@@ -550,9 +587,6 @@ var Application = new Class(
 				//grab earliest move and then delete it
 				var move_key_code = user.mMovesArray[0];
 
-
-				//if (wd.
-				
 				user.mMovesArray.splice(0,1);
 
 				var cd = party.getd();
@@ -605,33 +639,10 @@ var Application = new Class(
                         			}
 					}
                 		}
-/*
-                		if (move_key_code == 40)
-                		{
-                			if (cd == 0)
-                        		{
-                        			cy--;
-                        		}
-                        		if (cd == 1)
-                        		{
-                        			cx--;
-                        		}
-                        		if (cd == 2)
-                        		{
-                        			cy++;
-                       			} 
-                        		if (cd == 3)
-                        		{
-                        			cx++;
-                        		}
-				}
-*/
 				nd = cd;
 				nx = cx;
 				ny = cy;
 				nz = cz;
-			
-						
 	
 				party.setPosition(nd,nx,ny,nz);
 				this.privateCollisionCheck(party);
