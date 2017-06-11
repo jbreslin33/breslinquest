@@ -11,10 +11,7 @@ var WorldDirection = new Class(
 		this.picture_id = picture_id; 
 		this.url = url; 
 		this.passable = passable; 
-
-		console.log('pic:' + this.url);
         }
-
 });
 
 module.exports = WorldDirection;

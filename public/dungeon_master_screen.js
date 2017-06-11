@@ -56,7 +56,8 @@ var DungeonMasterScreen = new Class(
 		this.button.addEventListener('click', function()
 		{
 			var pictureid = that.mPictureSelect.options[that.mPictureSelect.selectedIndex].value;
-			that.mSocket.emit('build', pictureid);
+			var passableid = that.mPassableSelect.options[that.mPassableSelect.selectedIndex].value;
+			that.mSocket.emit('build wall', pictureid, passableid);
 		});
 	},
 	removePickPartyElements: function()

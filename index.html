@@ -70,11 +70,9 @@ function updateGameArea()
                 	socket.on('load dm game', function(pictureIDArray,pictureNameArray)
                 	{
 				console.log('load dm game');
-
 				startGame();
 				pickPartyScreen.removePickPartyElements();		
 				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray);
-
                 	});
                 	socket.on('battle', function(msg)
                 	{
@@ -83,6 +81,7 @@ function updateGameArea()
                 	socket.on('show', function(show)
                 	{
 				drawImage("" + show);		
+				console.log('show:' + show);
                 	});
       		});
     	</script>

@@ -424,6 +424,35 @@ var Application = new Class(
                 }.bind(this));
         },
 
+        buildWall: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from world_directions JOIN pictures on world_directions.picture_id=pictures.id;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        var worldDirection = new WorldDirection(this,row.id,row.d,row.picture_id,row.url,row.passable,row.world_point_id);
+                        this.addWorldDirection(worldDirection);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
+
         loadWorldDirections: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
@@ -618,7 +647,7 @@ var Application = new Class(
                 		}
                 		if (move_key_code == 38)
                 		{
-					if (wd.passable == 0)
+					if (wd.passable == 1)
 					{	
                 				if (cd == 0)
                         			{

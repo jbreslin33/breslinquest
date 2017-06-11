@@ -97,6 +97,10 @@ io.on('connection', function(socket)
 			socket.emit('load game');
 		}
 	});
+        socket.on('build wall', function(pictureid,passableid)
+        {
+                mApp.buildWall(pictureid,passableid);
+        });
 });
 
 http.listen(port, function(){
