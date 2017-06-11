@@ -232,6 +232,19 @@ var Application = new Class(
 			}
 		}
 	},
+	
+        getUrlByID: function(id)
+        {
+                for (var p=0; p < this.mPicturesArray.length; p++)
+                {
+                        var pic = this.mPicturesArray[p];
+                        if (pic.id == id)
+                        {
+                                return pic.url;
+                        }
+                }
+                return 0;
+        },
 
 	getWorldPointByID: function(id)
 	{
@@ -434,6 +447,7 @@ var Application = new Class(
 		//set class
 		worldDirection.picture_id = pictureid;
 		worldDirection.passable = passableid;
+		worldDirection.url = this.getUrlByID(pictureid);
                
 		//set db 
 		var conString = "postgres://postgres:mibesfat@localhost/openrpg";
