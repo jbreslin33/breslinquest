@@ -443,9 +443,9 @@ var Application = new Class(
 		var worldDirection = this.getWorldDirection(party.d,party.x,party.y,party.z);
 	
 		//set class
-		worldDirection.picture_id = pictureid;
-		worldDirection.passable = passableid;
-		worldDirection.url = this.getUrlByID(pictureid);
+		//worldDirection.picture_id = pictureid;
+		//worldDirection.passable = passableid;
+		//worldDirection.url = this.getUrlByID(pictureid);
 		var url = this.getUrlByID(pictureid);
                
 		//set db 
@@ -469,9 +469,7 @@ var Application = new Class(
                 }.bind(this));
                 query.on("end", function (result)
                 {
-        //setWall: function(pictureid,passable,url)
 			worldDirection.setWall(pictureid,passableid,url);
-
                         client.end();
                 }.bind(this));
         },
