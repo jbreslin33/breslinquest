@@ -27,7 +27,6 @@ var Application = new Class(
 		this.loadParties();
 		this.loadCharacters();
 
-		this.makeWorldPoints();
 		this.loadWorldPoints();
 		this.loadWorldDirections();
 		this.loadPictures();
