@@ -11,7 +11,14 @@ var WorldDirection = new Class(
 		this.url = url; 
 		this.passable = passable; 
 		this.world_point_id = world_point_id;
-        }
+        },
+
+	setWall: function(pictureid,passable,url)
+	{
+		this.picture_id = pictureid;
+		this.passable = passable;
+		this.url = url;
+	}
 });
 
 module.exports = WorldDirection;
