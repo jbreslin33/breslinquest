@@ -7,7 +7,6 @@ var Party = new Class(
 		this.id = id;
 		this.name = name;
 
-		//party coordinates should overide characters in a party like a boat?
 		this.d = d;
 		this.x = x;
 		this.y = y;

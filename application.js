@@ -281,7 +281,6 @@ var Application = new Class(
         {
                 for (var w=0; w < this.mWorldDirectionsArray.length; w++)
                 {
-
 			var worldDirection = this.mWorldDirectionsArray[w]; 
                         if (worldDirection.world_point_id == world_point_id && worldDirection.d == d)
                         {
@@ -424,10 +423,22 @@ var Application = new Class(
                 }.bind(this));
         },
 
-        buildWall: function()
+        buildWall: function(socketid,pictureid,passableid)
         {
-                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
-                var queryString = "select * from world_directions JOIN pictures on world_directions.picture_id=pictures.id;";
+		var user = this.getUserBySocketID(socketid); 
+		console.log('user:' + user.username); 
+		var party = this.getPartyByID(user.party_id);
+		console.log('party.id' + party.id);
+		var worldDirection = this.getWorldDirection(party.d,party.x,party.y,party.z);
+	
+		//set class
+		worldDirection.picture_id = pictureid;
+		worldDirection.passable = passableid;
+               
+		//set db 
+		var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+		var queryString = "update world_directions set picture_id = " + pictureid + ", passable = " + passableid + " where id = " + worldDirection.id + ";";   
+		console.log('qs:' + queryString);
 
                 var client = new pg.Client(conString);
                 client.connect();
@@ -442,8 +453,8 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        var worldDirection = new WorldDirection(this,row.id,row.d,row.picture_id,row.url,row.passable,row.world_point_id);
-                        this.addWorldDirection(worldDirection);
+                        //var worldDirection = new WorldDirection(this,row.id,row.d,row.picture_id,row.url,row.passable,row.world_point_id);
+                        //this.addWorldDirection(worldDirection);
 
                 }.bind(this));
                 query.on("end", function (result)
@@ -456,8 +467,7 @@ var Application = new Class(
         loadWorldDirections: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
-                //var queryString = "select * from world_directions;";
-		var queryString = "select * from world_directions JOIN pictures on world_directions.picture_id=pictures.id;";
+		var queryString = "select world_directions.id, world_directions.d, world_directions.picture_id, pictures.url, world_directions.passable, world_directions.world_point_id from world_directions JOIN pictures on world_directions.picture_id=pictures.id;";
 
                 var client = new pg.Client(conString);
                 client.connect();
@@ -557,6 +567,7 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
+			console.log('row.z:' + row.z);
 			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
 
                         this.addParty(party);

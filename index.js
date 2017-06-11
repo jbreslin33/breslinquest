@@ -99,7 +99,7 @@ io.on('connection', function(socket)
 	});
         socket.on('build wall', function(pictureid,passableid)
         {
-                mApp.buildWall(pictureid,passableid);
+                mApp.buildWall(socket.id,pictureid,passableid);
         });
 });
 
