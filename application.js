@@ -75,7 +75,26 @@ var Application = new Class(
 				{
 					if (worldDirection != 0)
 					{
-	           				user.socket.emit('show','' + worldDirection.url);
+						//DUNGEON MASTER
+						if (user.id == 1)
+						{
+				                        this.loadParties();
+                        				var partyIDArray = new Array();
+                        				for (i=0; i < this.mPartiesArray.length; i++)
+                        				{
+                                				var iparty = this.mPartiesArray[i];
+                                				if (this.mPartiesArray[i].user_id == null && party.x == iparty.x && party.y == iparty.y && party.z == iparty.z)
+                                				{
+                                        				partyIDArray.push(this.mPartiesArray[i].id);
+                                				}
+                        				}
+
+                        				user.socket.emit('dm show','' + worldDirection.url,'' + partyIDArray);
+						}
+						else
+						{
+	           					user.socket.emit('show','' + worldDirection.url);
+						}
 					}
 				}
 			}

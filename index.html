@@ -67,6 +67,7 @@ function updateGameArea()
 				pickPartyScreen.removePickPartyElements();		
 
                 	});
+
                 	socket.on('load dm game', function(pictureIDArray,pictureNameArray,partyIDArray,partyNameArray)
                 	{
 				console.log('load dm game');
@@ -88,7 +89,11 @@ function updateGameArea()
                 	socket.on('show', function(show)
                 	{
 				drawImage("" + show);		
-				console.log('show:' + show);
+                	});
+                	socket.on('dm show', function(show,partyIDArray)
+                	{
+				drawImage("" + show);		
+				dungeonMasterScreen.updateParties(partyIDArray);
                 	});
       		});
     	</script>
