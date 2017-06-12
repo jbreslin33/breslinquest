@@ -79,6 +79,8 @@ io.on('connection', function(socket)
 	{
 		var user = mApp.getUserBySocketID(socket.id);
 		user.setPartyID(party_id);
+		var dmParty = mApp.getPartyByID(party_id);
+		
 		if (user.username == 'd' && user.password == 'm')
 		{
 			//pictures
@@ -90,7 +92,21 @@ io.on('connection', function(socket)
 				picturesIDArray.push(picture.id);
 				picturesNameArray.push(picture.name);
 			}
-			socket.emit('load dm game',picturesIDArray,picturesNameArray);
+
+			//parties
+       			var partyNameArray  = new Array();
+                        var partyIDArray    = new Array();
+
+                        for (i=0; i < mApp.mPartiesArray.length; i++)
+                        {
+				var party = mApp.mPartiesArray[i];
+                                if (mApp.mPartiesArray[i].user_id == null && party.x == dmParty.x && party.y == dmParty.y && party.z == dmParty.z)
+                                {
+                                        partyNameArray.push(mApp.mPartiesArray[i].name);
+                                        partyIDArray.push(mApp.mPartiesArray[i].id);
+                                }
+                        }
+			socket.emit('load dm game',picturesIDArray,picturesNameArray,partyIDArray,partyNameArray);
 		}
 		else
 		{

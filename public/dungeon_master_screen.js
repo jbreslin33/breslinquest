@@ -1,7 +1,7 @@
 var DungeonMasterScreen = new Class(
 {
 		//send goodies from server in array form with ids
-        initialize: function(socket,pictureIDArray,pictureNameArray)
+        initialize: function(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray)
         {
 		this.mSocket = socket;
 		var that = this;
@@ -78,6 +78,38 @@ var DungeonMasterScreen = new Class(
 		{
 			that.mSocket.emit('dm add party');
 		});
+
+
+		/************************************************* 
+		SELECT PARTY  
+	      	**********************************************/
+                //button
+                this.button = document.createElement("BUTTON");
+                this.buttonText = document.createTextNode("ADD CHARACTER TO PARTY");
+                this.button.appendChild(this.buttonText);
+                document.body.appendChild(this.button);
+
+                this.mSelect = document.createElement("SELECT");
+                this.mSelect.setAttribute("id", "partySelect");
+                document.body.appendChild(this.mSelect);
+
+                //fill party select
+                for (i=0; i < partyIDArray.length; i++)
+                {
+                        var z = document.createElement("option");
+                        z.setAttribute("value", "" + partyIDArray[i]);
+                        var t = document.createTextNode("" + partyIDArray[i]);
+                        z.appendChild(t);
+                        this.mSelect.appendChild(z);
+                }
+
+                var that = this;
+
+                this.button.addEventListener('click', function()
+                {
+                        var partyid = that.mSelect.options[that.mSelect.selectedIndex].value;
+                        that.mSocket.emit('picked party', partyid);
+                });
 	},
 	removeDungeonMasterElements: function()
 	{
@@ -88,7 +120,5 @@ var DungeonMasterScreen = new Class(
 		//party
         	this.mAddPartyText.parentNode.removeChild(this.mAddPartyText);
         	this.addPartyButton.parentNode.removeChild(this.addPartyButton);
-
-		
 	}
 });
