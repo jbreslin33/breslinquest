@@ -502,8 +502,8 @@ var Application = new Class(
                         client.end();
                 }.bind(this));
         },
-
-        loadPictures: function()
+        
+	loadPictures: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
                 var queryString = "select * from pictures;";
@@ -560,6 +560,44 @@ var Application = new Class(
                 }.bind(this));
 	},
 
+	dmAddParty: function(socketid)
+	{
+                var user = this.getUserBySocketID(socketid);
+                var party = this.getPartyByID(user.party_id);
+                var worldDirection = this.getWorldDirection(party.d,party.x,party.y,party.z);
+
+		//var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
+		//var party = new Party(this,0,'',party.d,party.x,party.y,party.z,0);
+
+		// add party to db then reload loadParties
+	
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "insert into parties (d,x,y,z) values (" +  party.d + "," + party.x + "," + party.y + "," + party.z + ");";
+		console.log('qs:' + queryString);
+
+		client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        //var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
+                        //this.addParty(party);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+	},
+
         loadParties: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
@@ -578,9 +616,7 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-			console.log('row.z:' + row.z);
 			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
-
                         this.addParty(party);
 
                 }.bind(this));
@@ -636,7 +672,6 @@ var Application = new Class(
 			{
 				//grab earliest move and then delete it
 				var move_key_code = user.mMovesArray[0];
-
 				user.mMovesArray.splice(0,1);
 
 				var cd = party.getd();

@@ -4,6 +4,11 @@ var DungeonMasterScreen = new Class(
         initialize: function(socket,pictureIDArray,pictureNameArray)
         {
 		this.mSocket = socket;
+		var that = this;
+		
+		/************************************************* 
+		PICTURES  
+	      	**********************************************/
 		
 		//button
 		this.pictureButton = document.createElement("BUTTON");
@@ -49,7 +54,6 @@ var DungeonMasterScreen = new Class(
                         this.mPassableSelect.appendChild(z);
                 }
 
-		var that = this;
 	
 		//button and emit	
 		this.pictureButton.addEventListener('click', function()
@@ -58,10 +62,33 @@ var DungeonMasterScreen = new Class(
 			var passableid = that.mPassableSelect.options[that.mPassableSelect.selectedIndex].value;
 			that.mSocket.emit('build wall', pictureid, passableid);
 		});
+		
+		/************************************************* 
+		ADD PARTY  
+	      	**********************************************/
+		
+		//button
+		this.addPartyButton = document.createElement("BUTTON");
+    		this.addPartyButtonText = document.createTextNode("ADD PARTY");
+    		this.addPartyButton.appendChild(this.addPartyButtonText);
+    		document.body.appendChild(this.addPartyButton);        
+
+		//button and emit	
+		this.addPartyButton.addEventListener('click', function()
+		{
+			that.mSocket.emit('dm add party');
+		});
 	},
-	removePickPartyElements: function()
+	removeDungeonMasterElements: function()
 	{
+		//picture
         	this.mPictureSelect.parentNode.removeChild(this.mPictureSelect);
         	this.pictureButton.parentNode.removeChild(this.pictureButton);
+
+		//party
+        	this.mAddPartyText.parentNode.removeChild(this.mAddPartyText);
+        	this.addPartyButton.parentNode.removeChild(this.addPartyButton);
+
+		
 	}
 });

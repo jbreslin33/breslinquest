@@ -97,6 +97,10 @@ io.on('connection', function(socket)
 			socket.emit('load game');
 		}
 	});
+        socket.on('dm add party', function()
+        {
+                mApp.dmAddParty(socket.id);
+        });
         socket.on('build wall', function(pictureid,passableid)
         {
                 mApp.buildWall(socket.id,pictureid,passableid);
