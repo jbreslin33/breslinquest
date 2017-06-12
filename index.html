@@ -74,6 +74,13 @@ function updateGameArea()
 				pickPartyScreen.removePickPartyElements();		
 				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray);
                 	});
+
+                        socket.on('dm update parties', function(partyIDArray)
+                        {
+                                console.log('dm update parties');
+				dungeonMasterScreen.updateParties(partyIDArray);
+                        });
+
                 	socket.on('battle', function(msg)
                 	{
 				console.log('battle!!!');

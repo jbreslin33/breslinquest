@@ -120,5 +120,24 @@ var DungeonMasterScreen = new Class(
 		//party
         	this.mAddPartyText.parentNode.removeChild(this.mAddPartyText);
         	this.addPartyButton.parentNode.removeChild(this.addPartyButton);
+	},
+
+	updateParties: function(partyIDArray)
+	{
+    		var i;
+    		for(i = this.mSelect.options.length - 1 ; i >= 0 ; i--)
+    		{
+        			this.mSelect.remove(i);
+    		}
+
+		//fill party select
+                for (i=0; i < partyIDArray.length; i++)
+                {
+                        var z = document.createElement("option");
+                        z.setAttribute("value", "" + partyIDArray[i]);
+                        var t = document.createTextNode("" + partyIDArray[i]);
+                        z.appendChild(t);
+                        this.mSelect.appendChild(z);
+                }
 	}
 });

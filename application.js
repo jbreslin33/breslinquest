@@ -563,11 +563,11 @@ var Application = new Class(
 	dmAddParty: function(socketid)
 	{
                 var user = this.getUserBySocketID(socketid);
-                var party = this.getPartyByID(user.party_id);
-                var worldDirection = this.getWorldDirection(party.d,party.x,party.y,party.z);
+                var dmParty = this.getPartyByID(user.party_id);
+                var worldDirection = this.getWorldDirection(dmParty.d,dmParty.x,dmParty.y,dmParty.z);
 
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
-                var queryString = "insert into parties (d,x,y,z) values (" +  party.d + "," + party.x + "," + party.y + "," + party.z + ");";
+                var queryString = "insert into parties (d,x,y,z) values (" +  dmParty.d + "," + dmParty.x + "," + dmParty.y + "," + dmParty.z + ");";
 
 		client = new pg.Client(conString);
                 client.connect();
@@ -586,6 +586,17 @@ var Application = new Class(
                 query.on("end", function (result)
                 {
 			this.loadParties();
+			var partyIDArray = new Array();
+  			for (i=0; i < this.mPartiesArray.length; i++)
+                        {
+                                var party = this.mPartiesArray[i];
+                                if (this.mPartiesArray[i].user_id == null && party.x == dmParty.x && party.y == dmParty.y && party.z == dmParty.z)
+                                {
+                                        partyIDArray.push(this.mPartiesArray[i].id);
+                                }
+                        }
+
+	           	user.socket.emit('dm update parties','' + partyIDArray);
                         client.end();
                 }.bind(this));
 	},
