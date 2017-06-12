@@ -566,14 +566,8 @@ var Application = new Class(
                 var party = this.getPartyByID(user.party_id);
                 var worldDirection = this.getWorldDirection(party.d,party.x,party.y,party.z);
 
-		//var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
-		//var party = new Party(this,0,'',party.d,party.x,party.y,party.z,0);
-
-		// add party to db then reload loadParties
-	
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";
                 var queryString = "insert into parties (d,x,y,z) values (" +  party.d + "," + party.x + "," + party.y + "," + party.z + ");";
-		console.log('qs:' + queryString);
 
 		client = new pg.Client(conString);
                 client.connect();
@@ -588,12 +582,10 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-                        //var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
-                        //this.addParty(party);
-
                 }.bind(this));
                 query.on("end", function (result)
                 {
+			this.loadParties();
                         client.end();
                 }.bind(this));
 	},
@@ -616,8 +608,21 @@ var Application = new Class(
                 query.on("row", function (row,result)
                 {
                         result.addRow(row);
-			var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
-                        this.addParty(party);
+			var dup = false;
+			for (var p = 0; p < this.mPartiesArray.length; p++)
+			{
+				var party = this.mPartiesArray[p];
+				if (party.id == row.id)
+				{
+					dup = true;
+				}
+			}	 
+			if (dup == false)
+			{
+				var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
+                        	this.addParty(party);
+			}
+			console.log('parties:' + this.mPartiesArray.length);
 
                 }.bind(this));
                 query.on("end", function (result)
