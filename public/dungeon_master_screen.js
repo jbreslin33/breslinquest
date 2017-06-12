@@ -131,7 +131,7 @@ var DungeonMasterScreen = new Class(
     		}
 
 		//fill party select
-                for (i=0; i < partyIDArray.length; i++)
+                for (var i=0; i < partyIDArray.length; i++)
                 {
                         var z = document.createElement("option");
                         z.setAttribute("value", "" + partyIDArray[i]);
