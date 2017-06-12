@@ -6,10 +6,10 @@ var DungeonMasterScreen = new Class(
 		this.mSocket = socket;
 		
 		//button
-		this.button = document.createElement("BUTTON");
-    		this.buttonText = document.createTextNode("SET");
-    		this.button.appendChild(this.buttonText);
-    		document.body.appendChild(this.button);        
+		this.pictureButton = document.createElement("BUTTON");
+    		this.pictureButtonText = document.createTextNode("SET DIRECTION PICTURE");
+    		this.pictureButton.appendChild(this.pictureButtonText);
+    		document.body.appendChild(this.pictureButton);        
 
 		//picture
                 this.mPictureSelect = document.createElement("SELECT");
@@ -49,11 +49,10 @@ var DungeonMasterScreen = new Class(
                         this.mPassableSelect.appendChild(z);
                 }
 
-		
 		var that = this;
 	
 		//button and emit	
-		this.button.addEventListener('click', function()
+		this.pictureButton.addEventListener('click', function()
 		{
 			var pictureid = that.mPictureSelect.options[that.mPictureSelect.selectedIndex].value;
 			var passableid = that.mPassableSelect.options[that.mPassableSelect.selectedIndex].value;
@@ -63,6 +62,6 @@ var DungeonMasterScreen = new Class(
 	removePickPartyElements: function()
 	{
         	this.mPictureSelect.parentNode.removeChild(this.mPictureSelect);
-        	this.button.parentNode.removeChild(this.button);
+        	this.pictureButton.parentNode.removeChild(this.pictureButton);
 	}
 });
