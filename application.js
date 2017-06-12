@@ -622,7 +622,6 @@ var Application = new Class(
 				var party = new Party(this,row.id,row.name,row.d,row.x,row.y,row.z,row.user_id);
                         	this.addParty(party);
 			}
-			console.log('parties:' + this.mPartiesArray.length);
 
                 }.bind(this));
                 query.on("end", function (result)
