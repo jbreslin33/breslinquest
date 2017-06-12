@@ -6,14 +6,19 @@ var Battle  = require('./battle');
 var WorldPoint  = require('./world_point');
 var WorldDirection  = require('./world_direction');
 var Picture  = require('./picture');
+var Utility  = require('./utility');
 
 var Application = new Class(
 {
         initialize: function(io)
         {
+		this.mUtility = new Utility();
+
 		this.mIO = io;
       		this.mUsersArray = new Array(); 
 		this.mPartiesArray = new Array();
+		this.mPartyIDArray = new Array();
+		this.mPartyIDArrayLast = 0;
       		this.mCharactersArray = new Array(); 
 
 		//should battles array be reset?????? after every update
@@ -23,6 +28,7 @@ var Application = new Class(
 		this.mWorldPointsArray = new Array();
 		this.mWorldDirectionsArray = new Array();
 
+
 		this.loadUsers();
 		this.loadParties();
 		this.loadCharacters();
@@ -30,7 +36,6 @@ var Application = new Class(
 		this.loadWorldPoints();
 		this.loadWorldDirections();
 		this.loadPictures();
-
 	},
 
 	update: function()
@@ -79,21 +84,53 @@ var Application = new Class(
 						if (user.id == 1)
 						{
 				                        this.loadParties();
-                        				var partyIDArray = new Array();
-                        				for (i=0; i < this.mPartiesArray.length; i++)
+							user.mPartyIDArray = [];
+                        				user.mPartyIDArray = new Array();
+                        				for (var i=0; i < this.mPartiesArray.length; i++)
                         				{
                                 				var iparty = this.mPartiesArray[i];
                                 				if (this.mPartiesArray[i].user_id == null && party.x == iparty.x && party.y == iparty.y && party.z == iparty.z)
                                 				{
-                                        				partyIDArray.push(this.mPartiesArray[i].id);
+                                        				user.mPartyIDArray.push(this.mPartiesArray[i].id);
                                 				}
                         				}
-
-                        				user.socket.emit('dm show','' + worldDirection.url,'' + partyIDArray);
+							//console.log('url:' + worldDirection.url + ' url_last:' + worldDirection.url_last);
+							var sendUrl = false;
+							var sendPartyIDArray = false;
+							if (worldDirection.url != worldDirection.url_last)
+							{
+								sendUrl = true;
+							}
+							if (this.mUtility.areArraysEqual(user.mPartyIDArray,user.mPartyIDArrayLast == false))
+							{	
+								sendPartyIDArray = true;	
+							}
+							if (sendUrl == true && sendPartyIDArray == true)
+							{
+								user.socket.emit('dm show','' + worldDirection.url,'' + partyIDArray);
+                        					worldDirection.url_last = worldDiretion.url;
+								user.mPartyIDArrayLast = user.mPartyIDArray;
+							}
+							else if(sendUrl == true && sendPartyIDArray == false)
+							{
+								user.socket.emit('show','' + worldDirection.url);
+                        					worldDirection.url_last = worldDirection.url;
+							}
+							else if(sendUrl == false && sendPartyIDArray == true)
+							{
+								user.socket.emit('dm party','' + partyIDArray);
+								user.mPartyIDArrayLast = user.mPartyIDArray;
+							}
 						}
 						else
 						{
-	           					user.socket.emit('show','' + worldDirection.url);
+							if (worldDirection.url != worldDirection.url_last)
+							{
+	
+								user.socket.emit('dm show','' + worldDirection.url,'' + partyIDArray);
+	           						//user.socket.emit(' show','' + worldDirection.url);
+                        					worldDirection.url_last = worldDiretion.url;
+							}
 						}
 					}
 				}
@@ -174,11 +211,13 @@ var Application = new Class(
                                         {
                                         	if (partyJ.inBattle())
                                                 {
+							console.log('private collisionCheck if:' + partyJ.id);
                                                         var battle = this.getBattle(partyJ);
                                                         battle.addParty(partyA);
                                                 }
                                                 else //create new battle
                                                 {
+							console.log('private collisionCheck else:' + partyJ.id);
                                                         var battle = new Battle(this,0);
                                                         this.mBattlesArray.push(battle);
                                                         battle.addParty(partyA);
@@ -236,11 +275,13 @@ var Application = new Class(
 						{
 							if (partyJ.inBattle())
 							{
+								console.log('collisionCheck if:' + partyJ.id);
 								var battle = this.getBattle(partyJ);
 								battle.addParty(partyA);
 							}
 							else //create new battle
 							{
+								console.log('collisionCheck else:' + partyJ.id);
 								var battle = new Battle(this,0);
 								this.mBattlesArray.push(battle);
 								battle.addParty(partyA);

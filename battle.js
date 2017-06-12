@@ -89,7 +89,10 @@ var Battle = new Class(
 		if (user != 0)
 		{
 			console.log('ADD PARTY user.socket_id:' + user.socket_id);
-			user.socket.emit('battle');	
+			if (user.socket)
+			{
+				user.socket.emit('battle');	
+			}
 		}
 	}
 });

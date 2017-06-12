@@ -95,6 +95,10 @@ function updateGameArea()
 				drawImage("" + show);		
 				dungeonMasterScreen.updateParties(partyIDArray);
                 	});
+                	socket.on('dm party', function(partyIDArray)
+                	{
+				dungeonMasterScreen.updateParties(partyIDArray);
+                	});
       		});
     	</script>
 </body>

@@ -19,6 +19,10 @@ var Users = new Class(
 		//if there is a party id then the pary is active
 		this.party_id = 0;
 
+		//partyid array sent
+		this.mPartyIDArray = new Array();
+		this.mPartyIDArrayLast = new Array();
+
 		//app
 		this.mApp = bapp
 
