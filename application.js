@@ -125,8 +125,8 @@ var Application = new Class(
 						{
 							if (worldDirection.url != worldDirection.url_last)
 							{
-	           						user.socket.emit(' show','' + worldDirection.url);
-                        					worldDirection.url_last = worldDiretion.url;
+	           						user.socket.emit('show','' + worldDirection.url);
+                        					worldDirection.url_last = worldDirection.url;
 							}
 						}
 					}
