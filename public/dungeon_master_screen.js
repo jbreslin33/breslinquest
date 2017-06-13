@@ -124,18 +124,21 @@ var DungeonMasterScreen = new Class(
 
 	updateParties: function(partyIDArray)
 	{
-    		var i;
-    		for(i = this.mSelect.options.length - 1 ; i >= 0 ; i--)
+    		for(var i = this.mSelect.options.length - 1 ; i >= 0 ; i--)
     		{
         			this.mSelect.remove(i);
     		}
 
 		//fill party select
-                for (var i=0; i < partyIDArray.length; i++)
-                {
+		var arr = new Array();		
+		arr = partyIDArray.split(",");	
+                
+		for (var i=0; i < arr.length; i++)
+		{
+			console.log('arr[i]:' + arr[i]);
                         var z = document.createElement("option");
-                        z.setAttribute("value", "" + partyIDArray[i]);
-                        var t = document.createTextNode("" + partyIDArray[i]);
+                        z.setAttribute("value", "" + arr[i]);
+                        var t = document.createTextNode("" + arr[i]);
                         z.appendChild(t);
                         this.mSelect.appendChild(z);
                 }

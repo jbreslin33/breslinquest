@@ -94,7 +94,6 @@ var Application = new Class(
                                         				user.mPartyIDArray.push(this.mPartiesArray[i].id);
                                 				}
                         				}
-							//console.log('url:' + worldDirection.url + ' url_last:' + worldDirection.url_last);
 							var sendUrl = false;
 							var sendPartyIDArray = false;
 							if (worldDirection.url != worldDirection.url_last)
@@ -126,9 +125,7 @@ var Application = new Class(
 						{
 							if (worldDirection.url != worldDirection.url_last)
 							{
-	
-								user.socket.emit('dm show','' + worldDirection.url,'' + partyIDArray);
-	           						//user.socket.emit(' show','' + worldDirection.url);
+	           						user.socket.emit(' show','' + worldDirection.url);
                         					worldDirection.url_last = worldDiretion.url;
 							}
 						}
