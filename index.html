@@ -86,14 +86,14 @@ function updateGameArea()
                 	{
 				console.log('battle!!!');
                 	});
-                	socket.on('show', function(show)
-                	{
-				drawImage("" + show);		
-                	});
-                	socket.on('dm show', function(show,partyIDArray)
+                	socket.on('dm show and party', function(show,partyIDArray)
                 	{
 				drawImage("" + show);		
 				dungeonMasterScreen.updateParties(partyIDArray);
+                	});
+                	socket.on('show', function(show)
+                	{
+				drawImage("" + show);		
                 	});
                 	socket.on('dm party', function(partyIDArray)
                 	{
