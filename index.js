@@ -106,7 +106,18 @@ io.on('connection', function(socket)
                                         partyIDArray.push(mApp.mPartiesArray[i].id);
                                 }
                         }
-			socket.emit('load dm game',picturesIDArray,picturesNameArray,partyIDArray,partyNameArray);
+
+                        //race
+                        var raceIDArray = new Array();
+                        var raceNameArray = new Array();
+                        for (var p=0; p < mApp.mRaceArray.length; p++)
+                        {
+                                var race = mApp.mRaceArray[p];
+                                raceIDArray.push(race.id);
+                                raceNameArray.push(race.name);
+                        }
+
+			socket.emit('load dm game',picturesIDArray,picturesNameArray,partyIDArray,partyNameArray,raceIDArray,raceNameArray);
 		}
 		else
 		{
@@ -120,6 +131,11 @@ io.on('connection', function(socket)
         socket.on('build wall', function(pictureid,passableid)
         {
                 mApp.buildWall(socket.id,pictureid,passableid);
+        });
+        socket.on('dm add character to party', function(partyid,raceid)
+        {
+                //mApp.buildWall(socket.id,pictureid,passableid);
+		console.log('partyid:' + partyid + ' raceid:' + raceid); 
         });
 });
 

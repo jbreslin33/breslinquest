@@ -2,6 +2,7 @@ var pg = require('pg');
 var User  = require('./user');
 var Party  = require('./party');
 var Character  = require('./character');
+var Race  = require('./race');
 var Battle  = require('./battle');
 var WorldPoint  = require('./world_point');
 var WorldDirection  = require('./world_direction');
@@ -20,6 +21,7 @@ var Application = new Class(
 		this.mPartyIDArray = new Array();
 		this.mPartyIDArrayLast = 0;
       		this.mCharactersArray = new Array(); 
+      		this.mRaceArray = new Array(); 
 
 		//should battles array be reset?????? after every update
       		this.mBattlesArray = new Array(); 
@@ -28,10 +30,10 @@ var Application = new Class(
 		this.mWorldPointsArray = new Array();
 		this.mWorldDirectionsArray = new Array();
 
-
 		this.loadUsers();
 		this.loadParties();
 		this.loadCharacters();
+		this.loadRaces();
 
 		this.loadWorldPoints();
 		this.loadWorldDirections();
@@ -429,6 +431,11 @@ var Application = new Class(
         {
 		this.mCharactersArray.push(character);
         },
+	
+	addRace: function(race)
+        {
+		this.mRaceArray.push(race);
+        },
 
         makeWorldPoints: function()
         {
@@ -720,6 +727,35 @@ var Application = new Class(
                         var character = new Character(this,row.id,row.name,row.user_id,row.race_id,row.class_id,row.full_hitpoints,row.current_hitpoints,row.level,row.experience,row.party_id,row.action);
 
                         this.addCharacter(character);
+
+                }.bind(this));
+                query.on("end", function (result)
+                {
+                        client.end();
+                }.bind(this));
+        },
+
+        loadRaces: function()
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "select * from race;";
+
+                var client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                        var race = new Race(this,row.id,row.name);
+
+                        this.addRace(race);
 
                 }.bind(this));
                 query.on("end", function (result)

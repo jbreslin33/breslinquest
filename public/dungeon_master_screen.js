@@ -1,7 +1,7 @@
 var DungeonMasterScreen = new Class(
 {
 		//send goodies from server in array form with ids
-        initialize: function(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray)
+        initialize: function(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray,raceIDArray,raceNameArray)
         {
 		this.mSocket = socket;
 		var that = this;
@@ -81,17 +81,17 @@ var DungeonMasterScreen = new Class(
 
 
 		/************************************************* 
-		SELECT PARTY  
+		ADD CHARACATER TO PARTY  
 	      	**********************************************/
                 //button
-                this.button = document.createElement("BUTTON");
-                this.buttonText = document.createTextNode("ADD CHARACTER TO PARTY");
-                this.button.appendChild(this.buttonText);
-                document.body.appendChild(this.button);
+                this.addCharacterButton = document.createElement("BUTTON");
+                this.addCharacterButtonText = document.createTextNode("ADD CHARACTER TO PARTY");
+                this.addCharacterButton.appendChild(this.addCharacterButtonText);
+                document.body.appendChild(this.addCharacterButton);
 
-                this.mSelect = document.createElement("SELECT");
-                this.mSelect.setAttribute("id", "partySelect");
-                document.body.appendChild(this.mSelect);
+                this.mPartySelect = document.createElement("SELECT");
+                this.mPartySelect.setAttribute("id","partySelect");
+                document.body.appendChild(this.mPartySelect);
 
                 //fill party select
                 for (i=0; i < partyIDArray.length; i++)
@@ -100,19 +100,33 @@ var DungeonMasterScreen = new Class(
                         z.setAttribute("value", "" + partyIDArray[i]);
                         var t = document.createTextNode("" + partyIDArray[i]);
                         z.appendChild(t);
-                        this.mSelect.appendChild(z);
+                        this.mPartySelect.appendChild(z);
+                }
+                
+		this.mRaceSelect = document.createElement("SELECT");
+                this.mRaceSelect.setAttribute("id","raceSelect");
+                document.body.appendChild(this.mRaceSelect);
+                
+		//fill race select
+                for (i=0; i < raceIDArray.length; i++)
+                {
+                        var z = document.createElement("option");
+                        z.setAttribute("value", "" + raceIDArray[i]);
+                        var t = document.createTextNode("" + raceIDArray[i]);
+                        z.appendChild(t);
+                        this.mRaceSelect.appendChild(z);
                 }
 
-                var that = this;
-
-                this.button.addEventListener('click', function()
+                this.addCharacterButton.addEventListener('click', function()
                 {
-                        var partyid = that.mSelect.options[that.mSelect.selectedIndex].value;
-                        that.mSocket.emit('picked party', partyid);
+                        var partyid = that.mPartySelect.options[that.mPartySelect.selectedIndex].value;
+                        var raceid = that.mRaceSelect.options[that.mRaceSelect.selectedIndex].value;
+                        that.mSocket.emit('dm add character to party', partyid, raceid);
                 });
 	},
 	removeDungeonMasterElements: function()
 	{
+		//need more...
 		//picture
         	this.mPictureSelect.parentNode.removeChild(this.mPictureSelect);
         	this.pictureButton.parentNode.removeChild(this.pictureButton);
@@ -124,9 +138,9 @@ var DungeonMasterScreen = new Class(
 
 	updateParties: function(partyIDArray)
 	{
-    		for(var i = this.mSelect.options.length - 1 ; i >= 0 ; i--)
+    		for(var i = this.mPartySelect.options.length - 1 ; i >= 0 ; i--)
     		{
-        			this.mSelect.remove(i);
+        			this.mPartySelect.remove(i);
     		}
 
 		//fill party select
@@ -140,7 +154,7 @@ var DungeonMasterScreen = new Class(
                         z.setAttribute("value", "" + arr[i]);
                         var t = document.createTextNode("" + arr[i]);
                         z.appendChild(t);
-                        this.mSelect.appendChild(z);
+                        this.mPartySelect.appendChild(z);
                 }
 	}
 });

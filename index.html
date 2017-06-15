@@ -68,12 +68,12 @@ function updateGameArea()
 
                 	});
 
-                	socket.on('load dm game', function(pictureIDArray,pictureNameArray,partyIDArray,partyNameArray)
+                	socket.on('load dm game', function(pictureIDArray,pictureNameArray,partyIDArray,partyNameArray,raceIDArray,raceNameArray)
                 	{
 				console.log('load dm game');
 				startGame();
 				pickPartyScreen.removePickPartyElements();		
-				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray);
+				dungeonMasterScreen = new DungeonMasterScreen(socket,pictureIDArray,pictureNameArray,partyIDArray,partyNameArray,raceIDArray,raceNameArray);
                 	});
 
                         socket.on('dm update parties', function(partyIDArray)
