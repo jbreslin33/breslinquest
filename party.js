@@ -61,7 +61,7 @@ var Party = new Class(
 		this.y = y;
 		this.z = z;
 		this.dbUpdatePosition();
-		console.log('d:' + d + ' x:' + x + 'y:' + y + 'z:' + z);  
+		console.log('d:' + d + ' x:' + x + ' y:' + y + ' z:' + z);  
 	},
 
         dbUpdatePosition: function()
