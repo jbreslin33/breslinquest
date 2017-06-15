@@ -96,7 +96,7 @@ var Application = new Class(
                         				}
 							var sendUrl = false;
 							var sendPartyIDArray = false;
-							if (worldDirection.url != worldDirection.url_last)
+							if (worldDirection.url != user.url_last)
 							{
 								sendUrl = true;
 							}
@@ -107,13 +107,13 @@ var Application = new Class(
 							if (sendUrl == true && sendPartyIDArray == true)
 							{
 								user.socket.emit('dm show and party','' + worldDirection.url,'' + user.mPartyIDArray);
-                        					worldDirection.url_last = worldDirection.url;
+                        					user.url_last = worldDirection.url;
 								user.mPartyIDArrayLast = user.mPartyIDArray;
 							}
 							else if(sendUrl == true && sendPartyIDArray == false)
 							{
 								user.socket.emit('show','' + worldDirection.url);
-                        					worldDirection.url_last = worldDirection.url;
+                        					user.url_last = worldDirection.url;
 							}
 							else if(sendUrl == false && sendPartyIDArray == true)
 							{
@@ -123,12 +123,13 @@ var Application = new Class(
 						}
 						else
 						{
-							if (worldDirection.url != worldDirection.url_last)
+							if (worldDirection.url != user.url_last)
 							{
 	           						user.socket.emit('show','' + worldDirection.url);
-                        					worldDirection.url_last = worldDirection.url;
+                        					user.url_last = worldDirection.url;
 							}
 						}
+                        			user.url_last = worldDirection.url;
 					}
 				}
 			}

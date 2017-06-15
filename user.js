@@ -32,6 +32,8 @@ var Users = new Class(
 
 		//movement
 		this.mMovesArray = new Array();
+
+		this.url_last = 0;
         },
 
 	setPartyID: function(id)

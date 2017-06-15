@@ -9,7 +9,6 @@ var WorldDirection = new Class(
 		this.d = d;
 		this.picture_id = picture_id; 
 		this.url = url; 
-		this.url_last = 0; 
 		this.passable = passable; 
 		this.world_point_id = world_point_id;
         },
