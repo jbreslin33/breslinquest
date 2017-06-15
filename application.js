@@ -666,6 +666,35 @@ var Application = new Class(
                 }.bind(this));
 	},
 
+        dmAddCharacter: function(partyid,raceid)
+        {
+                var conString = "postgres://postgres:mibesfat@localhost/openrpg";
+                var queryString = "insert into characters (party_id,race_id) values (" +  partyid + "," + raceid + ");";
+		console.log('qs:' + queryString);
+
+                client = new pg.Client(conString);
+                client.connect();
+
+                var query = client.query(queryString, function (err,result)
+                {
+                        if (err)
+                        {
+                                throw err;
+                        }
+                });
+                query.on("row", function (row,result)
+                {
+                        result.addRow(row);
+                }.bind(this));
+                query.on("end", function (result)
+                {
+			//loadCharacters().....	
+                        //user.socket.emit('dm update parties','' + partyIDArray);
+                        client.end();
+                }.bind(this));
+        },
+
+
         loadParties: function()
         {
                 var conString = "postgres://postgres:mibesfat@localhost/openrpg";

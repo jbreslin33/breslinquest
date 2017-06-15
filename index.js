@@ -135,6 +135,7 @@ io.on('connection', function(socket)
         socket.on('dm add character to party', function(partyid,raceid)
         {
                 //mApp.buildWall(socket.id,pictureid,passableid);
+                mApp.dmAddCharacter(partyid,raceid);
 		console.log('partyid:' + partyid + ' raceid:' + raceid); 
         });
 });
